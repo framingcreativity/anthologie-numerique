@@ -1,6 +1,9 @@
-import imageA from 'figma:asset/07cb64d44f0ca7aa76b810053cdee15b1ec48375.png';
-import imageB from 'figma:asset/b26d3432409095bed228b39abf9f8c845d4cd506.png';
-import imageC from 'figma:asset/825c75d9988a36f04b9b0bc6f314908d70085d98.png';
+import syntaxeAbsenceImage from '../../assets/anthologie/syntaxe-absence.jpg';
+import matriceMemoireImage from '../../assets/anthologie/matrice-memoire.jpg';
+import lectureMachineImage from '../../assets/anthologie/lecture-machine.jpg';
+import lettreRecursiveImage from '../../assets/anthologie/lettre-recursive.jpg';
+import saisonCompresseeImage from '../../assets/anthologie/saison-compressee.jpg';
+import jardinErreursImage from '../../assets/anthologie/jardin-erreurs.jpg';
 
 export type ExperienceType =
   | 'absence'
@@ -54,7 +57,7 @@ export const artworks: Artwork[] = [
     medium: 'Texte interactif',
     behavior: 'Révélation',
     experience: 'absence',
-    image: imageA,
+    image: syntaxeAbsenceImage,
   },
 
   {
@@ -83,7 +86,7 @@ export const artworks: Artwork[] = [
     medium: 'Archive générative',
     behavior: 'Recomposition',
     experience: 'memory',
-    image: imageB,
+    image: matriceMemoireImage,
   },
 
   {
@@ -112,7 +115,7 @@ export const artworks: Artwork[] = [
     medium: 'Essai visuel',
     behavior: 'Interprétation',
     experience: 'machine',
-    image: imageC,
+    image: lectureMachineImage,
   },
 
   {
@@ -141,7 +144,7 @@ export const artworks: Artwork[] = [
     medium: 'Narration récursive',
     behavior: 'Boucle / variation',
     experience: 'recursion',
-    image: imageA,
+    image: lettreRecursiveImage,
   },
 
   {
@@ -170,7 +173,7 @@ export const artworks: Artwork[] = [
     medium: 'Poésie contrainte',
     behavior: 'Compression',
     experience: 'compression',
-    image: imageB,
+    image: saisonCompresseeImage,
   },
 
   {
@@ -199,7 +202,7 @@ export const artworks: Artwork[] = [
     medium: 'Étude expérimentale',
     behavior: 'Erreur contrôlée',
     experience: 'error',
-    image: imageC,
+    image: jardinErreursImage,
   },
 ];
 export function formatArtworkIndex(position: number) {
