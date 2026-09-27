@@ -22,6 +22,7 @@ export type Artwork = {
   hypothesis: string;
   mainText: string;
   consequence: string;
+  residue: string;
   interactionNote: string;
   fragments: string[];
   medium: string;
@@ -44,6 +45,8 @@ export const artworks: Artwork[] = [
       'La page devient une architecture de silences. Certains fragments apparaissent, d’autres restent hors champ. L’espace ne sépare plus le texte : il participe à sa syntaxe.',
     consequence:
       'Lire revient aussi à interpréter ce qui manque.',
+    residue:
+      'La lecture garde la forme du manque.',
     interactionNote:
       'Approcher, choisir, révéler. Chaque fragment reste partiellement absent tant que le lecteur ne vient pas à sa rencontre.',
     fragments: [
@@ -73,6 +76,8 @@ export const artworks: Artwork[] = [
       'La mémoire n’est pas présentée comme un document stable mais comme une grille mouvante. Certaines zones s’éclairent, d’autres s’effacent. Chaque reprise déplace légèrement ce qui semblait acquis.',
     consequence:
       'Se souvenir, ici, signifie reconstruire.',
+    residue:
+      'La dernière version ne sait plus laquelle était la première.',
     interactionNote:
       'Le système conserve la trace du fragment précédent. La lecture suivante hérite donc toujours de quelque chose.',
     fragments: [
@@ -102,6 +107,8 @@ export const artworks: Artwork[] = [
       'La machine classe, segmente et rapproche. Le lecteur, lui, hésite. Entre les deux demeure un espace difficile à mesurer : celui où une phrase cesse d’être une suite de signes et devient une expérience.',
     consequence:
       'Reconnaître n’est pas comprendre.',
+    residue:
+      'Ce qui est correctement classé peut encore rester incompris.',
     interactionNote:
       'Chaque fragment peut être lu comme donnée ou comme phrase. Le contenu reste identique ; le régime de lecture change.',
     fragments: [
@@ -131,6 +138,8 @@ export const artworks: Artwork[] = [
       'La récursion devient un procédé littéraire. Chaque fragment appelle un autre fragment, puis revient au précédent avec une nuance nouvelle. Le parcours produit moins une boucle qu’une spirale.',
     consequence:
       'Revenir n’est jamais répéter.',
+    residue:
+      'Le retour contient désormais le détour.',
     interactionNote:
       'Le dernier fragment renvoie au premier. Mais entre les deux, le contexte a changé.',
     fragments: [
@@ -160,6 +169,8 @@ export const artworks: Artwork[] = [
       'La compression n’est pas une économie technique mais une question poétique. Chaque réduction retire de l’information tout en augmentant la pression exercée sur ce qui reste.',
     consequence:
       'Moins de signes ne signifie pas nécessairement moins de présence.',
+    residue:
+      'Ce qui reste porte le poids de ce qui a été retiré.',
     interactionNote:
       'À mesure que la lecture avance, la phrase se contracte. Le sens ne disparaît pas d’un coup : il change de densité.',
     fragments: [
@@ -189,6 +200,8 @@ export const artworks: Artwork[] = [
       'Décalage, répétition, interruption : l’erreur devient matériau lorsqu’elle produit une lecture qui n’existait pas dans le plan initial. Le défaut n’est pas célébré pour lui-même ; il révèle la règle qu’il vient de rompre.',
     consequence:
       'Parfois, corriger efface précisément ce qu’il fallait regarder.',
+    residue:
+      'La règle devient visible dans la forme de sa rupture.',
     interactionNote:
       'Chaque sélection provoque un léger déplacement avant stabilisation. L’erreur reste perceptible, mais ne devient jamais spectacle.',
     fragments: [

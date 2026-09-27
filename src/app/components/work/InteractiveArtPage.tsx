@@ -140,8 +140,8 @@ export default function InteractiveArtPage({
           </header>
 
           <main>
-            <div className="mx-auto max-w-[1440px] px-5 py-10 md:px-10 md:py-16 lg:px-14">
-              <section className="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16">
+            <div className="mx-auto max-w-[1440px] px-5 pb-14 pt-10 md:px-10 md:pb-20 md:pt-16 lg:px-14">
+              <section className="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
                 <div>
                   <div className="mb-6 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d6b86f]">
                     <span>
