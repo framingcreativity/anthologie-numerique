@@ -211,6 +211,19 @@ export default function RecursiveExperiment({
         </div>
 
         <div>
+          {/* ANTHOLOGIE_RECURSION_STATUS */}
+          <div
+            className="sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Boucle {cycleIndex + 1} sur {cycles.length}.
+            Passage {passage + 1} sur {cycles[cycleIndex].length}.
+            {ended
+              ? ' La boucle a été interrompue.'
+              : ''}
+          </div>
+
           <div className="relative min-h-[410px] overflow-hidden border-y border-white/10 px-5 py-9 md:px-10 md:py-12">
             <div
               aria-hidden="true"

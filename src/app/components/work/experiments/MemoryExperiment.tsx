@@ -170,6 +170,21 @@ export default function MemoryExperiment({
         </div>
 
         <div>
+          {/* ANTHOLOGIE_MEMORY_STATUS */}
+          <div
+            className="sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Reconstruction {displayIndex} sur {displayTotal}.
+            {history.length === 0
+              ? ' Aucune trace précédente.'
+              : ` ${history.length} trace${history.length > 1 ? 's' : ''} conservée${history.length > 1 ? 's' : ''}.`}
+            {isFinal
+              ? ' Dernière reconstruction atteinte.'
+              : ''}
+          </div>
+
           <div className="relative min-h-[420px] overflow-hidden border-y border-white/10 px-5 py-10 md:px-10 md:py-14">
             <div
               aria-hidden="true"

@@ -218,6 +218,19 @@ export default function CompressionExperiment({
         </div>
 
         <div>
+          {/* ANTHOLOGIE_COMPRESSION_STATUS */}
+          <div
+            className="sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Compression {stage + 1} sur {stages.length}.
+            Matière restante {current.remaining} pour cent.
+            {isFinal
+              ? ' Densité maximale atteinte.'
+              : ''}
+          </div>
+
           <div className="relative min-h-[430px] overflow-hidden border-y border-white/10 px-5 py-10 md:px-10 md:py-14">
             <div
               aria-hidden="true"

@@ -170,6 +170,9 @@ export default function MachineExperiment({
                         choose(index)
                       }
                       aria-pressed={active}
+                      aria-current={
+                        active ? 'true' : undefined
+                      }
                       className={`grid grid-cols-[28px_1fr] gap-3 bg-[#090909] px-3 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1 ${
                         active
                           ? 'text-[#f4f0e8]'
@@ -194,6 +197,19 @@ export default function MachineExperiment({
         </div>
 
         <div>
+          {/* ANTHOLOGIE_MACHINE_STATUS */}
+          <div
+            className="sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Phrase {selected + 1} sur {artwork.fragments.length}.
+            Confiance système {analysis.confidence}.
+            {showRemainder
+              ? ' Le reste non classé est affiché.'
+              : ' Le reste non classé est masqué.'}
+          </div>
+
           <div className="grid border-y border-white/10 lg:grid-cols-[1.05fr_.95fr]">
             <div className="min-h-[390px] border-b border-white/10 px-5 py-8 lg:border-b-0 lg:border-r lg:px-8 lg:py-10">
               <div className="flex items-center justify-between">
@@ -308,6 +324,7 @@ export default function MachineExperiment({
                 )
               }
               aria-expanded={showRemainder}
+              aria-controls="machine-remainder"
               className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
             >
               {showRemainder
@@ -317,6 +334,7 @@ export default function MachineExperiment({
           </div>
 
           <motion.div
+            id="machine-remainder"
             initial={false}
             animate={{
               height: showRemainder

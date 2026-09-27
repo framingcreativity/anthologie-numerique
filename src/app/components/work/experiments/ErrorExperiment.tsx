@@ -176,6 +176,23 @@ export default function ErrorExperiment({
         </div>
 
         <div>
+          {/* ANTHOLOGIE_ERROR_STATUS */}
+          <div
+            className="sr-only"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {isInitial
+              ? 'État initial stable.'
+              : `Erreur ${stage} sur ${mutations.length}: ${current.type}.`}
+            {stage > 0
+              ? ` ${stage} descendant${stage > 1 ? 's' : ''} conservé${stage > 1 ? 's' : ''}.`
+              : ''}
+            {isFinal
+              ? ' Structure entièrement exposée.'
+              : ''}
+          </div>
+
           <div className="relative overflow-hidden border-y border-white/10">
             <div className="grid min-h-[410px] lg:grid-cols-[1.05fr_.95fr]">
               <div className="relative flex min-h-[310px] items-center border-b border-white/10 px-5 py-10 lg:border-b-0 lg:border-r lg:px-9">
