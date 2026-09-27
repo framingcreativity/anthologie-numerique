@@ -1,21 +1,11 @@
-import {
-  motion,
-  useReducedMotion,
-} from 'motion/react';
-import {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
-
 import type { Artwork } from '../../data/artworks';
-import CompressionExperiment from './experiments/CompressionExperiment';
-import MemoryExperiment from './experiments/MemoryExperiment';
-import MachineExperiment from './experiments/MachineExperiment';
-import RecursiveExperiment from './experiments/RecursiveExperiment';
 
 import AbsenceExperiment from './experiments/AbsenceExperiment';
+import CompressionExperiment from './experiments/CompressionExperiment';
+import ErrorExperiment from './experiments/ErrorExperiment';
+import MachineExperiment from './experiments/MachineExperiment';
+import MemoryExperiment from './experiments/MemoryExperiment';
+import RecursiveExperiment from './experiments/RecursiveExperiment';
 
 type Props = {
   artwork: Artwork;
@@ -24,186 +14,38 @@ type Props = {
 export default function ExperimentRenderer({
   artwork,
 }: Props) {
-  const reduceMotion = useReducedMotion();
-
-  const [activeFragment, setActiveFragment] = useState(0);
-  const [previousFragment, setPreviousFragment] =
-    useState<number | null>(null);
-
-  const recursionTimer = useRef<number | null>(null);
-
-  useEffect(() => {
-    setActiveFragment(0);
-    setPreviousFragment(null);
-
-    if (recursionTimer.current !== null) {
-      window.clearTimeout(recursionTimer.current);
-      recursionTimer.current = null;
-    }
-
-    return () => {
-      if (recursionTimer.current !== null) {
-        window.clearTimeout(recursionTimer.current);
-      }
-    };
-  }, [artwork.id]);
-
-  const compressedText = useMemo(() => {
-    if (artwork.experience !== 'compression') {
-      return '';
-    }
-
-    const stages = [
-      'Le vent traverse la chambre et conserve encore la température de la saison.',
-      'Le vent traverse la chambre et garde la saison.',
-      'Le vent garde la saison.',
-      'Le vent. La saison.',
-      'Vent / saison.',
-      'Vent.',
-    ];
-
-    return stages[activeFragment] ?? stages[0];
-  }, [artwork.experience, activeFragment]);
-
-  const selectFragment = (index: number) => {
-    setPreviousFragment(activeFragment);
-
-    if (
-      artwork.experience === 'recursion' &&
-      index === artwork.fragments.length - 1
-    ) {
-      setActiveFragment(index);
-
-      if (recursionTimer.current !== null) {
-        window.clearTimeout(recursionTimer.current);
-      }
-
-      recursionTimer.current = window.setTimeout(
-        () => {
-          setPreviousFragment(index);
-          setActiveFragment(0);
-        },
-        reduceMotion ? 0 : 650,
+  switch (artwork.experience) {
+    case 'absence':
+      return (
+        <AbsenceExperiment artwork={artwork} />
       );
 
-      return;
-    }
+    case 'memory':
+      return (
+        <MemoryExperiment artwork={artwork} />
+      );
 
-    setActiveFragment(index);
-  };
+    case 'machine':
+      return (
+        <MachineExperiment artwork={artwork} />
+      );
 
-  const activeText = artwork.fragments[activeFragment];
+    case 'recursion':
+      return (
+        <RecursiveExperiment artwork={artwork} />
+      );
 
-  if (artwork.experience === 'absence') {
-    return <AbsenceExperiment artwork={artwork} />;
+    case 'compression':
+      return (
+        <CompressionExperiment artwork={artwork} />
+      );
+
+    case 'error':
+      return (
+        <ErrorExperiment artwork={artwork} />
+      );
+
+    default:
+      return null;
   }
-
-  if (artwork.experience === 'memory') {
-    return <MemoryExperiment artwork={artwork} />;
-  }
-
-  if (artwork.experience === 'machine') {
-    return <MachineExperiment artwork={artwork} />;
-  }
-
-  if (artwork.experience === 'recursion') {
-    return <RecursiveExperiment artwork={artwork} />;
-  }
-
-  if (artwork.experience === 'compression') {
-    return <CompressionExperiment artwork={artwork} />;
-  }
-
-  return (
-    <section
-      className="border-t border-white/12 pt-10"
-      aria-labelledby={`interaction-${artwork.id}`}
-    >
-      <div className="grid gap-10 lg:grid-cols-[.6fr_1.4fr]">
-        <div>
-          <div
-            id={`interaction-${artwork.id}`}
-            className="micro-meta text-[#d6b86f]"
-          >
-            Interaction
-          </div>
-
-          <p className="mt-4 max-w-[360px] text-sm leading-6 text-white/48">
-            {artwork.interactionNote}
-          </p>
-        </div>
-
-        <div className="panel-soft min-h-[240px] p-6 md:p-8">
-          {artwork.experience === 'error' && (
-            <div className="flex min-h-[180px] items-center overflow-hidden">
-              <motion.p
-                key={activeFragment}
-                initial={{
-                  opacity: reduceMotion ? 1 : 0.2,
-                  x:
-                    reduceMotion
-                      ? 0
-                      : activeFragment % 2 === 0
-                        ? 22
-                        : -18,
-                  y:
-                    reduceMotion
-                      ? 0
-                      : activeFragment % 3 === 0
-                        ? -7
-                        : 6,
-                }}
-                animate={{
-                  opacity: 1,
-                  x: 0,
-                  y: 0,
-                }}
-                transition={{
-                  duration: reduceMotion ? 0 : 0.48,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-                className="max-w-[18ch] font-serif text-4xl leading-[1.1]"
-              >
-                {activeText}
-              </motion.p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div className="mt-8 grid gap-px bg-white/12 sm:grid-cols-2 lg:grid-cols-3">
-        {artwork.fragments.map((fragment, index) => {
-          const active = activeFragment === index;
-
-          return (
-            <button
-              key={`${artwork.id}-${index}`}
-              type="button"
-              onClick={() => selectFragment(index)}
-              aria-pressed={active}
-              className={`min-h-[125px] bg-[#0c0c0c] p-5 text-left transition focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1 ${
-                active
-                  ? 'outline outline-1 outline-[#d6b86f] -outline-offset-1'
-                  : 'hover:bg-[#121212]'
-              }`}
-            >
-              <div className="mb-5 font-mono text-[9px] tracking-[0.15em] text-[#d6b86f]">
-                {String(index + 1).padStart(2, '0')}
-              </div>
-
-              <p
-                className={`text-sm leading-6 transition ${
-                  active
-                    ? 'text-[#f4f0e8]'
-                    : 'text-white/48'
-                }`}
-              >
-                {fragment}
-              </p>
-            </button>
-          );
-        })}
-      </div>
-    </section>
-  );
 }
