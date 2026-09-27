@@ -10,6 +10,7 @@ import {
 } from 'react';
 
 import type { Artwork } from '../../data/artworks';
+import MemoryExperiment from './experiments/MemoryExperiment';
 
 import AbsenceExperiment from './experiments/AbsenceExperiment';
 
@@ -94,6 +95,10 @@ export default function ExperimentRenderer({
     return <AbsenceExperiment artwork={artwork} />;
   }
 
+  if (artwork.experience === 'memory') {
+    return <MemoryExperiment artwork={artwork} />;
+  }
+
   return (
     <section
       className="border-t border-white/12 pt-10"
@@ -114,46 +119,6 @@ export default function ExperimentRenderer({
         </div>
 
         <div className="panel-soft min-h-[240px] p-6 md:p-8">
-          {artwork.experience === 'memory' && (
-            <div className="grid min-h-[180px] gap-8 md:grid-cols-2">
-              <div>
-                <div className="micro-meta text-white/28">
-                  Trace précédente
-                </div>
-
-                <p className="mt-6 font-serif text-2xl leading-[1.25] text-white/30">
-                  {previousFragment === null
-                    ? 'Aucune trace enregistrée.'
-                    : artwork.fragments[previousFragment]}
-                </p>
-              </div>
-
-              <div className="border-l border-white/10 pl-6">
-                <div className="micro-meta text-[#d6b86f]">
-                  État actuel
-                </div>
-
-                <motion.p
-                  key={activeFragment}
-                  initial={{
-                    opacity: reduceMotion ? 1 : 0,
-                    y: reduceMotion ? 0 : 8,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  transition={{
-                    duration: reduceMotion ? 0 : 0.4,
-                  }}
-                  className="mt-6 font-serif text-3xl leading-[1.15]"
-                >
-                  {activeText}
-                </motion.p>
-              </div>
-            </div>
-          )}
-
           {artwork.experience === 'machine' && (
             <div className="grid min-h-[180px] gap-px bg-white/10 md:grid-cols-2">
               <div className="bg-[#0c0c0c] p-5">
