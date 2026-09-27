@@ -68,7 +68,7 @@ export default function Gallery() {
               <img
                 src={work.image}
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover opacity-30 grayscale transition duration-700 group-hover:scale-[1.025] group-hover:opacity-42"
+                className="absolute inset-0 h-full w-full object-cover opacity-55 transition duration-700 group-hover:scale-[1.025] group-hover:opacity-72"
               />
 
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,.12)_0%,rgba(5,5,5,.38)_38%,rgba(5,5,5,.90)_100%)]" />

@@ -10,6 +10,7 @@ import {
 } from 'react';
 
 import type { Artwork } from '../../data/artworks';
+import CompressionExperiment from './experiments/CompressionExperiment';
 import MemoryExperiment from './experiments/MemoryExperiment';
 import MachineExperiment from './experiments/MachineExperiment';
 import RecursiveExperiment from './experiments/RecursiveExperiment';
@@ -109,6 +110,10 @@ export default function ExperimentRenderer({
     return <RecursiveExperiment artwork={artwork} />;
   }
 
+  if (artwork.experience === 'compression') {
+    return <CompressionExperiment artwork={artwork} />;
+  }
+
   return (
     <section
       className="border-t border-white/12 pt-10"
@@ -129,30 +134,6 @@ export default function ExperimentRenderer({
         </div>
 
         <div className="panel-soft min-h-[240px] p-6 md:p-8">
-          {artwork.experience === 'compression' && (
-            <div className="flex min-h-[180px] items-center">
-              <div>
-                <div className="micro-meta text-[#d6b86f]">
-                  Compression / {activeFragment + 1} : {artwork.fragments.length}
-                </div>
-
-                <motion.p
-                  key={compressedText}
-                  initial={{
-                    opacity: reduceMotion ? 1 : 0.3,
-                  }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: reduceMotion ? 0 : 0.35,
-                  }}
-                  className="mt-6 max-w-[22ch] font-serif text-4xl leading-[1.12]"
-                >
-                  {compressedText}
-                </motion.p>
-              </div>
-            </div>
-          )}
-
           {artwork.experience === 'error' && (
             <div className="flex min-h-[180px] items-center overflow-hidden">
               <motion.p

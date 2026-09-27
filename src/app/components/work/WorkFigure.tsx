@@ -10,7 +10,7 @@ export default function WorkFigure({ artwork }: Props) {
       <img
         src={artwork.image}
         alt=""
-        className="absolute inset-0 h-full w-full object-cover opacity-72 grayscale"
+        className="absolute inset-0 h-full w-full object-cover opacity-85"
       />
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/15" />
