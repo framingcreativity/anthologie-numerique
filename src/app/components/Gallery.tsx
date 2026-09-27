@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
-import InteractiveArtPage from './InteractiveArtPage';
+import InteractiveArtPage from './work/InteractiveArtPage';
 import {
   artworks,
   formatArtworkIndex,
@@ -126,6 +126,7 @@ export default function Gallery() {
       <InteractiveArtPage
         artwork={active}
         onClose={() => setActive(null)}
+        onSelect={setActive}
       />
     </section>
   );
