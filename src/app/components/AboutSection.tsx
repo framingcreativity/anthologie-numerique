@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import { ArrowUpRight } from 'lucide-react';
 
 const principles = [
   {
@@ -52,7 +53,7 @@ export default function AboutSection() {
             viewport={{ once: true }}
           >
             <div className="mb-6 micro-meta text-[#d3b16e]">
-              Manifeste / méthode
+              Principes / expérience
             </div>
 
             <h2 className="max-w-[8ch] text-[clamp(3.2rem,6vw,6.4rem)] font-medium leading-[0.9] tracking-[-0.065em] text-[#f4f0e8]">
@@ -141,6 +142,22 @@ export default function AboutSection() {
                   {item.label}
                 </div>
               ))}
+            </div>
+
+            <div className="mt-10 border-t border-white/12 pt-8">
+              <a
+                href="#a-propos"
+                className="group inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-[#d3b16e] transition hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d3b16e] focus-visible:outline-offset-4"
+              >
+                À propos de l’expérience
+
+                <span className="grid h-9 w-9 place-items-center border border-[#d3b16e]/40 transition group-hover:border-[#d3b16e]">
+                  <ArrowUpRight
+                    size={15}
+                    className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </span>
+              </a>
             </div>
           </div>
         </div>
