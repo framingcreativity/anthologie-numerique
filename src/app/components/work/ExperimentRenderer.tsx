@@ -12,6 +12,7 @@ import {
 import type { Artwork } from '../../data/artworks';
 import MemoryExperiment from './experiments/MemoryExperiment';
 import MachineExperiment from './experiments/MachineExperiment';
+import RecursiveExperiment from './experiments/RecursiveExperiment';
 
 import AbsenceExperiment from './experiments/AbsenceExperiment';
 
@@ -104,6 +105,10 @@ export default function ExperimentRenderer({
     return <MachineExperiment artwork={artwork} />;
   }
 
+  if (artwork.experience === 'recursion') {
+    return <RecursiveExperiment artwork={artwork} />;
+  }
+
   return (
     <section
       className="border-t border-white/12 pt-10"
@@ -124,34 +129,6 @@ export default function ExperimentRenderer({
         </div>
 
         <div className="panel-soft min-h-[240px] p-6 md:p-8">
-          {artwork.experience === 'recursion' && (
-            <motion.div
-              key={activeFragment}
-              initial={{
-                opacity: reduceMotion ? 1 : 0,
-                x: reduceMotion ? 0 : 18,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.48,
-              }}
-              className="flex min-h-[180px] items-center"
-            >
-              <div>
-                <div className="micro-meta text-[#d6b86f]">
-                  Passage {String(activeFragment + 1).padStart(2, '0')}
-                </div>
-
-                <p className="mt-6 max-w-[18ch] font-serif text-4xl leading-[1.1]">
-                  {activeText}
-                </p>
-              </div>
-            </motion.div>
-          )}
-
           {artwork.experience === 'compression' && (
             <div className="flex min-h-[180px] items-center">
               <div>
