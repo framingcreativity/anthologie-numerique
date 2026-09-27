@@ -11,6 +11,8 @@ import {
 
 import type { Artwork } from '../../data/artworks';
 
+import AbsenceExperiment from './experiments/AbsenceExperiment';
+
 type Props = {
   artwork: Artwork;
 };
@@ -88,6 +90,10 @@ export default function ExperimentRenderer({
 
   const activeText = artwork.fragments[activeFragment];
 
+  if (artwork.experience === 'absence') {
+    return <AbsenceExperiment artwork={artwork} />;
+  }
+
   return (
     <section
       className="border-t border-white/12 pt-10"
@@ -108,24 +114,6 @@ export default function ExperimentRenderer({
         </div>
 
         <div className="panel-soft min-h-[240px] p-6 md:p-8">
-          {artwork.experience === 'absence' && (
-            <motion.div
-              key={activeFragment}
-              initial={{
-                opacity: reduceMotion ? 1 : 0.08,
-              }}
-              animate={{ opacity: 1 }}
-              transition={{
-                duration: reduceMotion ? 0 : 1.1,
-              }}
-              className="flex min-h-[180px] items-center"
-            >
-              <p className="max-w-[15ch] font-serif text-4xl leading-[1.08] text-[#f4f0e8] md:text-5xl">
-                {activeText}
-              </p>
-            </motion.div>
-          )}
-
           {artwork.experience === 'memory' && (
             <div className="grid min-h-[180px] gap-8 md:grid-cols-2">
               <div>
