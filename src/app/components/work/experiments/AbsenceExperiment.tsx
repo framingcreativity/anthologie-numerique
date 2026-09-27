@@ -48,6 +48,21 @@ export default function AbsenceExperiment({
   const [pinned, setPinned] =
     useState<number | null>(null);
 
+  const [visited, setVisited] =
+    useState<Set<number>>(() => new Set());
+
+  const markVisited = (index: number) => {
+    setVisited((current) => {
+      if (current.has(index)) {
+        return current;
+      }
+
+      const next = new Set(current);
+      next.add(index);
+      return next;
+    });
+  };
+
   const isRevealed = (index: number) =>
     hovered === index ||
     focused === index ||
@@ -71,13 +86,56 @@ export default function AbsenceExperiment({
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/28">
+          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/32">
             Approcher révèle.
             <br />
             Toucher conserve.
             <br />
             S’éloigner rend au blanc.
           </p>
+
+          <div className="mt-10 max-w-[280px] border-t border-white/10 pt-5">
+            <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em]">
+              <span className="text-white/25">
+                Traces rencontrées
+              </span>
+
+              <span className="text-[#d6b86f]/70">
+                {String(visited.size).padStart(2, '0')}
+                {' / '}
+                {String(
+                  artwork.fragments.length,
+                ).padStart(2, '0')}
+              </span>
+            </div>
+
+            <div
+              className="mt-4 grid grid-cols-6 gap-2"
+              aria-hidden="true"
+            >
+              {artwork.fragments.map((_, index) => (
+                <motion.span
+                  key={index}
+                  initial={false}
+                  animate={{
+                    opacity: visited.has(index)
+                      ? 0.7
+                      : 0.1,
+                    scaleX: visited.has(index)
+                      ? 1
+                      : 0.35,
+                  }}
+                  transition={{
+                    duration: reduceMotion
+                      ? 0
+                      : 0.45,
+                    ease: [0.2, 0.8, 0.2, 1],
+                  }}
+                  className="h-px origin-left bg-[#d6b86f]"
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="border-y border-white/10 py-8 md:py-12">
@@ -94,6 +152,7 @@ export default function AbsenceExperiment({
               }
 
               const index = cell.index;
+
               const fragment =
                 artwork.fragments[index];
 
@@ -103,19 +162,23 @@ export default function AbsenceExperiment({
               const retained =
                 pinned === index;
 
+              const hasTrace =
+                visited.has(index);
+
               return (
                 <button
                   key={`${artwork.id}-${index}`}
                   type="button"
                   aria-pressed={retained}
                   aria-label={
-                    retained
-                      ? `Fragment ${index + 1}. Révélation conservée.`
+                    revealed
+                      ? `Fragment ${index + 1}: ${fragment}`
                       : `Révéler le fragment ${index + 1}.`
                   }
-                  onMouseEnter={() =>
-                    setHovered(index)
-                  }
+                  onMouseEnter={() => {
+                    setHovered(index);
+                    markVisited(index);
+                  }}
                   onMouseLeave={() =>
                     setHovered((current) =>
                       current === index
@@ -123,9 +186,10 @@ export default function AbsenceExperiment({
                         : current,
                     )
                   }
-                  onFocus={() =>
-                    setFocused(index)
-                  }
+                  onFocus={() => {
+                    setFocused(index);
+                    markVisited(index);
+                  }}
                   onBlur={() =>
                     setFocused((current) =>
                       current === index
@@ -133,13 +197,15 @@ export default function AbsenceExperiment({
                         : current,
                     )
                   }
-                  onClick={() =>
+                  onClick={() => {
+                    markVisited(index);
+
                     setPinned((current) =>
                       current === index
                         ? null
                         : index,
-                    )
-                  }
+                    );
+                  }}
                   className="relative min-h-[150px] border-l border-white/10 px-5 py-6 text-left focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1"
                 >
                   <span
@@ -157,8 +223,10 @@ export default function AbsenceExperiment({
                     initial={false}
                     animate={{
                       opacity: revealed
-                        ? 0.92
-                        : 0.2,
+                        ? 0.94
+                        : hasTrace
+                          ? 0.34
+                          : 0.2,
                       y: revealed ? 0 : 3,
                     }}
                     transition={{
@@ -166,7 +234,7 @@ export default function AbsenceExperiment({
                         ? 0
                         : revealed
                           ? 0.32
-                          : 0.5,
+                          : 0.65,
                       ease: [0.2, 0.8, 0.2, 1],
                     }}
                     className="mt-8 max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white"
@@ -182,15 +250,20 @@ export default function AbsenceExperiment({
                     animate={{
                       width: revealed
                         ? '58%'
-                        : '10%',
+                        : hasTrace
+                          ? '24%'
+                          : '8%',
                       opacity: revealed
                         ? 0.65
-                        : 0.12,
+                        : hasTrace
+                          ? 0.32
+                          : 0.1,
                     }}
                     transition={{
                       duration: reduceMotion
                         ? 0
-                        : 0.4,
+                        : 0.45,
+                      ease: [0.2, 0.8, 0.2, 1],
                     }}
                     className="absolute bottom-5 left-5 h-px bg-[#d6b86f]"
                   />
@@ -199,7 +272,11 @@ export default function AbsenceExperiment({
             })}
           </div>
 
-          <div className="mt-5 flex justify-end">
+          <div className="mt-5 flex items-center justify-between gap-6">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+              mémoire locale / {visited.size}
+            </span>
+
             <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
               {pinned !== null
                 ? `fragment ${String(
