@@ -134,7 +134,7 @@ export default function RecursiveExperiment({
       className="border-t border-white/12 pt-10"
       aria-labelledby={`recursive-${artwork.id}`}
     >
-      <div className="grid gap-10 lg:grid-cols-[.48fr_1.52fr]">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.48fr_1.52fr]">
         <div>
           <div
             id={`recursive-${artwork.id}`}
@@ -224,7 +224,7 @@ export default function RecursiveExperiment({
               : ''}
           </div>
 
-          <div className="relative min-h-[410px] overflow-hidden border-y border-white/10 px-5 py-9 md:px-10 md:py-12">
+          <div className="relative min-h-[340px] sm:min-h-[410px] overflow-hidden border-y border-white/10 px-5 py-9 md:px-10 md:py-12">
             <div
               aria-hidden="true"
               className="absolute bottom-0 left-[15%] top-0 w-px bg-white/[0.025]"
@@ -300,7 +300,7 @@ export default function RecursiveExperiment({
 
                     <p
                       aria-live="polite"
-                      className="mt-11 max-w-[22ch] font-serif text-[clamp(2.3rem,4.4vw,5.1rem)] leading-[0.96] text-[#f4f0e8]"
+                      className="mt-11 max-w-[22ch] break-words font-serif text-[clamp(2.05rem,4.4vw,5.1rem)] leading-[0.96] text-[#f4f0e8]"
                     >
                       {currentText}
                     </p>
@@ -342,7 +342,7 @@ export default function RecursiveExperiment({
                     Interruption / boucle 03
                   </div>
 
-                  <p className="mt-11 max-w-[24ch] font-serif text-[clamp(2.2rem,4vw,4.7rem)] leading-[0.98] text-white/75">
+                  <p className="mt-11 max-w-[24ch] break-words font-serif text-[clamp(2.05rem,4vw,4.7rem)] leading-[0.98] text-white/75">
                     La boucle s’arrête.
                     <br />
                     Le texte, lui, ne revient pas
@@ -353,7 +353,7 @@ export default function RecursiveExperiment({
             </div>
           </div>
 
-          <div className="mt-7 flex min-h-10 items-center justify-between gap-6">
+          <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
             <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
               {ended
                 ? 'état / interrompu'
@@ -366,7 +366,7 @@ export default function RecursiveExperiment({
               <button
                 type="button"
                 onClick={advance}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
                 {finalPassage
                   ? finalCycle
@@ -378,7 +378,7 @@ export default function RecursiveExperiment({
               <button
                 type="button"
                 onClick={restart}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/34 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/34 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
                 Relire depuis le commencement
               </button>

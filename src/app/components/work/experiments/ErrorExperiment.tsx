@@ -96,7 +96,7 @@ export default function ErrorExperiment({
       className="border-t border-white/12 pt-10"
       aria-labelledby={`error-${artwork.id}`}
     >
-      <div className="grid gap-10 lg:grid-cols-[.46fr_1.54fr]">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.46fr_1.54fr]">
         <div>
           <div
             id={`error-${artwork.id}`}
@@ -194,7 +194,7 @@ export default function ErrorExperiment({
           </div>
 
           <div className="relative overflow-hidden border-y border-white/10">
-            <div className="grid min-h-[410px] lg:grid-cols-[1.05fr_.95fr]">
+            <div className="grid min-h-[340px] sm:min-h-[410px] lg:grid-cols-[1.05fr_.95fr]">
               <div className="relative flex min-h-[310px] items-center border-b border-white/10 px-5 py-10 lg:border-b-0 lg:border-r lg:px-9">
                 <div
                   aria-hidden="true"
@@ -246,7 +246,7 @@ export default function ErrorExperiment({
 
                   <p
                     aria-live="polite"
-                    className="mt-10 max-w-[19ch] font-serif text-[clamp(2.3rem,4.2vw,4.9rem)] leading-[0.96] text-[#f4f0e8]"
+                    className="mt-10 max-w-[19ch] break-words font-serif text-[clamp(2.05rem,4.2vw,4.9rem)] leading-[0.96] text-[#f4f0e8]"
                   >
                     {current.text}
                   </p>
@@ -334,7 +334,7 @@ export default function ErrorExperiment({
             </div>
           </div>
 
-          <div className="mt-7 flex min-h-10 items-center justify-between gap-6">
+          <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
             <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
               {isInitial
                 ? 'règle / visible'
@@ -349,7 +349,7 @@ export default function ErrorExperiment({
               <button
                 type="button"
                 onClick={introduceError}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-150 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-150 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
                 Introduire l’écart suivant
               </button>
@@ -357,7 +357,7 @@ export default function ErrorExperiment({
               <button
                 type="button"
                 onClick={reset}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-150 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-150 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
                 Restaurer la règle
               </button>

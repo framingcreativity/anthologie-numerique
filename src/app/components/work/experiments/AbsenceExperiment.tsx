@@ -113,7 +113,7 @@ export default function AbsenceExperiment({
       className="border-t border-white/12 pt-10"
       aria-labelledby={`absence-${artwork.id}`}
     >
-      <div className="grid gap-10 lg:grid-cols-[.55fr_1.45fr]">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.55fr_1.45fr]">
         <div>
           <div
             id={`absence-${artwork.id}`}
@@ -397,7 +397,7 @@ export default function AbsenceExperiment({
               })}
             </div>
 
-            <div className="mt-5 flex min-h-8 items-center justify-between gap-6">
+            <div className="mt-5 flex min-h-8 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
               <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
                 {completed
                   ? 'mémoire / résiduelle'
@@ -444,7 +444,7 @@ export default function AbsenceExperiment({
               <button
                 type="button"
                 onClick={leaveOnlyTraces}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
                 Laisser disparaître
               </button>

@@ -27,7 +27,7 @@ export default function WorkResidue({
           </p>
         </div>
 
-        <div className="relative min-h-[210px] overflow-hidden border border-white/8 bg-white/[0.008]">
+        <div className="relative min-h-[180px] sm:min-h-[210px] overflow-hidden border border-white/8 bg-white/[0.008]">
           <div
             aria-hidden="true"
             className="absolute left-[8%] top-[20%] h-px w-[12%] bg-white/10"
@@ -43,7 +43,7 @@ export default function WorkResidue({
             className="absolute bottom-[18%] left-[26%] h-px w-[4%] bg-white/8"
           />
 
-          <div className="relative flex min-h-[210px] items-center px-7 py-10 md:px-12">
+          <div className="relative flex min-h-[180px] sm:min-h-[210px] items-center px-5 py-8 sm:px-7 sm:py-10 md:px-12">
             <blockquote className="max-w-[34ch]">
               <p className="font-serif text-[clamp(1.35rem,2vw,2rem)] italic leading-[1.3] text-white/30">
                 {artwork.residue}

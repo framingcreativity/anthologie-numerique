@@ -131,7 +131,7 @@ export default function CompressionExperiment({
       className="border-t border-white/12 pt-10"
       aria-labelledby={`compression-${artwork.id}`}
     >
-      <div className="grid gap-10 lg:grid-cols-[.48fr_1.52fr]">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.48fr_1.52fr]">
         <div>
           <div
             id={`compression-${artwork.id}`}
@@ -231,7 +231,7 @@ export default function CompressionExperiment({
               : ''}
           </div>
 
-          <div className="relative min-h-[430px] overflow-hidden border-y border-white/10 px-5 py-10 md:px-10 md:py-14">
+          <div className="relative min-h-[340px] sm:min-h-[430px] overflow-hidden border-y border-white/10 px-5 py-10 md:px-10 md:py-14">
             <div
               aria-hidden="true"
               className="absolute inset-y-0 left-1/2 w-px bg-white/[0.025]"
@@ -305,7 +305,7 @@ export default function CompressionExperiment({
             </div>
           </div>
 
-          <div className="mt-7 flex min-h-10 items-center justify-between gap-6">
+          <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
             <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
               {isFinal
                 ? 'densité / maximale'
@@ -316,7 +316,7 @@ export default function CompressionExperiment({
               <button
                 type="button"
                 onClick={compress}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
                 Comprimer encore
               </button>
@@ -324,7 +324,7 @@ export default function CompressionExperiment({
               <button
                 type="button"
                 onClick={restore}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
                 Restaurer la source
               </button>

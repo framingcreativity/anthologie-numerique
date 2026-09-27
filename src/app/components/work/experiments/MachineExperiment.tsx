@@ -131,7 +131,7 @@ export default function MachineExperiment({
       className="border-t border-white/12 pt-10"
       aria-labelledby={`machine-${artwork.id}`}
     >
-      <div className="grid gap-10 lg:grid-cols-[.42fr_1.58fr]">
+      <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.42fr_1.58fr]">
         <div>
           <div
             id={`machine-${artwork.id}`}
@@ -241,7 +241,7 @@ export default function MachineExperiment({
                     : 0.55,
                   ease: [0.2, 0.8, 0.2, 1],
                 }}
-                className="mt-12 max-w-[18ch] font-serif text-[clamp(2.2rem,4vw,4.8rem)] leading-[0.98] text-[#f4f0e8]"
+                className="mt-12 max-w-[18ch] break-words font-serif text-[clamp(2.05rem,4vw,4.8rem)] leading-[0.98] text-[#f4f0e8]"
               >
                 {phrase}
               </motion.p>
@@ -311,7 +311,7 @@ export default function MachineExperiment({
             </motion.div>
           </div>
 
-          <div className="mt-7 flex min-h-10 items-center justify-between gap-6">
+          <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
             <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
               système / lecture littérale
             </span>
@@ -325,7 +325,7 @@ export default function MachineExperiment({
               }
               aria-expanded={showRemainder}
               aria-controls="machine-remainder"
-              className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+              className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
             >
               {showRemainder
                 ? 'Masquer l’écart'

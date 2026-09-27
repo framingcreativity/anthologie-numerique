@@ -190,7 +190,7 @@ export default function InteractiveArtPage({
           ref={scrollRef}
         tabIndex={-1}
           key={artwork.id}
-          className="fixed inset-0 z-[80] overflow-y-auto bg-[#090909] text-[#f4f0e8]"
+          className="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#090909] text-[#f4f0e8]"
           initial={{
             opacity: reduceMotion ? 1 : 0,
           }}
@@ -232,7 +232,7 @@ export default function InteractiveArtPage({
 
           <main>
             <div className="mx-auto max-w-[1440px] px-5 pb-14 pt-10 md:px-10 md:pb-20 md:pt-16 lg:px-14">
-              <section className="grid gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
+              <section className="grid gap-10 sm:gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
                 <div>
                   <div className="mb-6 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d6b86f]">
                     <span>
@@ -246,7 +246,7 @@ export default function InteractiveArtPage({
 
                   <h1
                     id={`work-title-${artwork.id}`}
-                    className="max-w-[10ch] text-[clamp(3.6rem,8vw,8rem)] font-medium leading-[0.85] tracking-[-0.065em]"
+                    className="max-w-[10ch] text-[clamp(3rem,15vw,8rem)] font-medium leading-[0.85] tracking-[-0.065em]"
                   >
                     {artwork.title}
                   </h1>
