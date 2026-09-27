@@ -93,11 +93,102 @@ export default function InteractiveArtPage({
 
   const totalWorks = formatArtworkTotal();
 
+
+  // ANTHOLOGIE_FOCUS_TRAP
+  useEffect(() => {
+    if (!artwork) return;
+
+    const root = scrollRef.current;
+
+    if (!root) return;
+
+    const selector = [
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])',
+    ].join(',');
+
+    const getFocusable = () =>
+      Array.from(
+        root.querySelectorAll<HTMLElement>(
+          selector,
+        ),
+      ).filter((element) => {
+        const style =
+          window.getComputedStyle(element);
+
+        return (
+          style.display !== 'none' &&
+          style.visibility !== 'hidden' &&
+          element.getClientRects().length > 0 &&
+          element.getAttribute('aria-hidden') !==
+            'true'
+        );
+      });
+
+    const trapFocus = (
+      event: KeyboardEvent,
+    ) => {
+      if (event.key !== 'Tab') return;
+
+      const focusable = getFocusable();
+
+      if (focusable.length === 0) {
+        event.preventDefault();
+        root.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last =
+        focusable[focusable.length - 1];
+
+      const active =
+        document.activeElement;
+
+      if (
+        event.shiftKey &&
+        (
+          active === first ||
+          !root.contains(active)
+        )
+      ) {
+        event.preventDefault();
+        last.focus();
+        return;
+      }
+
+      if (
+        !event.shiftKey &&
+        active === last
+      ) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    root.addEventListener(
+      'keydown',
+      trapFocus,
+    );
+
+    return () => {
+      root.removeEventListener(
+        'keydown',
+        trapFocus,
+      );
+    };
+  }, [artwork]);
+
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {artwork && (
         <motion.div
           ref={scrollRef}
+        tabIndex={-1}
           key={artwork.id}
           className="fixed inset-0 z-[80] overflow-y-auto bg-[#090909] text-[#f4f0e8]"
           initial={{
