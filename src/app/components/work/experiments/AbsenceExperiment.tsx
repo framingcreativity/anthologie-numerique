@@ -1,5 +1,11 @@
-import { motion, useReducedMotion } from 'motion/react';
-import { useState } from 'react';
+import {
+  motion,
+  useReducedMotion,
+} from 'motion/react';
+import {
+  useEffect,
+  useState,
+} from 'react';
 
 import type { Artwork } from '../../../data/artworks';
 
@@ -51,7 +57,20 @@ export default function AbsenceExperiment({
   const [visited, setVisited] =
     useState<Set<number>>(() => new Set());
 
+  const [completed, setCompleted] =
+    useState(false);
+
+  useEffect(() => {
+    setHovered(null);
+    setFocused(null);
+    setPinned(null);
+    setVisited(new Set());
+    setCompleted(false);
+  }, [artwork.id]);
+
   const markVisited = (index: number) => {
+    if (completed) return;
+
     setVisited((current) => {
       if (current.has(index)) {
         return current;
@@ -64,9 +83,30 @@ export default function AbsenceExperiment({
   };
 
   const isRevealed = (index: number) =>
-    hovered === index ||
-    focused === index ||
-    pinned === index;
+    !completed &&
+    (
+      hovered === index ||
+      focused === index ||
+      pinned === index
+    );
+
+  const allVisited =
+    visited.size === artwork.fragments.length;
+
+  const leaveOnlyTraces = () => {
+    setCompleted(true);
+    setHovered(null);
+    setFocused(null);
+    setPinned(null);
+  };
+
+  const restart = () => {
+    setCompleted(false);
+    setHovered(null);
+    setFocused(null);
+    setPinned(null);
+    setVisited(new Set());
+  };
 
   return (
     <section
@@ -86,18 +126,29 @@ export default function AbsenceExperiment({
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/32">
+          <motion.p
+            initial={false}
+            animate={{
+              opacity: completed ? 0.18 : 1,
+            }}
+            transition={{
+              duration: reduceMotion ? 0 : 0.8,
+            }}
+            className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/32"
+          >
             Approcher révèle.
             <br />
             Toucher conserve.
             <br />
             S’éloigner rend au blanc.
-          </p>
+          </motion.p>
 
           <div className="mt-10 max-w-[280px] border-t border-white/10 pt-5">
             <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em]">
               <span className="text-white/25">
-                Traces rencontrées
+                {completed
+                  ? 'Résidu'
+                  : 'Traces rencontrées'}
               </span>
 
               <span className="text-[#d6b86f]/70">
@@ -118,17 +169,28 @@ export default function AbsenceExperiment({
                   key={index}
                   initial={false}
                   animate={{
-                    opacity: visited.has(index)
-                      ? 0.7
-                      : 0.1,
-                    scaleX: visited.has(index)
-                      ? 1
-                      : 0.35,
+                    opacity: completed
+                      ? visited.has(index)
+                        ? 0.3
+                        : 0.04
+                      : visited.has(index)
+                        ? 0.72
+                        : 0.1,
+
+                    scaleX: completed
+                      ? visited.has(index)
+                        ? 0.55
+                        : 0.15
+                      : visited.has(index)
+                        ? 1
+                        : 0.35,
                   }}
                   transition={{
                     duration: reduceMotion
                       ? 0
-                      : 0.45,
+                      : completed
+                        ? 1
+                        : 0.45,
                     ease: [0.2, 0.8, 0.2, 1],
                   }}
                   className="h-px origin-left bg-[#d6b86f]"
@@ -136,155 +198,288 @@ export default function AbsenceExperiment({
               ))}
             </div>
           </div>
+
+          <div
+            className="sr-only"
+            aria-live="polite"
+          >
+            {completed
+              ? 'La composition a disparu. Seules les traces du parcours restent.'
+              : `${visited.size} fragments sur ${artwork.fragments.length} ont été rencontrés.`}
+          </div>
         </div>
 
-        <div className="border-y border-white/10 py-8 md:py-12">
-          <div className="grid gap-6 md:grid-cols-3">
-            {layout.map((cell) => {
-              if (cell.type === 'void') {
+        <div>
+          <motion.div
+            initial={false}
+            animate={{
+              opacity: completed ? 0.72 : 1,
+            }}
+            transition={{
+              duration: reduceMotion ? 0 : 1,
+              ease: [0.2, 0.8, 0.2, 1],
+            }}
+            className="border-y border-white/10 py-8 md:py-12"
+          >
+            <div className="grid gap-6 md:grid-cols-3">
+              {layout.map((cell) => {
+                if (cell.type === 'void') {
+                  return (
+                    <div
+                      key={cell.key}
+                      aria-hidden="true"
+                      className="hidden min-h-[150px] md:block"
+                    />
+                  );
+                }
+
+                const index = cell.index;
+
+                const fragment =
+                  artwork.fragments[index];
+
+                const revealed =
+                  isRevealed(index);
+
+                const retained =
+                  pinned === index;
+
+                const hasTrace =
+                  visited.has(index);
+
+                const textOpacity = completed
+                  ? hasTrace
+                    ? 0.055
+                    : 0.015
+                  : revealed
+                    ? 0.94
+                    : hasTrace
+                      ? 0.34
+                      : 0.2;
+
+                const lineWidth = completed
+                  ? hasTrace
+                    ? '16%'
+                    : '3%'
+                  : revealed
+                    ? '58%'
+                    : hasTrace
+                      ? '24%'
+                      : '8%';
+
+                const lineOpacity = completed
+                  ? hasTrace
+                    ? 0.24
+                    : 0.03
+                  : revealed
+                    ? 0.65
+                    : hasTrace
+                      ? 0.32
+                      : 0.1;
+
                 return (
-                  <div
-                    key={cell.key}
-                    aria-hidden="true"
-                    className="hidden min-h-[150px] md:block"
-                  />
-                );
-              }
-
-              const index = cell.index;
-
-              const fragment =
-                artwork.fragments[index];
-
-              const revealed =
-                isRevealed(index);
-
-              const retained =
-                pinned === index;
-
-              const hasTrace =
-                visited.has(index);
-
-              return (
-                <button
-                  key={`${artwork.id}-${index}`}
-                  type="button"
-                  aria-pressed={retained}
-                  aria-label={
-                    revealed
-                      ? `Fragment ${index + 1}: ${fragment}`
-                      : `Révéler le fragment ${index + 1}.`
-                  }
-                  onMouseEnter={() => {
-                    setHovered(index);
-                    markVisited(index);
-                  }}
-                  onMouseLeave={() =>
-                    setHovered((current) =>
-                      current === index
-                        ? null
-                        : current,
-                    )
-                  }
-                  onFocus={() => {
-                    setFocused(index);
-                    markVisited(index);
-                  }}
-                  onBlur={() =>
-                    setFocused((current) =>
-                      current === index
-                        ? null
-                        : current,
-                    )
-                  }
-                  onClick={() => {
-                    markVisited(index);
-
-                    setPinned((current) =>
-                      current === index
-                        ? null
-                        : index,
-                    );
-                  }}
-                  className="relative min-h-[150px] border-l border-white/10 px-5 py-6 text-left focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="font-mono text-[8px] tracking-[0.16em] text-[#d6b86f]/50"
-                  >
-                    {String(index + 1).padStart(
-                      2,
-                      '0',
-                    )}
-                  </span>
-
-                  <motion.p
-                    aria-hidden="true"
-                    initial={false}
-                    animate={{
-                      opacity: revealed
-                        ? 0.94
-                        : hasTrace
-                          ? 0.34
-                          : 0.2,
-                      y: revealed ? 0 : 3,
-                    }}
-                    transition={{
-                      duration: reduceMotion
-                        ? 0
+                  <button
+                    key={`${artwork.id}-${index}`}
+                    type="button"
+                    disabled={completed}
+                    aria-pressed={retained}
+                    aria-label={
+                      completed
+                        ? `Fragment ${index + 1}. Trace résiduelle.`
                         : revealed
-                          ? 0.32
-                          : 0.65,
-                      ease: [0.2, 0.8, 0.2, 1],
+                          ? `Fragment ${index + 1}: ${fragment}`
+                          : `Révéler le fragment ${index + 1}.`
+                    }
+                    onMouseEnter={() => {
+                      setHovered(index);
+                      markVisited(index);
                     }}
-                    className="mt-8 max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white"
+                    onMouseLeave={() =>
+                      setHovered((current) =>
+                        current === index
+                          ? null
+                          : current,
+                      )
+                    }
+                    onFocus={() => {
+                      setFocused(index);
+                      markVisited(index);
+                    }}
+                    onBlur={() =>
+                      setFocused((current) =>
+                        current === index
+                          ? null
+                          : current,
+                      )
+                    }
+                    onClick={() => {
+                      markVisited(index);
+
+                      setPinned((current) =>
+                        current === index
+                          ? null
+                          : index,
+                      );
+                    }}
+                    className="relative min-h-[150px] border-l border-white/10 px-5 py-6 text-left focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1 disabled:cursor-default"
                   >
-                    {revealed
-                      ? fragment
-                      : masks[index]}
-                  </motion.p>
+                    <motion.span
+                      aria-hidden="true"
+                      initial={false}
+                      animate={{
+                        opacity: completed
+                          ? 0.12
+                          : 0.5,
+                      }}
+                      transition={{
+                        duration: reduceMotion
+                          ? 0
+                          : 0.8,
+                      }}
+                      className="font-mono text-[8px] tracking-[0.16em] text-[#d6b86f]"
+                    >
+                      {String(index + 1).padStart(
+                        2,
+                        '0',
+                      )}
+                    </motion.span>
 
-                  <motion.span
-                    aria-hidden="true"
-                    initial={false}
-                    animate={{
-                      width: revealed
-                        ? '58%'
-                        : hasTrace
-                          ? '24%'
-                          : '8%',
-                      opacity: revealed
-                        ? 0.65
-                        : hasTrace
-                          ? 0.32
-                          : 0.1,
-                    }}
-                    transition={{
-                      duration: reduceMotion
-                        ? 0
-                        : 0.45,
-                      ease: [0.2, 0.8, 0.2, 1],
-                    }}
-                    className="absolute bottom-5 left-5 h-px bg-[#d6b86f]"
-                  />
-                </button>
-              );
-            })}
-          </div>
+                    <motion.p
+                      aria-hidden="true"
+                      initial={false}
+                      animate={{
+                        opacity: textOpacity,
+                        y:
+                          completed
+                            ? 5
+                            : revealed
+                              ? 0
+                              : 3,
+                      }}
+                      transition={{
+                        duration: reduceMotion
+                          ? 0
+                          : completed
+                            ? 1.1
+                            : revealed
+                              ? 0.32
+                              : 0.65,
+                        ease: [0.2, 0.8, 0.2, 1],
+                      }}
+                      className="mt-8 max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white"
+                    >
+                      {completed
+                        ? masks[index]
+                        : revealed
+                          ? fragment
+                          : masks[index]}
+                    </motion.p>
 
-          <div className="mt-5 flex items-center justify-between gap-6">
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
-              mémoire locale / {visited.size}
-            </span>
+                    <motion.span
+                      aria-hidden="true"
+                      initial={false}
+                      animate={{
+                        width: lineWidth,
+                        opacity: lineOpacity,
+                      }}
+                      transition={{
+                        duration: reduceMotion
+                          ? 0
+                          : completed
+                            ? 1
+                            : 0.45,
+                        ease: [0.2, 0.8, 0.2, 1],
+                      }}
+                      className="absolute bottom-5 left-5 h-px bg-[#d6b86f]"
+                    />
+                  </button>
+                );
+              })}
+            </div>
 
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
-              {pinned !== null
-                ? `fragment ${String(
-                    pinned + 1,
-                  ).padStart(2, '0')} retenu`
-                : 'état / instable'}
-            </span>
-          </div>
+            <div className="mt-5 flex min-h-8 items-center justify-between gap-6">
+              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+                {completed
+                  ? 'mémoire / résiduelle'
+                  : `mémoire locale / ${visited.size}`}
+              </span>
+
+              {!completed && pinned !== null && (
+                <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                  fragment{' '}
+                  {String(pinned + 1).padStart(
+                    2,
+                    '0',
+                  )}{' '}
+                  retenu
+                </span>
+              )}
+
+              {!completed &&
+                pinned === null &&
+                !allVisited && (
+                  <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                    état / instable
+                  </span>
+                )}
+            </div>
+          </motion.div>
+
+          {allVisited && !completed && (
+            <motion.div
+              initial={{
+                opacity: reduceMotion ? 1 : 0,
+                y: reduceMotion ? 0 : 8,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.7,
+                ease: [0.2, 0.8, 0.2, 1],
+              }}
+              className="mt-8 flex justify-end"
+            >
+              <button
+                type="button"
+                onClick={leaveOnlyTraces}
+                className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+              >
+                Laisser disparaître
+              </button>
+            </motion.div>
+          )}
+
+          {completed && (
+            <motion.div
+              initial={{
+                opacity: reduceMotion ? 1 : 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                duration: reduceMotion ? 0 : 1.1,
+                delay: reduceMotion ? 0 : 0.25,
+              }}
+              className="mt-10 border-t border-white/8 pt-8"
+            >
+              <p className="max-w-[28ch] font-serif text-xl italic leading-7 text-white/24">
+                La phrase n’est plus là.
+                <br />
+                La lecture, elle, en garde la forme.
+              </p>
+
+              <button
+                type="button"
+                onClick={restart}
+                className="mt-8 font-mono text-[8px] uppercase tracking-[0.18em] text-white/28 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+              >
+                Recommencer l’expérience
+              </button>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>
