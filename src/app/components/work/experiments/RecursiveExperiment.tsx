@@ -1,0 +1,378 @@
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+} from 'motion/react';
+import {
+  useEffect,
+  useState,
+} from 'react';
+
+import type { Artwork } from '../../../data/artworks';
+
+type Props = {
+  artwork: Artwork;
+};
+
+const cycles = [
+  [
+    'Revenir n’est jamais répéter.',
+    'Le texte se souvient du détour.',
+    'Une boucle peut déplacer.',
+    'La sortie est dans l’entrée.',
+    'Le commencement n’est plus intact.',
+    'return differently;',
+  ],
+
+  [
+    'Revenir n’est jamais tout à fait répéter.',
+    'Le texte se souvient du détour qu’il vient de faire.',
+    'Une boucle peut déplacer son point de départ.',
+    'La sortie était déjà dans l’entrée.',
+    'Le commencement n’est plus tout à fait intact.',
+    'return differently; // again',
+  ],
+
+  [
+    'Revenir n’est plus revenir au même endroit.',
+    'Le texte se souvient maintenant de s’être souvenu.',
+    'La boucle déplace ce qui la traverse.',
+    'L’entrée porte désormais la trace de la sortie.',
+    'Le commencement reconnaît qu’il a changé.',
+    'return changed;',
+  ],
+];
+
+const cycleNotes = [
+  'Vous avez déjà lu cette page. Pas encore.',
+  'Quelque chose ressemble exactement à ce qui précédait.',
+  'La page revient. Le point de départ, non.',
+];
+
+export default function RecursiveExperiment({
+  artwork,
+}: Props) {
+  const reduceMotion = useReducedMotion();
+
+  const [passage, setPassage] =
+    useState(0);
+
+  const [cycle, setCycle] =
+    useState(0);
+
+  const [previousText, setPreviousText] =
+    useState<string | null>(null);
+
+  const [ended, setEnded] =
+    useState(false);
+
+  useEffect(() => {
+    setPassage(0);
+    setCycle(0);
+    setPreviousText(null);
+    setEnded(false);
+  }, [artwork.id]);
+
+  const cycleIndex = Math.min(
+    cycle,
+    cycles.length - 1,
+  );
+
+  const currentText =
+    cycles[cycleIndex][passage];
+
+  const finalPassage =
+    passage === cycles[cycleIndex].length - 1;
+
+  const finalCycle =
+    cycleIndex === cycles.length - 1;
+
+  const advance = () => {
+    if (ended) return;
+
+    setPreviousText(currentText);
+
+    if (finalPassage && finalCycle) {
+      setEnded(true);
+      return;
+    }
+
+    if (finalPassage) {
+      setCycle((current) =>
+        Math.min(
+          current + 1,
+          cycles.length - 1,
+        ),
+      );
+
+      setPassage(0);
+      return;
+    }
+
+    setPassage((current) =>
+      current + 1,
+    );
+  };
+
+  const restart = () => {
+    setPassage(0);
+    setCycle(0);
+    setPreviousText(null);
+    setEnded(false);
+  };
+
+  const passageNumber = String(
+    passage + 1,
+  ).padStart(2, '0');
+
+  const cycleNumber = String(
+    cycleIndex + 1,
+  ).padStart(2, '0');
+
+  return (
+    <section
+      className="border-t border-white/12 pt-10"
+      aria-labelledby={`recursive-${artwork.id}`}
+    >
+      <div className="grid gap-10 lg:grid-cols-[.48fr_1.52fr]">
+        <div>
+          <div
+            id={`recursive-${artwork.id}`}
+            className="micro-meta text-[#d6b86f]"
+          >
+            Interaction / récursion
+          </div>
+
+          <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
+            {artwork.interactionNote}
+          </p>
+
+          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/30">
+            Continuer fait avancer.
+            <br />
+            Arriver au bout fait revenir.
+            <br />
+            Revenir ne restaure rien.
+          </p>
+
+          <div className="mt-10 max-w-[285px] border-t border-white/10 pt-5">
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                  Passage
+                </div>
+
+                <div className="mt-2 font-mono text-[10px] text-[#d6b86f]/70">
+                  {passageNumber} / 06
+                </div>
+              </div>
+
+              <div>
+                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                  Boucle
+                </div>
+
+                <div className="mt-2 font-mono text-[10px] text-[#d6b86f]/70">
+                  {cycleNumber} / 03
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="mt-5 grid grid-cols-6 gap-2"
+              aria-hidden="true"
+            >
+              {cycles[cycleIndex].map(
+                (_, index) => (
+                  <motion.span
+                    key={index}
+                    initial={false}
+                    animate={{
+                      opacity:
+                        index <= passage
+                          ? 0.7
+                          : 0.08,
+                      scaleX:
+                        index <= passage
+                          ? 1
+                          : 0.3,
+                    }}
+                    transition={{
+                      duration: reduceMotion
+                        ? 0
+                        : 0.4,
+                    }}
+                    className="h-px origin-left bg-[#d6b86f]"
+                  />
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div className="relative min-h-[410px] overflow-hidden border-y border-white/10 px-5 py-9 md:px-10 md:py-12">
+            <div
+              aria-hidden="true"
+              className="absolute bottom-0 left-[15%] top-0 w-px bg-white/[0.025]"
+            />
+
+            <div
+              aria-hidden="true"
+              className="absolute bottom-[18%] left-0 right-0 h-px bg-white/[0.025]"
+            />
+
+            <div className="relative min-h-[315px]">
+              {previousText && !ended && (
+                <motion.p
+                  key={`previous-${cycle}-${passage}`}
+                  aria-hidden="true"
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: 0.075,
+                    x: cycleIndex > 0 ? 8 : 4,
+                    y: 62,
+                  }}
+                  transition={{
+                    duration: reduceMotion
+                      ? 0
+                      : 0.8,
+                  }}
+                  className="absolute left-0 top-0 max-w-[25ch] font-serif text-[clamp(2rem,3.7vw,4.4rem)] leading-[1] text-white"
+                >
+                  {previousText}
+                </motion.p>
+              )}
+
+              {!ended ? (
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`${cycle}-${passage}`}
+                    initial={{
+                      opacity: reduceMotion ? 1 : 0,
+                      x: reduceMotion ? 0 : 10,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                    }}
+                    exit={{
+                      opacity: reduceMotion
+                        ? 1
+                        : 0.08,
+                      x: reduceMotion ? 0 : -8,
+                    }}
+                    transition={{
+                      duration: reduceMotion
+                        ? 0
+                        : cycleIndex === 0
+                          ? 0.5
+                          : 0.75,
+                      ease: [0.2, 0.8, 0.2, 1],
+                    }}
+                    className="relative z-10"
+                  >
+                    <div className="flex items-center gap-4">
+                      <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-[#d6b86f]/55">
+                        Lettre / passage {passageNumber}
+                      </span>
+
+                      <span
+                        aria-hidden="true"
+                        className="h-px w-8 bg-[#d6b86f]/30"
+                      />
+                    </div>
+
+                    <p
+                      aria-live="polite"
+                      className="mt-11 max-w-[22ch] font-serif text-[clamp(2.3rem,4.4vw,5.1rem)] leading-[0.96] text-[#f4f0e8]"
+                    >
+                      {currentText}
+                    </p>
+
+                    <motion.p
+                      key={`note-${cycleIndex}`}
+                      initial={{
+                        opacity: reduceMotion ? 1 : 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                      }}
+                      transition={{
+                        duration: reduceMotion
+                          ? 0
+                          : 1,
+                      }}
+                      className="mt-12 max-w-[34ch] font-serif text-base italic leading-6 text-white/22"
+                    >
+                      {cycleNotes[cycleIndex]}
+                    </motion.p>
+                  </motion.div>
+                </AnimatePresence>
+              ) : (
+                <motion.div
+                  initial={{
+                    opacity: reduceMotion ? 1 : 0,
+                  }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: reduceMotion
+                      ? 0
+                      : 1.1,
+                  }}
+                >
+                  <div className="micro-meta text-[#d6b86f]/55">
+                    Interruption / boucle 03
+                  </div>
+
+                  <p className="mt-11 max-w-[24ch] font-serif text-[clamp(2.2rem,4vw,4.7rem)] leading-[0.98] text-white/75">
+                    La boucle s’arrête.
+                    <br />
+                    Le texte, lui, ne revient pas
+                    à son état initial.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </div>
+
+          <div className="mt-7 flex min-h-10 items-center justify-between gap-6">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+              {ended
+                ? 'état / interrompu'
+                : cycleIndex === 0
+                  ? 'écart / 00'
+                  : `écart / +${cycleIndex}`}
+            </span>
+
+            {!ended ? (
+              <button
+                type="button"
+                onClick={advance}
+                className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+              >
+                {finalPassage
+                  ? finalCycle
+                    ? 'Sortir de la boucle'
+                    : 'Revenir au début'
+                  : 'Passage suivant'}
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={restart}
+                className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/34 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+              >
+                Relire depuis le commencement
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
