@@ -2,7 +2,12 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ArrowLeft, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
-import type { Artwork } from './Gallery';
+import {
+  artworks,
+  formatArtworkIndex,
+  formatArtworkTotal,
+  type Artwork,
+} from '../data/artworks';
 
 type Props = {
   artwork: Artwork | null;
@@ -57,6 +62,16 @@ export default function InteractiveArtPage({
   }, [artwork, activeFragment]);
 
   if (!artwork) return null;
+
+  const artworkPosition = artworks.findIndex(
+    (item) => item.id === artwork.id,
+  );
+
+  const displayIndex = formatArtworkIndex(
+    Math.max(artworkPosition, 0),
+  );
+
+  const totalWorks = formatArtworkTotal();
 
   const selectFragment = (index: number) => {
     setPreviousFragment(activeFragment);
@@ -116,7 +131,7 @@ export default function InteractiveArtPage({
           <div className="grid gap-10 lg:grid-cols-[1.05fr_.95fr] lg:gap-16">
             <div>
               <div className="mb-6 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d6b86f]">
-                <span>ÉTUDE {artwork.index} / 06</span>
+                <span>ÉTUDE {displayIndex} / {totalWorks}</span>
                 <span className="h-px w-10 bg-[#d6b86f]/60" />
                 <span>{artwork.chapter}</span>
               </div>
