@@ -11,6 +11,7 @@ import {
 
 import type { Artwork } from '../../data/artworks';
 import MemoryExperiment from './experiments/MemoryExperiment';
+import MachineExperiment from './experiments/MachineExperiment';
 
 import AbsenceExperiment from './experiments/AbsenceExperiment';
 
@@ -99,6 +100,10 @@ export default function ExperimentRenderer({
     return <MemoryExperiment artwork={artwork} />;
   }
 
+  if (artwork.experience === 'machine') {
+    return <MachineExperiment artwork={artwork} />;
+  }
+
   return (
     <section
       className="border-t border-white/12 pt-10"
@@ -119,33 +124,6 @@ export default function ExperimentRenderer({
         </div>
 
         <div className="panel-soft min-h-[240px] p-6 md:p-8">
-          {artwork.experience === 'machine' && (
-            <div className="grid min-h-[180px] gap-px bg-white/10 md:grid-cols-2">
-              <div className="bg-[#0c0c0c] p-5">
-                <div className="micro-meta text-white/28">
-                  System
-                </div>
-
-                <p className="mt-6 font-mono text-sm uppercase leading-7 tracking-[0.12em] text-white/45">
-                  {activeText
-                    .split(' ')
-                    .map((word) => `[${word}]`)
-                    .join(' ')}
-                </p>
-              </div>
-
-              <div className="bg-[#0c0c0c] p-5">
-                <div className="micro-meta text-[#d6b86f]">
-                  Reader
-                </div>
-
-                <p className="mt-6 font-serif text-3xl leading-[1.2]">
-                  {activeText}
-                </p>
-              </div>
-            </div>
-          )}
-
           {artwork.experience === 'recursion' && (
             <motion.div
               key={activeFragment}
