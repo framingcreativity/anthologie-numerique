@@ -14,6 +14,32 @@ type Props = {
   artwork: Artwork;
 };
 
+const memoryVersions = [
+  'Le souvenir conserve ce qui a eu lieu.',
+  'Le souvenir conserve ce qui semble avoir eu lieu.',
+  'Le souvenir retient ce qui semble avoir eu lieu.',
+  'Le souvenir retient ce qui aurait pu avoir lieu.',
+  'Le souvenir reconstruit ce qui aurait pu avoir lieu.',
+  'Le souvenir reconstruit ce qui n’a peut-être jamais eu lieu.',
+];
+
+const mutationNotes = [
+  'source / certitude',
+  'ajout / semble',
+  'substitution / conserve → retient',
+  'glissement / semble → aurait pu',
+  'substitution / retient → reconstruit',
+  'rupture / l’événement devient incertain',
+];
+
+const traceOffsets = [
+  { x: -2, y: 54 },
+  { x: 5, y: 88 },
+  { x: -5, y: 122 },
+  { x: 8, y: 156 },
+  { x: -7, y: 190 },
+];
+
 export default function MemoryExperiment({
   artwork,
 }: Props) {
@@ -30,8 +56,10 @@ export default function MemoryExperiment({
     setHistory([]);
   }, [artwork.id]);
 
+  const total = memoryVersions.length;
+
   const isFinal =
-    currentIndex >= artwork.fragments.length - 1;
+    currentIndex === total - 1;
 
   const reconstruct = () => {
     if (isFinal) return;
@@ -42,10 +70,7 @@ export default function MemoryExperiment({
     ]);
 
     setCurrentIndex((current) =>
-      Math.min(
-        current + 1,
-        artwork.fragments.length - 1,
-      ),
+      Math.min(current + 1, total - 1),
     );
   };
 
@@ -58,8 +83,8 @@ export default function MemoryExperiment({
     currentIndex + 1,
   ).padStart(2, '0');
 
-  const total = String(
-    artwork.fragments.length,
+  const displayTotal = String(
+    total,
   ).padStart(2, '0');
 
   return (
@@ -80,21 +105,22 @@ export default function MemoryExperiment({
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/30">
+          <p className="mt-8 max-w-[290px] font-serif text-lg italic leading-7 text-white/30">
             Rejouer ne restitue pas.
             <br />
-            Chaque retour déplace légèrement
-            ce qui semblait certain.
+            La phrase revient,
+            mais jamais exactement
+            depuis le même endroit.
           </p>
 
-          <div className="mt-10 max-w-[280px] border-t border-white/10 pt-5">
+          <div className="mt-10 max-w-[290px] border-t border-white/10 pt-5">
             <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em]">
               <span className="text-white/24">
                 Reconstruction
               </span>
 
               <span className="text-[#d6b86f]/70">
-                {displayIndex} / {total}
+                {displayIndex} / {displayTotal}
               </span>
             </div>
 
@@ -102,19 +128,19 @@ export default function MemoryExperiment({
               className="mt-4 flex gap-2"
               aria-hidden="true"
             >
-              {artwork.fragments.map((_, index) => (
+              {memoryVersions.map((_, index) => (
                 <motion.span
                   key={index}
                   initial={false}
                   animate={{
                     opacity:
                       index <= currentIndex
-                        ? 0.65
+                        ? 0.7
                         : 0.08,
                     scaleX:
                       index <= currentIndex
                         ? 1
-                        : 0.35,
+                        : 0.3,
                   }}
                   transition={{
                     duration: reduceMotion
@@ -126,14 +152,28 @@ export default function MemoryExperiment({
                 />
               ))}
             </div>
+
+            <motion.div
+              key={currentIndex}
+              initial={{
+                opacity: reduceMotion ? 1 : 0,
+              }}
+              animate={{ opacity: 1 }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.5,
+              }}
+              className="mt-5 font-mono text-[8px] uppercase tracking-[0.15em] text-white/20"
+            >
+              {mutationNotes[currentIndex]}
+            </motion.div>
           </div>
         </div>
 
         <div>
-          <div className="relative min-h-[390px] overflow-hidden border-y border-white/10 px-5 py-10 md:px-10 md:py-14">
+          <div className="relative min-h-[420px] overflow-hidden border-y border-white/10 px-5 py-10 md:px-10 md:py-14">
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 top-1/2 h-px bg-white/[0.035]"
+              className="absolute inset-x-0 top-[52%] h-px bg-white/[0.035]"
             />
 
             <div
@@ -141,43 +181,61 @@ export default function MemoryExperiment({
               className="absolute bottom-0 left-[18%] top-0 w-px bg-white/[0.025]"
             />
 
-            <div className="relative min-h-[280px]">
+            <div className="relative min-h-[310px]">
               {history
                 .slice()
                 .reverse()
-                .map((index, depth) => {
+                .map((versionIndex, depth) => {
+                  const offset =
+                    traceOffsets[
+                      Math.min(
+                        depth,
+                        traceOffsets.length - 1,
+                      )
+                    ];
+
                   const opacity = Math.max(
-                    0.055,
-                    0.22 - depth * 0.045,
+                    0.045,
+                    0.2 - depth * 0.035,
                   );
 
                   return (
-                    <motion.p
-                      key={`${index}-${depth}`}
+                    <motion.div
+                      key={`${versionIndex}-${depth}`}
                       aria-hidden="true"
                       initial={{
                         opacity: 0,
+                        x: 0,
+                        y: 25,
                       }}
                       animate={{
                         opacity,
-                        y:
-                          58 +
-                          depth * 34,
-                        x:
-                          depth % 2 === 0
-                            ? depth * 4
-                            : depth * -4,
+                        x: offset.x,
+                        y: offset.y,
                       }}
                       transition={{
                         duration: reduceMotion
                           ? 0
-                          : 0.8,
+                          : 0.85,
                         ease: [0.2, 0.8, 0.2, 1],
                       }}
-                      className="absolute left-0 max-w-[30ch] font-serif text-[clamp(1.35rem,2.3vw,2.25rem)] leading-[1.16] text-white"
+                      className="absolute inset-x-0 top-0"
                     >
-                      {artwork.fragments[index]}
-                    </motion.p>
+                      <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-[#d6b86f]/40">
+                        trace{' '}
+                        {String(
+                          versionIndex + 1,
+                        ).padStart(2, '0')}
+                      </div>
+
+                      <p className="mt-3 max-w-[32ch] font-serif text-[clamp(1.25rem,2.15vw,2.15rem)] leading-[1.12] text-white">
+                        {
+                          memoryVersions[
+                            versionIndex
+                          ]
+                        }
+                      </p>
+                    </motion.div>
                   );
                 })}
 
@@ -186,38 +244,60 @@ export default function MemoryExperiment({
                   key={currentIndex}
                   initial={{
                     opacity: reduceMotion ? 1 : 0,
-                    y: reduceMotion ? 0 : -6,
+                    y: reduceMotion ? 0 : -8,
                   }}
                   animate={{
                     opacity: 1,
                     y: 0,
                   }}
                   exit={{
-                    opacity: reduceMotion ? 1 : 0.12,
-                    y: reduceMotion ? 0 : 18,
+                    opacity: reduceMotion
+                      ? 1
+                      : 0.08,
+                    y: reduceMotion ? 0 : 22,
                   }}
                   transition={{
                     duration: reduceMotion
                       ? 0
-                      : 0.65,
+                      : 0.7,
                     ease: [0.2, 0.8, 0.2, 1],
                   }}
-                  className="relative z-10"
+                  className="relative z-20"
                 >
-                  <div className="font-mono text-[8px] uppercase tracking-[0.18em] text-[#d6b86f]/55">
-                    Version {displayIndex}
+                  <div className="flex items-center gap-4">
+                    <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-[#d6b86f]/55">
+                      Version {displayIndex}
+                    </span>
+
+                    <span
+                      aria-hidden="true"
+                      className="h-px w-8 bg-[#d6b86f]/35"
+                    />
                   </div>
 
                   <p
                     aria-live="polite"
-                    className="mt-8 max-w-[26ch] font-serif text-[clamp(2rem,4.2vw,4.8rem)] leading-[0.98] text-[#f4f0e8]"
+                    className="mt-8 max-w-[23ch] font-serif text-[clamp(2.15rem,4.1vw,4.7rem)] leading-[0.98] text-[#f4f0e8]"
                   >
-                    {
-                      artwork.fragments[
-                        currentIndex
-                      ]
-                    }
+                    {memoryVersions[currentIndex]}
                   </p>
+
+                  <div className="mt-9 max-w-[34ch] border-l border-white/10 pl-4">
+                    <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/18">
+                      annotation d’archive
+                    </p>
+
+                    <p className="mt-3 font-serif text-sm italic leading-6 text-white/24">
+                      {
+                        artwork.fragments[
+                          Math.min(
+                            currentIndex,
+                            artwork.fragments.length - 1,
+                          )
+                        ]
+                      }
+                    </p>
+                  </div>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -226,13 +306,10 @@ export default function MemoryExperiment({
           <div className="mt-7 flex min-h-10 items-center justify-between gap-6">
             <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
               {history.length === 0
-                ? 'archive / vide'
-                : `${String(
+                ? 'archive / aucune trace'
+                : `archive / ${String(
                     history.length,
-                  ).padStart(
-                    2,
-                    '0',
-                  )} trace${
+                  ).padStart(2, '0')} trace${
                     history.length > 1
                       ? 's'
                       : ''
@@ -245,18 +322,38 @@ export default function MemoryExperiment({
                 onClick={reconstruct}
                 className="font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
-                Reconstruire
+                Reconstruire depuis la trace
               </button>
             ) : (
               <button
                 type="button"
                 onClick={restart}
-                className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/38 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
               >
-                Reprendre depuis la première trace
+                Revenir au souvenir initial
               </button>
             )}
           </div>
+
+          {isFinal && (
+            <motion.p
+              initial={{
+                opacity: reduceMotion ? 1 : 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              transition={{
+                duration: reduceMotion ? 0 : 1,
+                delay: reduceMotion ? 0 : 0.25,
+              }}
+              className="mt-10 max-w-[30ch] font-serif text-xl italic leading-7 text-white/24"
+            >
+              À force d’être rappelée,
+              la phrase ne se souvient plus
+              exactement d’où elle vient.
+            </motion.p>
+          )}
         </div>
       </div>
     </section>
