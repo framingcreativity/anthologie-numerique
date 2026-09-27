@@ -51,7 +51,7 @@ export default function Gallery() {
         </div>
 
         <div className="mt-10 grid gap-px bg-black/20 md:grid-cols-2 lg:grid-cols-3">
-          {works.map((work, index) => (
+          {artworks.map((work, index) => (
             <motion.button
               key={work.id}
               type="button"
