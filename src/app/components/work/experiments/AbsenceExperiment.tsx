@@ -1,3 +1,6 @@
+import { motion, useReducedMotion } from 'motion/react';
+import { useState } from 'react';
+
 import type { Artwork } from '../../../data/artworks';
 
 type Props = {
@@ -22,9 +25,34 @@ const layout: Cell[] = [
   { type: 'fragment', index: 5 },
 ];
 
+const masks = [
+  'Le blanc ______ la trace.',
+  'Une ligne ______. Le sens reste.',
+  'L’intervalle est une ______.',
+  'Le silence possède ______ syntaxe.',
+  'Ce qui disparaît ______ d’agir.',
+  'if (presence) ______();',
+];
+
 export default function AbsenceExperiment({
   artwork,
 }: Props) {
+  const reduceMotion = useReducedMotion();
+
+  const [hovered, setHovered] =
+    useState<number | null>(null);
+
+  const [focused, setFocused] =
+    useState<number | null>(null);
+
+  const [pinned, setPinned] =
+    useState<number | null>(null);
+
+  const isRevealed = (index: number) =>
+    hovered === index ||
+    focused === index ||
+    pinned === index;
+
   return (
     <section
       className="border-t border-white/12 pt-10"
@@ -44,8 +72,11 @@ export default function AbsenceExperiment({
           </p>
 
           <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/28">
-            Ici, le blanc n’est pas un manque de contenu.
-            Il fait partie de la lecture.
+            Approcher révèle.
+            <br />
+            Toucher conserve.
+            <br />
+            S’éloigner rend au blanc.
           </p>
         </div>
 
@@ -62,24 +93,120 @@ export default function AbsenceExperiment({
                 );
               }
 
+              const index = cell.index;
               const fragment =
-                artwork.fragments[cell.index];
+                artwork.fragments[index];
+
+              const revealed =
+                isRevealed(index);
+
+              const retained =
+                pinned === index;
 
               return (
-                <article
-                  key={`${artwork.id}-${cell.index}`}
-                  className="relative min-h-[150px] border-l border-white/10 px-5 py-6"
+                <button
+                  key={`${artwork.id}-${index}`}
+                  type="button"
+                  aria-pressed={retained}
+                  aria-label={
+                    retained
+                      ? `Fragment ${index + 1}. Révélation conservée.`
+                      : `Révéler le fragment ${index + 1}.`
+                  }
+                  onMouseEnter={() =>
+                    setHovered(index)
+                  }
+                  onMouseLeave={() =>
+                    setHovered((current) =>
+                      current === index
+                        ? null
+                        : current,
+                    )
+                  }
+                  onFocus={() =>
+                    setFocused(index)
+                  }
+                  onBlur={() =>
+                    setFocused((current) =>
+                      current === index
+                        ? null
+                        : current,
+                    )
+                  }
+                  onClick={() =>
+                    setPinned((current) =>
+                      current === index
+                        ? null
+                        : index,
+                    )
+                  }
+                  className="relative min-h-[150px] border-l border-white/10 px-5 py-6 text-left focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1"
                 >
-                  <span className="font-mono text-[8px] tracking-[0.16em] text-[#d6b86f]/50">
-                    {String(cell.index + 1).padStart(2, '0')}
+                  <span
+                    aria-hidden="true"
+                    className="font-mono text-[8px] tracking-[0.16em] text-[#d6b86f]/50"
+                  >
+                    {String(index + 1).padStart(
+                      2,
+                      '0',
+                    )}
                   </span>
 
-                  <p className="mt-8 max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white/72">
-                    {fragment}
-                  </p>
-                </article>
+                  <motion.p
+                    aria-hidden="true"
+                    initial={false}
+                    animate={{
+                      opacity: revealed
+                        ? 0.92
+                        : 0.2,
+                      y: revealed ? 0 : 3,
+                    }}
+                    transition={{
+                      duration: reduceMotion
+                        ? 0
+                        : revealed
+                          ? 0.32
+                          : 0.5,
+                      ease: [0.2, 0.8, 0.2, 1],
+                    }}
+                    className="mt-8 max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white"
+                  >
+                    {revealed
+                      ? fragment
+                      : masks[index]}
+                  </motion.p>
+
+                  <motion.span
+                    aria-hidden="true"
+                    initial={false}
+                    animate={{
+                      width: revealed
+                        ? '58%'
+                        : '10%',
+                      opacity: revealed
+                        ? 0.65
+                        : 0.12,
+                    }}
+                    transition={{
+                      duration: reduceMotion
+                        ? 0
+                        : 0.4,
+                    }}
+                    className="absolute bottom-5 left-5 h-px bg-[#d6b86f]"
+                  />
+                </button>
               );
             })}
+          </div>
+
+          <div className="mt-5 flex justify-end">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+              {pinned !== null
+                ? `fragment ${String(
+                    pinned + 1,
+                  ).padStart(2, '0')} retenu`
+                : 'état / instable'}
+            </span>
           </div>
         </div>
       </div>
