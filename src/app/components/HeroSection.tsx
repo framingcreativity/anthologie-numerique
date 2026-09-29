@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { ArrowDownRight } from 'lucide-react';
 
-import heroImage from 'figma:asset/07cb64d44f0ca7aa76b810053cdee15b1ec48375.png';
+import heroImage from '../../assets/anthologie/hero-anthologie-numerique.png';
 
 const principles = [
   {

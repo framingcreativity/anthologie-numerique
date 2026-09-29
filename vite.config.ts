@@ -6,26 +6,6 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
-function figmaAssetResolver() {
-  return {
-    name: 'figma-asset-resolver',
-
-    resolveId(id: string) {
-      if (id.startsWith('figma:asset/')) {
-        const filename = id.replace('figma:asset/', '');
-
-        return path.resolve(
-          root,
-          'src/assets',
-          filename,
-        );
-      }
-
-      return null;
-    },
-  };
-}
-
 export default defineConfig(({ command }) => ({
   base:
     command === 'serve'
@@ -33,7 +13,6 @@ export default defineConfig(({ command }) => ({
       : process.env.VITE_BASE_PATH ||
         '/anthologie-numerique/',
   plugins: [
-    figmaAssetResolver(),
     react(),
     tailwindcss(),
   ],
