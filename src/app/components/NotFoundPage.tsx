@@ -22,7 +22,7 @@ export default function NotFoundPage() {
       <Header />
 
       <main
-        id="main-content"
+        id="main-content" tabIndex={-1}
         className="mx-auto flex w-full max-w-[1440px] flex-1 items-center px-5 pb-24 pt-32 md:px-10 lg:px-14"
       >
         <div>

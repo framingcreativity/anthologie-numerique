@@ -45,7 +45,7 @@ export default function WorkNavigation({
             onClick={() => onSelect(previous)}
             className="group flex min-h-[112px] sm:min-h-[138px] w-full items-center gap-5 p-5 text-left sm:p-6 transition hover:bg-white/[0.018] focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 md:p-8"
           >
-            <ArrowLeft
+            <ArrowLeft aria-hidden="true"
               size={17}
               className="text-gold transition-transform group-hover:-translate-x-1"
             />
@@ -86,7 +86,7 @@ export default function WorkNavigation({
               </div>
             </div>
 
-            <ArrowRight
+            <ArrowRight aria-hidden="true"
               size={17}
               className="text-gold transition-transform group-hover:translate-x-1"
             />

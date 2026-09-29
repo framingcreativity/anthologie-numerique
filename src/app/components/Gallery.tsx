@@ -52,9 +52,8 @@ export default function Gallery() {
 
         <div className="mt-10 grid gap-px bg-black/20 md:grid-cols-2 lg:grid-cols-3">
           {artworks.map((work, index) => (
-            <motion.button
+            <motion.article
               key={work.id}
-              type="button"
               className="group digital-frame digital-noise relative min-h-[520px] overflow-hidden bg-panel text-left text-white"
               initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -63,10 +62,11 @@ export default function Gallery() {
                 duration: 0.55,
                 delay: Math.min(index * 0.05, 0.24),
               }}
-              onClick={() => setActive(work)}
             >
               <img
                 src={work.image}
+                loading="lazy"
+                decoding="async"
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover opacity-55 transition duration-700 group-hover:scale-[1.025] group-hover:opacity-72"
               />
@@ -88,7 +88,7 @@ export default function Gallery() {
                   </div>
 
                   <span className="grid h-9 w-9 place-items-center border border-white/18 text-white/62 transition group-hover:border-gold-highlight group-hover:text-gold-highlight">
-                    <ArrowUpRight size={16} />
+                    <ArrowUpRight aria-hidden="true" size={16} />
                   </span>
                 </div>
 
@@ -105,7 +105,7 @@ export default function Gallery() {
 
                   <div className="mb-5 h-px w-full bg-white/10" />
 
-                  <h3 className="max-w-[11ch] text-[2.65rem] font-medium leading-[0.95] tracking-[-0.05em]">
+                  <h3 id={`card-${work.id}`} className="max-w-[11ch] text-[2.65rem] font-medium leading-[0.95] tracking-[-0.05em]">
                     {work.title}
                   </h3>
 
@@ -118,7 +118,14 @@ export default function Gallery() {
                   </p>
                 </div>
               </div>
-            </motion.button>
+              <button
+                type="button"
+                aria-labelledby={`card-${work.id}`}
+                aria-haspopup="dialog"
+                onClick={() => setActive(work)}
+                className="absolute inset-0 z-10 cursor-pointer focus-visible:-outline-offset-4"
+              />
+            </motion.article>
           ))}
         </div>
       </div>

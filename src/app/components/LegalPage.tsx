@@ -118,7 +118,7 @@ export default function LegalPage({
       <Header />
 
       <main
-        id="main-content"
+        id="main-content" tabIndex={-1}
         className="mx-auto max-w-[1440px] px-5 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40 lg:px-14"
       >
         <article

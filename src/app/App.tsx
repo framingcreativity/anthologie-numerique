@@ -33,13 +33,6 @@ type Route =
 function resolveRoute(): Route {
   const pathname = getRoutePath();
 
-  if (
-    pathname === '/' &&
-    window.location.hash === LEGACY_ABOUT_HASH
-  ) {
-    return 'about';
-  }
-
   switch (pathname) {
     case '/':
       return 'home';
@@ -118,15 +111,13 @@ export default function App() {
             return;
           }
 
-          window.requestAnimationFrame(
-            () => {
-              document
-                .querySelector(hash)
-                ?.scrollIntoView({
-                  block: 'start',
-                });
-            },
-          );
+          let id: string;
+          try {
+            id = decodeURIComponent(hash.slice(1));
+          } catch {
+            return;
+          }
+          document.getElementById(id)?.scrollIntoView({ block: 'start' });
         };
 
       scrollToHash();
@@ -176,7 +167,7 @@ export default function App() {
 
       <Header />
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <HeroSection />
         <Gallery />
         <ObservationSection />

@@ -8,14 +8,13 @@ import Footer from './Footer';
 
 export default function AboutPage() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-bg text-ink selection:bg-gold selection:text-black">
+    <div className="relative min-h-screen bg-bg text-ink selection:bg-gold selection:text-black">
       <PageMeta
         title="À propos — Anthologie numérique"
         description="Pourquoi Anthologie numérique existe : une pratique où texte, image, interaction et mouvement deviennent une seule forme de lecture."
         canonicalPath="/a-propos/"
       />
 
-      {/* Global photographic field */}
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 opacity-[0.42]"
@@ -27,7 +26,6 @@ export default function AboutPage() {
         }}
       />
 
-      {/* Dark editorial veil */}
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0"
@@ -49,8 +47,8 @@ export default function AboutPage() {
       <div className="relative z-10 flex min-h-screen flex-col">
         <Header />
 
-        <main id="main-content" className="flex-1">
-          <section className="mx-auto max-w-[1440px] px-5 py-20 md:px-10 md:py-28 lg:px-14 lg:py-36">
+        <main id="main-content" tabIndex={-1} className="flex-1">
+          <section className="mx-auto max-w-[1440px] px-5 pb-20 pt-32 md:px-10 md:pb-28 md:pt-36 lg:px-14 lg:py-36">
             <div className="grid gap-14 lg:grid-cols-[.62fr_1.38fr] lg:gap-24">
               <motion.div
                 initial={{ opacity: 0, y: 18 }}
@@ -126,7 +124,7 @@ export default function AboutPage() {
                     href="https://framing-creativity.ch"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group mt-8 inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition-all duration-300 ease-out hover:translate-x-1.5 hover:tracking-[0.205em] hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                    className="group mt-8 inline-flex min-h-11 flex-wrap items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition-all duration-300 ease-out hover:translate-x-1.5 hover:tracking-[0.205em] hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
                   >
                     <span>
                       Découvrir mon portfolio
@@ -136,7 +134,7 @@ export default function AboutPage() {
                       Framing Creativity
                     </span>
 
-                    <ArrowUpRight
+                    <ArrowUpRight aria-hidden="true"
                       size={15}
                       className="transition-transform duration-300 ease-out group-hover:-translate-y-1 group-hover:translate-x-1.5"
                     />

@@ -42,6 +42,8 @@ export default function HeroSection() {
       <div className="absolute inset-0">
         <img
           src={heroImage}
+          fetchPriority="high"
+          decoding="async"
           alt=""
           className="h-full w-full object-cover opacity-[0.12] grayscale"
         />
@@ -72,7 +74,7 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.h1
-            className="max-w-[1000px] text-[clamp(4.1rem,10vw,9.5rem)] font-medium leading-[0.82] tracking-[-0.075em] text-ink"
+            className="max-w-[1000px] text-[clamp(3rem,10vw,9.5rem)] font-medium leading-[0.82] tracking-[-0.075em] text-ink"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -109,7 +111,7 @@ export default function HeroSection() {
               Explorer
 
               <span className="grid h-9 w-9 place-items-center border border-gold/55 text-gold transition-transform group-hover:translate-x-1 group-hover:translate-y-1">
-                <ArrowDownRight size={16} />
+                <ArrowDownRight aria-hidden="true" size={16} />
               </span>
             </a>
           </motion.div>

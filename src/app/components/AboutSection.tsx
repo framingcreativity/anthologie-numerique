@@ -1,3 +1,4 @@
+import { withBase } from '../lib/site';
 import { motion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -146,13 +147,13 @@ export default function AboutSection() {
 
             <div className="mt-10 border-t border-white/12 pt-8">
               <a
-                href={`${import.meta.env.BASE_URL}a-propos/`}
+                href={withBase('a-propos/')}
                 className="group inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 À propos de l’expérience
 
                 <span className="grid h-9 w-9 place-items-center border border-gold/40 transition group-hover:border-gold">
-                  <ArrowUpRight
+                  <ArrowUpRight aria-hidden="true"
                     size={15}
                     className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />

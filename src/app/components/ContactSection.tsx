@@ -55,7 +55,7 @@ export default function ContactSection() {
               Revenir au début
 
               <span className="grid h-9 w-9 place-items-center border border-black/35 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1">
-                <ArrowUpRight size={15} />
+                <ArrowUpRight aria-hidden="true" size={15} />
               </span>
             </a>
           </div>

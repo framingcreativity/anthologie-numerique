@@ -1,6 +1,6 @@
 import {
-  AnimatePresence,
   motion,
+  useReducedMotion,
 } from 'motion/react';
 
 import {
@@ -11,6 +11,7 @@ import {
 import {
   useEffect,
   useState,
+  useRef,
 } from 'react';
 
 import {
@@ -21,6 +22,29 @@ import {
 export default function Header() {
   const [open, setOpen] =
     useState(false);
+
+  const reduceMotion = useReducedMotion();
+  const menuButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 768px)');
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false); };
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => desktop.removeEventListener('change', closeOnDesktop);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        menuButton.current?.focus();
+      }
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
+
 
   const [hash, setHash] =
     useState(
@@ -33,6 +57,7 @@ export default function Header() {
   useEffect(
     () => {
       const syncHash = () => {
+        setOpen(false);
         setHash(
           window.location.hash,
         );
@@ -103,13 +128,13 @@ export default function Header() {
       <motion.header
       className="fixed inset-x-0 top-0 z-50 border-b border-gold/35 bg-bg/82 backdrop-blur-xl"
       initial={{
-        y: -72,
+        y: reduceMotion ? 0 : -72,
       }}
       animate={{
         y: 0,
       }}
       transition={{
-        duration: 0.65,
+        duration: reduceMotion ? 0 : 0.65,
         ease: [
           0.22,
           1,
@@ -124,7 +149,7 @@ export default function Header() {
             '#fragments',
           )}
           aria-label="Anthologie numérique — revenir à l’accueil"
-          className="group flex min-h-11 items-center gap-2"
+          className="group flex min-h-11 min-w-0 flex-wrap content-center items-center gap-x-2 gap-y-0"
           onClick={() =>
             setOpen(false)
           }
@@ -170,8 +195,9 @@ export default function Header() {
         </nav>
 
         <button
+          ref={menuButton}
           type="button"
-          className="grid h-11 w-11 place-items-center border border-white/15 text-white transition-colors duration-300 hover:border-gold/60 hover:text-gold md:hidden"
+          className="grid h-11 w-11 shrink-0 place-items-center border border-white/15 text-white transition-colors duration-300 hover:border-gold/60 hover:text-gold md:hidden"
           aria-expanded={
             open
           }
@@ -204,24 +230,15 @@ export default function Header() {
         </button>
       </div>
 
-      <AnimatePresence>
-        {open && (
+
           <motion.nav
             id="mobile-navigation"
             aria-label="Navigation mobile"
             className="border-t border-white/10 bg-panel px-5 py-6 md:hidden"
-            initial={{
-              opacity: 0,
-              height: 0,
-            }}
-            animate={{
-              opacity: 1,
-              height: 'auto',
-            }}
-            exit={{
-              opacity: 0,
-              height: 0,
-            }}
+            hidden={!open}
+            initial={false}
+            animate={{ opacity: open ? 1 : 0 }}
+            transition={{ duration: reduceMotion ? 0 : 0.18 }}
           >
             <div className="mx-auto flex max-w-[1440px] flex-col">
               {links.map(
@@ -271,8 +288,7 @@ export default function Header() {
               )}
             </div>
           </motion.nav>
-        )}
-      </AnimatePresence>
+
       </motion.header>
     </>
   );

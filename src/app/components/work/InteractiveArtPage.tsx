@@ -214,7 +214,7 @@ export default function InteractiveArtPage({
                 onClick={onClose}
                 className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-white/60 transition hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
-                <ArrowLeft size={15} />
+                <ArrowLeft aria-hidden="true" size={15} />
                 Retour à la collection
               </button>
 
@@ -225,7 +225,7 @@ export default function InteractiveArtPage({
                 className="grid h-9 w-9 place-items-center border border-white/15 text-white/65 transition hover:border-gold hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
                 aria-label="Fermer l’étude"
               >
-                <X size={16} />
+                <X aria-hidden="true" size={16} />
               </button>
             </div>
           </header>
