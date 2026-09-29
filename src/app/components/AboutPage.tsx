@@ -11,11 +11,7 @@ export default function AboutPage() {
   const reduceMotion = useReducedMotion();
   return (
     <div className="relative min-h-screen bg-bg text-ink selection:bg-gold selection:text-black">
-      <PageMeta
-        title="À propos — Anthologie numérique"
-        description="Pourquoi Anthologie numérique existe : une pratique où texte, image, interaction et mouvement deviennent une seule forme de lecture."
-        canonicalPath="/a-propos/"
-      />
+      <PageMeta page="about" />
 
       <div
         aria-hidden="true"

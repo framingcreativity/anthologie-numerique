@@ -13,11 +13,7 @@ import {
 export default function NotFoundPage() {
   return (
     <div className="flex min-h-screen flex-col bg-bg text-ink">
-      <PageMeta
-        title="Page introuvable — Anthologie numérique"
-        description="La page demandée n’existe pas ou n’est plus disponible."
-        robots="noindex,nofollow"
-      />
+      <PageMeta page="404" />
 
       <Header />
 

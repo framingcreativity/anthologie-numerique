@@ -11,9 +11,6 @@ const pages = {
   legal: {
     eyebrow: 'Informations légales',
     title: 'Mentions légales',
-    description:
-      'Informations relatives à l’édition, à l’hébergement et aux droits associés à Anthologie numérique.',
-    canonical: '/mentions-legales/',
     sections: [
       {
         title: 'Édition',
@@ -41,9 +38,6 @@ const pages = {
   privacy: {
     eyebrow: 'Données & vie privée',
     title: 'Confidentialité',
-    description:
-      'Informations relatives à la confidentialité et au traitement des données techniques sur Anthologie numérique.',
-    canonical: '/confidentialite/',
     sections: [
       {
         title: 'Principe',
@@ -71,9 +65,6 @@ const pages = {
   terms: {
     eyebrow: 'Cadre d’utilisation',
     title: 'Conditions d’utilisation',
-    description:
-      'Conditions d’accès et d’utilisation du projet éditorial et artistique Anthologie numérique.',
-    canonical: '/conditions-utilisation/',
     sections: [
       {
         title: 'Objet',
@@ -108,12 +99,7 @@ export default function LegalPage({
 
   return (
     <div className="min-h-screen bg-bg text-ink selection:bg-gold selection:text-black">
-      <PageMeta
-        title={`${page.title} — Anthologie numérique`}
-        description={page.description}
-        canonicalPath={page.canonical}
-        robots="noindex,nofollow"
-      />
+      <PageMeta page={kind} />
 
       <Header />
 

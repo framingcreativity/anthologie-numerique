@@ -1,0 +1,42 @@
+{
+  "siteUrl": "https://framingcreativity.github.io/anthologie-numerique",
+  "basePath": "/anthologie-numerique/",
+  "pages": {
+    "home": {
+      "path": "/",
+      "title": "Anthologie numérique — Expérience éditoriale interactive",
+      "description": "Anthologie numérique explore la littérature, l’image, l’interface et le code à travers six expériences interactives.",
+      "robots": "index,follow"
+    },
+    "about": {
+      "path": "/a-propos/",
+      "title": "À propos — Anthologie numérique",
+      "description": "Pourquoi Anthologie numérique existe : une pratique où texte, image, interaction et mouvement deviennent une seule forme de lecture.",
+      "robots": "index,follow"
+    },
+    "legal": {
+      "path": "/mentions-legales/",
+      "title": "Mentions légales — Anthologie numérique",
+      "description": "Informations relatives à l’édition, à l’hébergement et aux droits associés à Anthologie numérique.",
+      "robots": "noindex,nofollow"
+    },
+    "privacy": {
+      "path": "/confidentialite/",
+      "title": "Confidentialité — Anthologie numérique",
+      "description": "Informations relatives à la confidentialité et au traitement des données techniques sur Anthologie numérique.",
+      "robots": "noindex,nofollow"
+    },
+    "terms": {
+      "path": "/conditions-utilisation/",
+      "title": "Conditions d’utilisation — Anthologie numérique",
+      "description": "Conditions d’accès et d’utilisation du projet éditorial et artistique Anthologie numérique.",
+      "robots": "noindex,nofollow"
+    },
+    "404": {
+      "path": null,
+      "title": "Page introuvable — Anthologie numérique",
+      "description": "La page demandée n’existe pas ou n’est plus disponible.",
+      "robots": "noindex,nofollow"
+    }
+  }
+}

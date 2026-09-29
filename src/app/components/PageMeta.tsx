@@ -1,15 +1,9 @@
+import { pages } from '../data/pages.json';
 import { useEffect } from 'react';
 
 import {
   canonicalUrl,
 } from '../lib/site';
-
-type PageMetaProps = {
-  title: string;
-  description: string;
-  canonicalPath?: string;
-  robots?: string;
-};
 
 function ensureMeta(
   selector: string,
@@ -42,12 +36,8 @@ function ensureMeta(
   );
 }
 
-export default function PageMeta({
-  title,
-  description,
-  canonicalPath,
-  robots = 'index,follow',
-}: PageMetaProps) {
+export default function PageMeta({ page }: { page: keyof typeof pages }) {
+  const { title, description, path: canonicalPath, robots } = pages[page];
   useEffect(
     () => {
       document.documentElement.lang =

@@ -1,76 +1,12 @@
-import {
-  cp,
-  mkdir,
-  readFile,
-  writeFile,
-} from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { loadEnv } from 'vite';
 
-import {
-  join,
-} from 'node:path';
-
-const dist =
-  new URL(
-    '../dist/',
-    import.meta.url,
-  );
-
-const sourcePath =
-  new URL(
-    'index.html',
-    dist,
-  );
-
-const source =
-  await readFile(
-    sourcePath,
-    'utf8',
-  );
-
-const siteUrl =
-  (
-    process.env.VITE_SITE_URL ||
-    'https://framingcreativity.github.io/anthologie-numerique'
-  ).replace(/\/+$/, '');
-
-const routes = [
-  {
-    path: 'a-propos',
-    title:
-      'À propos — Anthologie numérique',
-    description:
-      'Pourquoi Anthologie numérique existe : une pratique où texte, image, interaction et mouvement deviennent une seule forme de lecture.',
-    robots:
-      'index,follow',
-  },
-  {
-    path: 'mentions-legales',
-    title:
-      'Mentions légales — Anthologie numérique',
-    description:
-      'Informations relatives à l’édition, à l’hébergement et aux droits associés à Anthologie numérique.',
-    robots:
-      'noindex,nofollow',
-  },
-  {
-    path: 'confidentialite',
-    title:
-      'Confidentialité — Anthologie numérique',
-    description:
-      'Informations relatives à la confidentialité et au traitement des données techniques sur Anthologie numérique.',
-    robots:
-      'noindex,nofollow',
-  },
-  {
-    path: 'conditions-utilisation',
-    title:
-      'Conditions d’utilisation — Anthologie numérique',
-    description:
-      'Conditions d’accès et d’utilisation du projet éditorial et artistique Anthologie numérique.',
-    robots:
-      'noindex,nofollow',
-  },
-];
+const config = JSON.parse(await readFile(new URL('../src/app/data/pages.json', import.meta.url), 'utf8'));
+const env = loadEnv('production', fileURLToPath(new URL('../', import.meta.url)), 'VITE_');
+const dist = new URL('../dist/', import.meta.url);
+const source = await readFile(new URL('index.html', dist), 'utf8');
+const siteUrl = (env.VITE_SITE_URL || config.siteUrl).replace(/\/+$/, '');
 
 function escapeHtml(value) {
   return value
@@ -149,74 +85,15 @@ function buildHtml({
   );
 }
 
-for (const route of routes) {
-  const directory =
-    new URL(
-      `${route.path}/`,
-      dist,
-    );
-
-  await mkdir(
-    directory,
-    {
-      recursive: true,
-    },
-  );
-
-  const canonical =
-    `${siteUrl}/${route.path}/`;
-
-  await writeFile(
-    new URL(
-      'index.html',
-      directory,
-    ),
-    buildHtml({
-      title:
-        route.title,
-      description:
-        route.description,
-      canonical,
-      robots:
-        route.robots,
-    }),
-    'utf8',
-  );
+for (const [key, page] of Object.entries(config.pages)) {
+  const file = key === '404' ? '404.html' : `${page.path.slice(1)}index.html`;
+  const destination = new URL(file, dist);
+  await mkdir(new URL('.', destination), { recursive: true });
+  await writeFile(destination, buildHtml({
+    ...page,
+    canonical: page.path ? `${siteUrl}${page.path}` : null,
+  }), 'utf8');
 }
 
-await writeFile(
-  new URL(
-    '404.html',
-    dist,
-  ),
-  buildHtml({
-    title:
-      'Page introuvable — Anthologie numérique',
-    description:
-      'La page demandée n’existe pas ou n’est plus disponible.',
-    canonical:
-      null,
-    robots:
-      'noindex,nofollow',
-  }),
-  'utf8',
-);
-
-await writeFile(
-  new URL(
-    '.nojekyll',
-    dist,
-  ),
-  '',
-  'utf8',
-);
-
-console.log(
-  '✓ Routes statiques générées',
-);
-console.log(
-  '✓ 404.html généré sans canonical',
-);
-console.log(
-  '✓ .nojekyll généré',
-);
+await writeFile(new URL('.nojekyll', dist), '', 'utf8');
+console.log('✓ Accueil et routes statiques avec métadonnées ; 404 sans canonical ; .nojekyll');

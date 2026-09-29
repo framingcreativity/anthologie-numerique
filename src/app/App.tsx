@@ -169,11 +169,7 @@ function SiteContent() {
 
   return (
     <div className="min-h-screen bg-bg text-ink selection:bg-gold selection:text-black">
-      <PageMeta
-        title="Anthologie numérique — Expérience éditoriale interactive"
-        description="Anthologie numérique explore la littérature, l’image, l’interface et le code à travers six expériences interactives."
-        canonicalPath="/"
-      />
+      <PageMeta page="home" />
 
       <Header />
 

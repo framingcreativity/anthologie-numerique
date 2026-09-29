@@ -1,217 +1,61 @@
-import {
-  access,
-  readFile,
-} from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import { loadEnv } from 'vite';
 
-const root =
-  new URL(
-    '../dist/',
-    import.meta.url,
-  );
-
-const expectedFiles = [
-  'index.html',
-  'a-propos/index.html',
-  'mentions-legales/index.html',
-  'confidentialite/index.html',
-  'conditions-utilisation/index.html',
-  '404.html',
-  '.nojekyll',
-];
-
+const config = JSON.parse(await readFile(new URL('../src/app/data/pages.json', import.meta.url), 'utf8'));
+const env = loadEnv('production', fileURLToPath(new URL('../', import.meta.url)), 'VITE_');
+const siteUrl = (env.VITE_SITE_URL || config.siteUrl).replace(/\/+$/, '');
+const base = `/${(env.VITE_BASE_PATH || config.basePath).replace(/^\/+|\/+$/g, '')}/`.replace(/\/+/g, '/');
+const dist = new URL('../dist/', import.meta.url);
 const errors = [];
+const escapeHtml = value => value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
-for (const file of expectedFiles) {
-  try {
-    await access(
-      new URL(
-        file,
-        root,
-      ),
-    );
+for (const [key, page] of Object.entries(config.pages)) {
+  const file = key === '404' ? '404.html' : `${page.path.slice(1)}index.html`;
+  let html;
+  try { html = await readFile(new URL(file, dist), 'utf8'); }
+  catch { errors.push(`${file} : fichier manquant`); continue; }
 
-    console.log(
-      `✓ ${file}`,
-    );
-  } catch {
-    errors.push(
-      `Fichier manquant : ${file}`,
-    );
+  const expectTag = (pattern, expected, label) => {
+    const matches = [...html.matchAll(pattern)];
+    if (matches.length !== 1 || matches[0][1] !== escapeHtml(expected)) {
+      errors.push(`${file} : ${label} absent, dupliqué ou incorrect`);
+    }
+  };
+  expectTag(/<title>([\s\S]*?)<\/title>/g, page.title, 'title');
+  const expectedMeta = {
+    description: page.description,
+    robots: key === 'home' || key === 'about' ? 'index,follow' : 'noindex,nofollow',
+    'og:title': page.title,
+    'og:description': page.description,
+    'og:type': 'website',
+  };
+  if (page.path) expectedMeta['og:url'] = `${siteUrl}${page.path}`;
+  for (const [name, value] of Object.entries(expectedMeta)) {
+    expectTag(new RegExp(`<meta (?:name|property)="${name}" content="([^"<>]*)"[^>]*>`, 'g'), value, name);
   }
-}
-
-const pages = [
-  {
-    file:
-      'a-propos/index.html',
-    canonical:
-      '/a-propos/',
-  },
-  {
-    file:
-      'mentions-legales/index.html',
-    canonical:
-      '/mentions-legales/',
-  },
-  {
-    file:
-      'confidentialite/index.html',
-    canonical:
-      '/confidentialite/',
-  },
-  {
-    file:
-      'conditions-utilisation/index.html',
-    canonical:
-      '/conditions-utilisation/',
-  },
-];
-
-for (const page of pages) {
-  const html =
-    await readFile(
-      new URL(
-        page.file,
-        root,
-      ),
-      'utf8',
-    );
-
-  if (
-    !html.includes(
-      '/anthologie-numerique/assets/',
-    )
-  ) {
-    errors.push(
-      `${page.file} : assets hors base GitHub Pages`,
-    );
+  if (page.path) {
+    expectTag(/<link rel="canonical" href="([^"<>]*)"[^>]*>/g, `${siteUrl}${page.path}`, 'canonical');
+  } else if (/rel=["']canonical["']|property=["']og:url["']/.test(html)) {
+    errors.push(`${file} : canonical ou og:url interdit`);
   }
 
-  if (
-    !html.includes(
-      `https://framingcreativity.github.io/anthologie-numerique${page.canonical}`,
-    )
-  ) {
-    errors.push(
-      `${page.file} : canonical incorrect`,
-    );
+  const assets = [...html.matchAll(/(?:src|href)="([^"<>]*\/assets\/[^"<>]+)"/g)];
+  if (!assets.length) errors.push(`${file} : assets manquants`);
+  for (const [, url] of assets) {
+    if (!url.startsWith(`${base}assets/`)) errors.push(`${file} : asset hors base : ${url}`);
+    else {
+      try { await access(new URL(url.slice(base.length), dist)); }
+      catch { errors.push(`${file} : asset introuvable : ${url}`); }
+    }
   }
-
-  const expectedRobots =
-    page.file ===
-      'a-propos/index.html'
-      ? 'index,follow'
-      : 'noindex,nofollow';
-
-  if (
-    !html.includes(
-      `name="robots" content="${expectedRobots}"`,
-    )
-  ) {
-    errors.push(
-      `${page.file} : robots ${expectedRobots} absent`,
-    );
-  }
+  console.log(`✓ ${file}`);
 }
-
-const notFound =
-  await readFile(
-    new URL(
-      '404.html',
-      root,
-    ),
-    'utf8',
-  );
-
-if (
-  !notFound.includes(
-    'name="robots" content="noindex,nofollow"',
-  )
-) {
-  errors.push(
-    '404.html : noindex,nofollow absent',
-  );
-}
-
-if (
-  /rel=["']canonical["']/i.test(
-    notFound,
-  )
-) {
-  errors.push(
-    '404.html : canonical interdit présent',
-  );
-}
-
-if (
-  !notFound.includes(
-    '/anthologie-numerique/assets/',
-  )
-) {
-  errors.push(
-    '404.html : assets hors base GitHub Pages',
-  );
-}
-
-const home =
-  await readFile(
-    new URL(
-      'index.html',
-      root,
-    ),
-    'utf8',
-  );
-
-const badAssetRefs = [
-  ...home.matchAll(
-    /(?:src|href)=["']\/assets\//g,
-  ),
-];
-
-if (
-  badAssetRefs.length > 0
-) {
-  errors.push(
-    'index.html : référence /assets/ incompatible avec GitHub Pages',
-  );
-}
-
-console.log();
+try { await access(new URL('.nojekyll', dist)); }
+catch { errors.push('.nojekyll manquant'); }
 
 if (errors.length) {
-  console.error(
-    'AUDIT BUILD — ÉCHEC',
-  );
-
-  for (const error of errors) {
-    console.error(
-      `✗ ${error}`,
-    );
-  }
-
+  console.error('AUDIT BUILD — ÉCHEC\n' + errors.map(error => `✗ ${error}`).join('\n'));
   process.exit(1);
 }
-
-console.log(
-  'AUDIT BUILD — OK',
-);
-
-console.log(
-  '✓ routes statiques',
-);
-
-console.log(
-  '✓ base assets',
-);
-
-console.log(
-  '✓ canonicals',
-);
-
-console.log(
-  '✓ robots',
-);
-
-console.log(
-  '✓ 404 sans canonical',
-);
+console.log('AUDIT BUILD — OK : métadonnées statiques, accueil, routes, assets, robots, 404 sans canonical');

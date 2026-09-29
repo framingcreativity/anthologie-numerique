@@ -1,17 +1,15 @@
+import { siteUrl } from '../data/pages.json';
 export const BASE_URL =
-  import.meta.env.BASE_URL || '/';
+  (import.meta.env.BASE_URL || '/').replace(/\/*$/, '/');
 
 export const SITE_URL =
   (
     import.meta.env.VITE_SITE_URL ||
-    'https://framingcreativity.github.io/anthologie-numerique'
+    siteUrl
   ).replace(/\/+$/, '');
 
 export function withBase(path = '') {
-  const base =
-    BASE_URL.endsWith('/')
-      ? BASE_URL
-      : `${BASE_URL}/`;
+  const base = BASE_URL;
 
   if (!path) {
     return base;
@@ -43,14 +41,11 @@ export function getRoutePath() {
   let pathname =
     window.location.pathname;
 
-  const base =
-    BASE_URL.endsWith('/')
-      ? BASE_URL
-      : `${BASE_URL}/`;
+  const base = BASE_URL;
 
   if (
     base !== '/' &&
-    pathname.startsWith(base)
+    (pathname === base.slice(0, -1) || pathname.startsWith(base))
   ) {
     pathname =
       `/${pathname.slice(base.length)}`;
