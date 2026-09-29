@@ -4,7 +4,6 @@ import {
   useReducedMotion,
 } from 'motion/react';
 import {
-  useEffect,
   useState,
 } from 'react';
 
@@ -82,13 +81,7 @@ export default function CompressionExperiment({
   const [stage, setStage] =
     useState(0);
 
-  const [removedHistory, setRemovedHistory] =
-    useState<string[]>([]);
-
-  useEffect(() => {
-    setStage(0);
-    setRemovedHistory([]);
-  }, [artwork.id]);
+  const removedHistory = stages.slice(1, stage + 1).map(item => item.removed!);
 
   const current = stages[stage];
 
@@ -98,24 +91,11 @@ export default function CompressionExperiment({
   const compress = () => {
     if (isFinal) return;
 
-    const nextStage = stage + 1;
-
-    const removed =
-      stages[nextStage].removed;
-
-    if (removed) {
-      setRemovedHistory((history) => [
-        ...history,
-        removed,
-      ]);
-    }
-
-    setStage(nextStage);
+    setStage(currentStage => Math.min(currentStage + 1, stages.length - 1));
   };
 
   const restore = () => {
     setStage(0);
-    setRemovedHistory([]);
   };
 
   const stageNumber = String(
@@ -133,12 +113,12 @@ export default function CompressionExperiment({
     >
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.48fr_1.52fr]">
         <div>
-          <div
+          <h2
             id={`compression-${artwork.id}`}
             className="micro-meta text-gold"
           >
             Interaction / compression
-          </div>
+          </h2>
 
           <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
             {artwork.interactionNote}
@@ -153,7 +133,7 @@ export default function CompressionExperiment({
           </p>
 
           <div className="mt-10 max-w-[285px] border-t border-white/10 pt-5">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-wrap items-center justify-between gap-2">
               <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
                 Matière restante
               </span>
@@ -218,12 +198,12 @@ export default function CompressionExperiment({
         </div>
 
         <div>
-          {/* ANTHOLOGIE_COMPRESSION_STATUS */}
           <div
             className="sr-only"
             aria-live="polite"
             aria-atomic="true"
           >
+            {current.text}{' '}
             Compression {stage + 1} sur {stages.length}.
             Matière restante {current.remaining} pour cent.
             {isFinal
@@ -254,9 +234,9 @@ export default function CompressionExperiment({
                     : durations[stage],
                   ease: [0.2, 0.8, 0.2, 1],
                 }}
-                className="relative border-x border-white/8 px-5 py-12 text-center md:px-8"
+                className="relative min-w-[min(100%,16rem)] border-x border-white/8 px-5 py-12 text-center md:px-8"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="font-mono text-[8px] uppercase tracking-[0.17em] text-gold/55">
                     Compression {stageNumber}
                   </span>
@@ -269,7 +249,6 @@ export default function CompressionExperiment({
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={stage}
-                    aria-live="polite"
                     initial={{
                       opacity: reduceMotion ? 1 : 0,
                       scaleX: reduceMotion ? 1 : 1.035,
@@ -341,7 +320,7 @@ export default function CompressionExperiment({
                 {removedHistory.map(
                   (removed, index) => (
                     <motion.span
-                      key={`${removed}-${index}`}
+                      key={removed}
                       initial={{
                         opacity: reduceMotion
                           ? 0.2

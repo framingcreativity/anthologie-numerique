@@ -3,7 +3,6 @@ import {
   useReducedMotion,
 } from 'motion/react';
 import {
-  useEffect,
   useState,
 } from 'react';
 
@@ -54,10 +53,6 @@ export default function ErrorExperiment({
   const [stage, setStage] =
     useState(0);
 
-  useEffect(() => {
-    setStage(0);
-  }, [artwork.id]);
-
   const isInitial = stage === 0;
 
   const isFinal =
@@ -98,12 +93,12 @@ export default function ErrorExperiment({
     >
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.46fr_1.54fr]">
         <div>
-          <div
+          <h2
             id={`error-${artwork.id}`}
             className="micro-meta text-gold"
           >
             Interaction / erreur
-          </div>
+          </h2>
 
           <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
             {artwork.interactionNote}
@@ -176,12 +171,12 @@ export default function ErrorExperiment({
         </div>
 
         <div>
-          {/* ANTHOLOGIE_ERROR_STATUS */}
           <div
             className="sr-only"
             aria-live="polite"
             aria-atomic="true"
           >
+            {current.text}{' '}
             {isInitial
               ? 'État initial stable.'
               : `Erreur ${stage} sur ${mutations.length}: ${current.type}.`}
@@ -245,7 +240,6 @@ export default function ErrorExperiment({
                   </div>
 
                   <p
-                    aria-live="polite"
                     className="mt-10 max-w-[19ch] break-words font-serif text-[clamp(2.05rem,4.2vw,4.9rem)] leading-[0.96] text-ink"
                   >
                     {current.text}

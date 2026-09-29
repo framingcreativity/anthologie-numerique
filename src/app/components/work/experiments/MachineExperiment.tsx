@@ -3,7 +3,6 @@ import {
   useReducedMotion,
 } from 'motion/react';
 import {
-  useEffect,
   useState,
 } from 'react';
 
@@ -103,11 +102,6 @@ export default function MachineExperiment({
   const [showRemainder, setShowRemainder] =
     useState(false);
 
-  useEffect(() => {
-    setSelected(0);
-    setShowRemainder(false);
-  }, [artwork.id]);
-
   const analysis =
     analyses[
       Math.min(selected, analyses.length - 1)
@@ -133,12 +127,12 @@ export default function MachineExperiment({
     >
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.42fr_1.58fr]">
         <div>
-          <div
+          <h2
             id={`machine-${artwork.id}`}
             className="micro-meta text-gold"
           >
             Interaction / interprétation
-          </div>
+          </h2>
 
           <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
             {artwork.interactionNote}
@@ -164,15 +158,12 @@ export default function MachineExperiment({
 
                   return (
                     <button
-                      key={index}
+                      key={fragment}
                       type="button"
                       onClick={() =>
                         choose(index)
                       }
                       aria-pressed={active}
-                      aria-current={
-                        active ? 'true' : undefined
-                      }
                       className={`grid grid-cols-[28px_1fr] gap-3 bg-work px-3 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 ${
                         active
                           ? 'text-ink'
@@ -185,7 +176,7 @@ export default function MachineExperiment({
                         ).padStart(2, '0')}
                       </span>
 
-                      <span className="truncate font-serif text-sm">
+                      <span className="min-w-0 font-serif text-sm">
                         {fragment}
                       </span>
                     </button>
@@ -197,16 +188,16 @@ export default function MachineExperiment({
         </div>
 
         <div>
-          {/* ANTHOLOGIE_MACHINE_STATUS */}
           <div
             className="sr-only"
             aria-live="polite"
             aria-atomic="true"
           >
+            {phrase}{' '}
             Phrase {selected + 1} sur {artwork.fragments.length}.
             Confiance système {analysis.confidence}.
             {showRemainder
-              ? ' Le reste non classé est affiché.'
+              ? ` ${analysis.remainder}`
               : ' Le reste non classé est masqué.'}
           </div>
 
@@ -286,13 +277,13 @@ export default function MachineExperiment({
                 ].map(([label, value]) => (
                   <div
                     key={label}
-                    className="grid grid-cols-[92px_1fr] gap-4 py-3"
+                    className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 py-3"
                   >
                     <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/20">
                       {label}
                     </span>
 
-                    <span className="font-mono text-[10px] leading-5 text-white/55">
+                    <span className="break-words font-mono text-[10px] leading-5 text-white/55">
                       {value}
                     </span>
                   </div>
@@ -304,7 +295,7 @@ export default function MachineExperiment({
                   sortie
                 </div>
 
-                <p className="mt-3 max-w-[38ch] font-mono text-[10px] leading-5 text-white/46">
+                <p className="mt-3 max-w-[38ch] break-words font-mono text-[10px] leading-5 text-white/46">
                   {analysis.output}
                 </p>
               </div>
@@ -335,6 +326,7 @@ export default function MachineExperiment({
 
           <motion.div
             id="machine-remainder"
+            aria-hidden={!showRemainder}
             initial={false}
             animate={{
               height: showRemainder

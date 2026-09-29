@@ -4,7 +4,6 @@ import {
   useReducedMotion,
 } from 'motion/react';
 import {
-  useEffect,
   useState,
 } from 'react';
 
@@ -48,13 +47,7 @@ export default function MemoryExperiment({
   const [currentIndex, setCurrentIndex] =
     useState(0);
 
-  const [history, setHistory] =
-    useState<number[]>([]);
-
-  useEffect(() => {
-    setCurrentIndex(0);
-    setHistory([]);
-  }, [artwork.id]);
+  const history = Array.from({ length: currentIndex }, (_, index) => index);
 
   const total = memoryVersions.length;
 
@@ -64,11 +57,6 @@ export default function MemoryExperiment({
   const reconstruct = () => {
     if (isFinal) return;
 
-    setHistory((current) => [
-      ...current,
-      currentIndex,
-    ]);
-
     setCurrentIndex((current) =>
       Math.min(current + 1, total - 1),
     );
@@ -76,7 +64,6 @@ export default function MemoryExperiment({
 
   const restart = () => {
     setCurrentIndex(0);
-    setHistory([]);
   };
 
   const displayIndex = String(
@@ -94,12 +81,12 @@ export default function MemoryExperiment({
     >
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.55fr_1.45fr]">
         <div>
-          <div
+          <h2
             id={`memory-${artwork.id}`}
             className="micro-meta text-gold"
           >
             Interaction / mémoire
-          </div>
+          </h2>
 
           <p className="mt-4 max-w-[340px] text-sm leading-6 text-white/45">
             {artwork.interactionNote}
@@ -170,12 +157,12 @@ export default function MemoryExperiment({
         </div>
 
         <div>
-          {/* ANTHOLOGIE_MEMORY_STATUS */}
           <div
             className="sr-only"
             aria-live="polite"
             aria-atomic="true"
           >
+            {memoryVersions[currentIndex]}{' '}
             Reconstruction {displayIndex} sur {displayTotal}.
             {history.length === 0
               ? ' Aucune trace précédente.'
@@ -216,7 +203,7 @@ export default function MemoryExperiment({
 
                   return (
                     <motion.div
-                      key={`${versionIndex}-${depth}`}
+                      key={versionIndex}
                       aria-hidden="true"
                       initial={{
                         opacity: 0,
@@ -291,7 +278,6 @@ export default function MemoryExperiment({
                   </div>
 
                   <p
-                    aria-live="polite"
                     className="mt-8 max-w-[23ch] font-serif text-[clamp(2.15rem,4.1vw,4.7rem)] leading-[0.98] text-ink"
                   >
                     {memoryVersions[currentIndex]}

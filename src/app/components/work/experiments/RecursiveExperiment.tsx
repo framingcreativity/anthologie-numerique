@@ -4,7 +4,6 @@ import {
   useReducedMotion,
 } from 'motion/react';
 import {
-  useEffect,
   useState,
 } from 'react';
 
@@ -14,16 +13,7 @@ type Props = {
   artwork: Artwork;
 };
 
-const cycles = [
-  [
-    'Revenir n’est jamais répéter.',
-    'Le texte se souvient du détour.',
-    'Une boucle peut déplacer.',
-    'La sortie est dans l’entrée.',
-    'Le commencement n’est plus intact.',
-    'return differently;',
-  ],
-
+const cycleVariations = [
   [
     'Revenir n’est jamais tout à fait répéter.',
     'Le texte se souvient du détour qu’il vient de faire.',
@@ -53,6 +43,7 @@ export default function RecursiveExperiment({
   artwork,
 }: Props) {
   const reduceMotion = useReducedMotion();
+  const cycles = [artwork.fragments, ...cycleVariations];
 
   const [passage, setPassage] =
     useState(0);
@@ -65,13 +56,6 @@ export default function RecursiveExperiment({
 
   const [ended, setEnded] =
     useState(false);
-
-  useEffect(() => {
-    setPassage(0);
-    setCycle(0);
-    setPreviousText(null);
-    setEnded(false);
-  }, [artwork.id]);
 
   const cycleIndex = Math.min(
     cycle,
@@ -136,12 +120,12 @@ export default function RecursiveExperiment({
     >
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.48fr_1.52fr]">
         <div>
-          <div
+          <h2
             id={`recursive-${artwork.id}`}
             className="micro-meta text-gold"
           >
             Interaction / récursion
-          </div>
+          </h2>
 
           <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
             {artwork.interactionNote}
@@ -163,7 +147,7 @@ export default function RecursiveExperiment({
                 </div>
 
                 <div className="mt-2 font-mono text-[10px] text-gold/70">
-                  {passageNumber} / 06
+                  {passageNumber} / {String(cycles[cycleIndex].length).padStart(2, '0')}
                 </div>
               </div>
 
@@ -173,7 +157,7 @@ export default function RecursiveExperiment({
                 </div>
 
                 <div className="mt-2 font-mono text-[10px] text-gold/70">
-                  {cycleNumber} / 03
+                  {cycleNumber} / {String(cycles.length).padStart(2, '0')}
                 </div>
               </div>
             </div>
@@ -211,12 +195,12 @@ export default function RecursiveExperiment({
         </div>
 
         <div>
-          {/* ANTHOLOGIE_RECURSION_STATUS */}
           <div
             className="sr-only"
             aria-live="polite"
             aria-atomic="true"
           >
+            {currentText}{' '}
             Boucle {cycleIndex + 1} sur {cycles.length}.
             Passage {passage + 1} sur {cycles[cycleIndex].length}.
             {ended
@@ -299,7 +283,6 @@ export default function RecursiveExperiment({
                     </div>
 
                     <p
-                      aria-live="polite"
                       className="mt-11 max-w-[22ch] break-words font-serif text-[clamp(2.05rem,4.4vw,5.1rem)] leading-[0.96] text-ink"
                     >
                       {currentText}
@@ -339,7 +322,7 @@ export default function RecursiveExperiment({
                   }}
                 >
                   <div className="micro-meta text-gold/55">
-                    Interruption / boucle 03
+                    Interruption / boucle {cycleNumber}
                   </div>
 
                   <p className="mt-11 max-w-[24ch] break-words font-serif text-[clamp(2.05rem,4vw,4.7rem)] leading-[0.98] text-white/75">

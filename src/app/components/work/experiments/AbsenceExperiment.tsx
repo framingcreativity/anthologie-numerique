@@ -3,8 +3,9 @@ import {
   useReducedMotion,
 } from 'motion/react';
 import {
-  useEffect,
   useState,
+  useRef,
+  useLayoutEffect,
 } from 'react';
 
 import type { Artwork } from '../../../data/artworks';
@@ -44,6 +45,8 @@ export default function AbsenceExperiment({
   artwork,
 }: Props) {
   const reduceMotion = useReducedMotion();
+  const firstFragment = useRef<HTMLButtonElement>(null);
+  const restoreFocus = useRef(false);
 
   const [hovered, setHovered] =
     useState<number | null>(null);
@@ -60,13 +63,12 @@ export default function AbsenceExperiment({
   const [completed, setCompleted] =
     useState(false);
 
-  useEffect(() => {
-    setHovered(null);
-    setFocused(null);
-    setPinned(null);
-    setVisited(new Set());
-    setCompleted(false);
-  }, [artwork.id]);
+  useLayoutEffect(() => {
+    if (restoreFocus.current) {
+      restoreFocus.current = false;
+      firstFragment.current?.focus({ preventScroll: true });
+    }
+  }, [completed]);
 
   const markVisited = (index: number) => {
     if (completed) return;
@@ -101,6 +103,7 @@ export default function AbsenceExperiment({
   };
 
   const restart = () => {
+    restoreFocus.current = true;
     setCompleted(false);
     setHovered(null);
     setFocused(null);
@@ -115,12 +118,12 @@ export default function AbsenceExperiment({
     >
       <div className="grid gap-8 sm:gap-10 lg:grid-cols-[.55fr_1.45fr]">
         <div>
-          <div
+          <h2
             id={`absence-${artwork.id}`}
             className="micro-meta text-gold"
           >
             Interaction / absence
-          </div>
+          </h2>
 
           <p className="mt-4 max-w-[340px] text-sm leading-6 text-white/45">
             {artwork.interactionNote}
@@ -280,6 +283,7 @@ export default function AbsenceExperiment({
                 return (
                   <button
                     key={`${artwork.id}-${index}`}
+                    ref={index === 0 ? firstFragment : undefined}
                     type="button"
                     disabled={completed}
                     aria-pressed={retained}
@@ -425,60 +429,29 @@ export default function AbsenceExperiment({
             </div>
           </motion.div>
 
-          {allVisited && !completed && (
-            <motion.div
-              initial={{
-                opacity: reduceMotion ? 1 : 0,
-                y: reduceMotion ? 0 : 8,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.7,
-                ease: [0.2, 0.8, 0.2, 1],
-              }}
-              className="mt-8 flex justify-end"
-            >
+          {allVisited && (
+            <div className="mt-8 flex justify-end">
               <button
                 type="button"
-                onClick={leaveOnlyTraces}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                onClick={completed ? restart : leaveOnlyTraces}
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-300 hover:text-ink"
               >
-                Laisser disparaître
+                {completed ? 'Recommencer l’expérience' : 'Laisser disparaître'}
               </button>
-            </motion.div>
+            </div>
           )}
 
           {completed && (
-            <motion.div
-              initial={{
-                opacity: reduceMotion ? 1 : 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              transition={{
-                duration: reduceMotion ? 0 : 1.1,
-                delay: reduceMotion ? 0 : 0.25,
-              }}
-              className="mt-10 border-t border-white/8 pt-8"
+            <motion.p
+              initial={{ opacity: reduceMotion ? 1 : 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: reduceMotion ? 0 : 1.1 }}
+              className="mt-10 max-w-[28ch] border-t border-white/8 pt-8 font-serif text-xl italic leading-7 text-white/24"
             >
-              <p className="max-w-[28ch] font-serif text-xl italic leading-7 text-white/24">
-                La phrase n’est plus là.
-                <br />
-                La lecture, elle, en garde la forme.
-              </p>
-
-              <button
-                type="button"
-                onClick={restart}
-                className="mt-8 font-mono text-[8px] uppercase tracking-[0.18em] text-white/28 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
-              >
-                Recommencer l’expérience
-              </button>
-            </motion.div>
+              La phrase n’est plus là.
+              <br />
+              La lecture, elle, en garde la forme.
+            </motion.p>
           )}
         </div>
       </div>
