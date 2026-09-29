@@ -2,7 +2,7 @@ import { editorialEase, motionTiming } from '../lib/motion';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, useReducedMotion } from 'motion/react';
 
-import aboutExperience from '../../assets/anthologie/about-experience.png';
+import aboutExperience from '../../assets/anthologie/about-experience.webp';
 import Header from './Header';
 import PageMeta from './PageMeta';
 import Footer from './Footer';

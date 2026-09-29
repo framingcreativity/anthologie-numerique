@@ -2,7 +2,7 @@ import { editorialEase, motionTiming } from '../lib/motion';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowDownRight } from 'lucide-react';
 
-import heroImage from '../../assets/anthologie/hero-anthologie-numerique.png';
+import heroImage from '../../assets/anthologie/hero-anthologie-numerique.webp';
 
 const principles = [
   {

@@ -1,8 +1,10 @@
 import {
   useEffect,
+  lazy,
+  Suspense,
 } from 'react';
 
-import AboutPage from './components/AboutPage';
+const AboutPage = lazy(() => import('./components/AboutPage'));
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
 import Footer from './components/Footer';
@@ -10,7 +12,7 @@ import PageMeta from './components/PageMeta';
 import Gallery from './components/Gallery';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
-import LegalPage from './components/LegalPage';
+const LegalPage = lazy(() => import('./components/LegalPage'));
 import NotFoundPage from './components/NotFoundPage';
 import ObservationSection from './components/ObservationSection';
 
@@ -55,6 +57,14 @@ function resolveRoute(): Route {
 }
 
 export default function App() {
+  return (
+    <Suspense fallback={<><Header /><main id="main-content" tabIndex={-1} className="min-h-screen px-5 pt-32"><p role="status">Chargement de la page…</p></main><Footer /></>}>
+      <SiteContent />
+    </Suspense>
+  );
+}
+
+function SiteContent() {
   const route = resolveRoute();
   useEffect(
     () => {
