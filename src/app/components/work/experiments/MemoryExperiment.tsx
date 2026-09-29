@@ -1,3 +1,4 @@
+import { experimentEase } from '../../../lib/motion';
 import {
   AnimatePresence,
   motion,
@@ -133,7 +134,7 @@ export default function MemoryExperiment({
                     duration: reduceMotion
                       ? 0
                       : 0.5,
-                    ease: [0.2, 0.8, 0.2, 1],
+                    ease: experimentEase,
                   }}
                   className="h-px flex-1 origin-left bg-gold"
                 />
@@ -219,7 +220,7 @@ export default function MemoryExperiment({
                         duration: reduceMotion
                           ? 0
                           : 0.85,
-                        ease: [0.2, 0.8, 0.2, 1],
+                        ease: experimentEase,
                       }}
                       className="absolute inset-x-0 top-0"
                     >
@@ -262,7 +263,7 @@ export default function MemoryExperiment({
                     duration: reduceMotion
                       ? 0
                       : 0.7,
-                    ease: [0.2, 0.8, 0.2, 1],
+                    ease: experimentEase,
                   }}
                   className="relative z-20"
                 >

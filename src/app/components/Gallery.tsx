@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
 import InteractiveArtPage from './work/InteractiveArtPage';
@@ -11,6 +11,7 @@ import {
 } from '../data/artworks';
 
 export default function Gallery() {
+  const reduceMotion = useReducedMotion();
   const [active, setActive] = useState<Artwork | null>(null);
   const total = formatArtworkTotal();
 
@@ -55,12 +56,12 @@ export default function Gallery() {
             <motion.article
               key={work.id}
               className="group digital-frame digital-noise relative min-h-[520px] overflow-hidden bg-panel text-left text-white"
-              initial={{ opacity: 0, y: 22 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{
-                duration: 0.55,
-                delay: Math.min(index * 0.05, 0.24),
+                duration: reduceMotion ? 0 : 0.55,
+                delay: reduceMotion ? 0 : Math.min(index * 0.05, 0.24),
               }}
             >
               <img

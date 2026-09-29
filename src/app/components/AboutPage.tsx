@@ -1,5 +1,6 @@
+import { editorialEase, motionTiming } from '../lib/motion';
 import { ArrowUpRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 
 import aboutExperience from '../../assets/anthologie/about-experience.png';
 import Header from './Header';
@@ -7,6 +8,7 @@ import PageMeta from './PageMeta';
 import Footer from './Footer';
 
 export default function AboutPage() {
+  const reduceMotion = useReducedMotion();
   return (
     <div className="relative min-h-screen bg-bg text-ink selection:bg-gold selection:text-black">
       <PageMeta
@@ -51,11 +53,11 @@ export default function AboutPage() {
           <section className="mx-auto max-w-[1440px] px-5 pb-20 pt-32 md:px-10 md:pb-28 md:pt-36 lg:px-14 lg:py-36">
             <div className="grid gap-14 lg:grid-cols-[.62fr_1.38fr] lg:gap-24">
               <motion.div
-                initial={{ opacity: 0, y: 18 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.6,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: reduceMotion ? 0 : motionTiming.standard,
+                  ease: editorialEase,
                 }}
               >
                 <div className="micro-meta text-gold">
@@ -69,12 +71,12 @@ export default function AboutPage() {
 
               <motion.div
                 className="lg:pt-20"
-                initial={{ opacity: 0, y: 18 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.65,
-                  delay: 0.08,
-                  ease: [0.22, 1, 0.36, 1],
+                  duration: reduceMotion ? 0 : 0.65,
+                  delay: reduceMotion ? 0 : 0.08,
+                  ease: editorialEase,
                 }}
               >
                 <p className="max-w-[820px] font-serif text-2xl leading-[1.38] text-white/88 md:text-3xl">

@@ -1,5 +1,5 @@
 import { withBase } from '../lib/site';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
 const principles = [
@@ -41,6 +41,7 @@ const layers = [
 ];
 
 export default function AboutSection() {
+  const reduceMotion = useReducedMotion();
   return (
     <section
       id="algorithmiques"
@@ -49,7 +50,7 @@ export default function AboutSection() {
       <div className="relative z-[1] mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32 lg:px-14">
         <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
@@ -74,10 +75,10 @@ export default function AboutSection() {
 
           <div className="lg:pt-20">
             <motion.div
-              initial={{ opacity: 0, y: 18 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.08 }}
+              transition={{ delay: reduceMotion ? 0 : 0.08 }}
             >
               <p className="max-w-[860px] font-serif text-2xl leading-[1.35] text-white/84 md:text-3xl">
                 <span className="block">
@@ -110,10 +111,10 @@ export default function AboutSection() {
                 <motion.article
                   key={principle.index}
                   className="grid gap-4 border-b border-white/12 py-7 md:grid-cols-[70px_1fr_1.2fr] md:items-start"
-                  initial={{ opacity: 0, x: 18 }}
+                  initial={reduceMotion ? false : { opacity: 0, x: 18 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.08 }}
+                  transition={{ delay: reduceMotion ? 0 : index * 0.08 }}
                 >
                   <span className="font-mono text-[10px] text-gold">
                     {principle.index}

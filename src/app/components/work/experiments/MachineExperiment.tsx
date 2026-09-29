@@ -1,3 +1,4 @@
+import { experimentEase } from '../../../lib/motion';
 import {
   motion,
   useReducedMotion,
@@ -230,7 +231,7 @@ export default function MachineExperiment({
                   duration: reduceMotion
                     ? 0
                     : 0.55,
-                  ease: [0.2, 0.8, 0.2, 1],
+                  ease: experimentEase,
                 }}
                 className="mt-12 max-w-[18ch] break-words font-serif text-[clamp(2.05rem,4vw,4.8rem)] leading-[0.98] text-ink"
               >
@@ -340,7 +341,7 @@ export default function MachineExperiment({
               duration: reduceMotion
                 ? 0
                 : 0.55,
-              ease: [0.2, 0.8, 0.2, 1],
+              ease: experimentEase,
             }}
             className="overflow-hidden"
           >

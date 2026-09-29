@@ -1,3 +1,4 @@
+import { experimentEase } from '../../../lib/motion';
 import {
   motion,
   useReducedMotion,
@@ -222,7 +223,7 @@ export default function ErrorExperiment({
                     duration: reduceMotion
                       ? 0
                       : 0.18,
-                    ease: [0.2, 0.8, 0.2, 1],
+                    ease: experimentEase,
                   }}
                   className="relative z-10"
                 >

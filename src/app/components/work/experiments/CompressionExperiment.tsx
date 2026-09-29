@@ -1,3 +1,4 @@
+import { experimentEase } from '../../../lib/motion';
 import {
   AnimatePresence,
   motion,
@@ -153,7 +154,7 @@ export default function CompressionExperiment({
                   duration: reduceMotion
                     ? 0
                     : durations[stage],
-                  ease: [0.2, 0.8, 0.2, 1],
+                  ease: experimentEase,
                 }}
                 className="h-px bg-gold/65"
               />
@@ -232,7 +233,7 @@ export default function CompressionExperiment({
                   duration: reduceMotion
                     ? 0
                     : durations[stage],
-                  ease: [0.2, 0.8, 0.2, 1],
+                  ease: experimentEase,
                 }}
                 className="relative min-w-[min(100%,16rem)] border-x border-white/8 px-5 py-12 text-center md:px-8"
               >
@@ -269,7 +270,7 @@ export default function CompressionExperiment({
                       duration: reduceMotion
                         ? 0
                         : durations[stage],
-                      ease: [0.2, 0.8, 0.2, 1],
+                      ease: experimentEase,
                     }}
                     style={{
                       fontSize:

@@ -1,3 +1,4 @@
+import { editorialEase } from '../lib/motion';
 import {
   motion,
   useReducedMotion,
@@ -127,7 +128,7 @@ export default function Header() {
 
       <motion.header
       className="fixed inset-x-0 top-0 z-50 border-b border-gold/35 bg-bg/82 backdrop-blur-xl"
-      initial={{
+      initial={reduceMotion ? false : {
         y: reduceMotion ? 0 : -72,
       }}
       animate={{
@@ -135,12 +136,7 @@ export default function Header() {
       }}
       transition={{
         duration: reduceMotion ? 0 : 0.65,
-        ease: [
-          0.22,
-          1,
-          0.36,
-          1,
-        ],
+        ease: editorialEase,
       }}
     >
       <div className="mx-auto flex h-[var(--header-height)] max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-14">

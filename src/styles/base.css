@@ -48,21 +48,6 @@
     text-decoration: none;
   }
 
-  .font-serif {
-    font-family:
-      Georgia,
-      "Times New Roman",
-      serif;
-  }
-
-  .font-mono {
-    font-family:
-      "SFMono-Regular",
-      Consolas,
-      "Liberation Mono",
-      monospace;
-  }
-
   ::selection {
     background: var(--gold);
     color: var(--editorial-ink);

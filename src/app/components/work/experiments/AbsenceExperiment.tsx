@@ -1,3 +1,4 @@
+import { experimentEase } from '../../../lib/motion';
 import {
   motion,
   useReducedMotion,
@@ -194,7 +195,7 @@ export default function AbsenceExperiment({
                       : completed
                         ? 1
                         : 0.45,
-                    ease: [0.2, 0.8, 0.2, 1],
+                    ease: experimentEase,
                   }}
                   className="h-px origin-left bg-gold"
                 />
@@ -220,7 +221,7 @@ export default function AbsenceExperiment({
             }}
             transition={{
               duration: reduceMotion ? 0 : 1,
-              ease: [0.2, 0.8, 0.2, 1],
+              ease: experimentEase,
             }}
             className="border-y border-white/10 py-8 md:py-12"
           >
@@ -368,7 +369,7 @@ export default function AbsenceExperiment({
                             : revealed
                               ? 0.32
                               : 0.65,
-                        ease: [0.2, 0.8, 0.2, 1],
+                        ease: experimentEase,
                       }}
                       className="mt-8 max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white"
                     >
@@ -392,7 +393,7 @@ export default function AbsenceExperiment({
                           : completed
                             ? 1
                             : 0.45,
-                        ease: [0.2, 0.8, 0.2, 1],
+                        ease: experimentEase,
                       }}
                       className="absolute bottom-5 left-5 h-px bg-gold"
                     />

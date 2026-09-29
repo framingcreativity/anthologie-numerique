@@ -1,7 +1,8 @@
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function ContactSection() {
+  const reduceMotion = useReducedMotion();
   return (
     <section
       id="contact"
@@ -10,7 +11,7 @@ export default function ContactSection() {
       <div className="mx-auto max-w-[1440px] px-5 py-20 md:px-10 md:py-28 lg:px-14">
         <motion.div
           className="grid gap-12 lg:grid-cols-[1.18fr_.82fr] lg:items-end"
-          initial={{ opacity: 0, y: 22 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >

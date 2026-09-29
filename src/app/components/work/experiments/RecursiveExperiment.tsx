@@ -1,3 +1,4 @@
+import { experimentEase } from '../../../lib/motion';
 import {
   AnimatePresence,
   motion,
@@ -267,7 +268,7 @@ export default function RecursiveExperiment({
                         : cycleIndex === 0
                           ? 0.5
                           : 0.75,
-                      ease: [0.2, 0.8, 0.2, 1],
+                      ease: experimentEase,
                     }}
                     className="relative z-10"
                   >

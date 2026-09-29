@@ -1,4 +1,5 @@
-import { motion } from 'motion/react';
+import { editorialEase, motionTiming } from '../lib/motion';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowDownRight } from 'lucide-react';
 
 import heroImage from '../../assets/anthologie/hero-anthologie-numerique.png';
@@ -34,6 +35,7 @@ const layers = [
 ];
 
 export default function HeroSection() {
+  const reduceMotion = useReducedMotion();
   return (
     <section
       id="fragments"
@@ -60,9 +62,9 @@ export default function HeroSection() {
         <div className="max-w-[980px]">
           <motion.div
             className="mb-8 flex flex-wrap items-center gap-3"
-            initial={{ opacity: 0, y: 18 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.12 }}
+            transition={{ duration: reduceMotion ? 0 : motionTiming.standard, delay: reduceMotion ? 0 : 0.12 }}
           >
             <span className="data-label">
               Littérature × Interface × Système
@@ -75,12 +77,12 @@ export default function HeroSection() {
 
           <motion.h1
             className="max-w-[1000px] text-[clamp(3rem,10vw,9.5rem)] font-medium leading-[0.82] tracking-[-0.075em] text-ink"
-            initial={{ opacity: 0, y: 28 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
-              duration: 0.9,
-              delay: 0.2,
-              ease: [0.22, 1, 0.36, 1],
+              duration: reduceMotion ? 0 : motionTiming.slow,
+              delay: reduceMotion ? 0 : 0.2,
+              ease: editorialEase,
             }}
           >
             <span className="discipline-code-text">
@@ -94,9 +96,9 @@ export default function HeroSection() {
 
           <motion.div
             className="mt-10 grid max-w-[900px] gap-8 border-t border-white/15 pt-7 md:grid-cols-[1fr_auto]"
-            initial={{ opacity: 0, y: 16 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.58 }}
+            transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.58 }}
           >
             <p className="max-w-[720px] text-base leading-7 text-white/62 md:text-lg md:leading-8">
               Une collection d’expériences éditoriales où lire signifie
@@ -118,9 +120,9 @@ export default function HeroSection() {
 
           <motion.div
             className="mt-10 grid gap-3 md:grid-cols-3"
-            initial={{ opacity: 0, y: 16 }}
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.78 }}
+            transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.78 }}
           >
             {layers.map((item) => (
               <div
@@ -139,9 +141,9 @@ export default function HeroSection() {
 
         <motion.aside
           className="panel-soft self-end p-5 lg:p-6"
-          initial={{ opacity: 0, x: 20 }}
+          initial={reduceMotion ? false : { opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.72, delay: 0.8 }}
+          transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.8 }}
         >
           <div className="mb-6 flex items-center justify-between">
             <div className="micro-meta text-white/38">
