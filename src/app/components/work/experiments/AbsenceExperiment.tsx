@@ -117,7 +117,7 @@ export default function AbsenceExperiment({
         <div>
           <div
             id={`absence-${artwork.id}`}
-            className="micro-meta text-[#d6b86f]"
+            className="micro-meta text-gold"
           >
             Interaction / absence
           </div>
@@ -151,7 +151,7 @@ export default function AbsenceExperiment({
                   : 'Traces rencontrées'}
               </span>
 
-              <span className="text-[#d6b86f]/70">
+              <span className="text-gold/70">
                 {String(visited.size).padStart(2, '0')}
                 {' / '}
                 {String(
@@ -193,7 +193,7 @@ export default function AbsenceExperiment({
                         : 0.45,
                     ease: [0.2, 0.8, 0.2, 1],
                   }}
-                  className="h-px origin-left bg-[#d6b86f]"
+                  className="h-px origin-left bg-gold"
                 />
               ))}
             </div>
@@ -321,7 +321,7 @@ export default function AbsenceExperiment({
                           : index,
                       );
                     }}
-                    className="relative min-h-[150px] border-l border-white/10 px-5 py-6 text-left focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1 disabled:cursor-default"
+                    className="relative min-h-[150px] border-l border-white/10 px-5 py-6 text-left focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 disabled:cursor-default"
                   >
                     <motion.span
                       aria-hidden="true"
@@ -336,7 +336,7 @@ export default function AbsenceExperiment({
                           ? 0
                           : 0.8,
                       }}
-                      className="font-mono text-[8px] tracking-[0.16em] text-[#d6b86f]"
+                      className="font-mono text-[8px] tracking-[0.16em] text-gold"
                     >
                       {String(index + 1).padStart(
                         2,
@@ -390,7 +390,7 @@ export default function AbsenceExperiment({
                             : 0.45,
                         ease: [0.2, 0.8, 0.2, 1],
                       }}
-                      className="absolute bottom-5 left-5 h-px bg-[#d6b86f]"
+                      className="absolute bottom-5 left-5 h-px bg-gold"
                     />
                   </button>
                 );
@@ -444,7 +444,7 @@ export default function AbsenceExperiment({
               <button
                 type="button"
                 onClick={leaveOnlyTraces}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Laisser disparaître
               </button>
@@ -474,7 +474,7 @@ export default function AbsenceExperiment({
               <button
                 type="button"
                 onClick={restart}
-                className="mt-8 font-mono text-[8px] uppercase tracking-[0.18em] text-white/28 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="mt-8 font-mono text-[8px] uppercase tracking-[0.18em] text-white/28 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Recommencer l’expérience
               </button>

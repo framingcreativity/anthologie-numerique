@@ -135,7 +135,7 @@ export default function CompressionExperiment({
         <div>
           <div
             id={`compression-${artwork.id}`}
-            className="micro-meta text-[#d6b86f]"
+            className="micro-meta text-gold"
           >
             Interaction / compression
           </div>
@@ -158,7 +158,7 @@ export default function CompressionExperiment({
                 Matière restante
               </span>
 
-              <span className="font-mono text-[9px] tracking-[0.16em] text-[#d6b86f]/70">
+              <span className="font-mono text-[9px] tracking-[0.16em] text-gold/70">
                 {current.remaining}%
               </span>
             </div>
@@ -175,7 +175,7 @@ export default function CompressionExperiment({
                     : durations[stage],
                   ease: [0.2, 0.8, 0.2, 1],
                 }}
-                className="h-px bg-[#d6b86f]/65"
+                className="h-px bg-gold/65"
               />
             </div>
 
@@ -257,7 +257,7 @@ export default function CompressionExperiment({
                 className="relative border-x border-white/8 px-5 py-12 text-center md:px-8"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-[8px] uppercase tracking-[0.17em] text-[#d6b86f]/55">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.17em] text-gold/55">
                     Compression {stageNumber}
                   </span>
 
@@ -296,7 +296,7 @@ export default function CompressionExperiment({
                       fontSize:
                         current.fontSize,
                     }}
-                    className="mx-auto mt-10 font-serif leading-[0.98] text-[#f4f0e8]"
+                    className="mx-auto mt-10 font-serif leading-[0.98] text-ink"
                   >
                     {current.text}
                   </motion.p>
@@ -316,7 +316,7 @@ export default function CompressionExperiment({
               <button
                 type="button"
                 onClick={compress}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Comprimer encore
               </button>
@@ -324,7 +324,7 @@ export default function CompressionExperiment({
               <button
                 type="button"
                 onClick={restore}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Restaurer la source
               </button>

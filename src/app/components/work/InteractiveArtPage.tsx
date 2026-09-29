@@ -190,7 +190,7 @@ export default function InteractiveArtPage({
           ref={scrollRef}
         tabIndex={-1}
           key={artwork.id}
-          className="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto overscroll-contain bg-[#090909] text-[#f4f0e8]"
+          className="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto overscroll-contain bg-work text-ink"
           initial={{
             opacity: reduceMotion ? 1 : 0,
           }}
@@ -207,12 +207,12 @@ export default function InteractiveArtPage({
           aria-modal="true"
           aria-labelledby={`work-title-${artwork.id}`}
         >
-          <header className="sticky top-0 z-20 border-b border-white/10 bg-[#090909]/88 backdrop-blur-xl">
+          <header className="sticky top-0 z-20 border-b border-white/10 bg-work/88 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-14">
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-white/60 transition hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-white/60 transition hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 <ArrowLeft size={15} />
                 Retour à la collection
@@ -222,7 +222,7 @@ export default function InteractiveArtPage({
                 ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                className="grid h-9 w-9 place-items-center border border-white/15 text-white/65 transition hover:border-[#d6b86f] hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="grid h-9 w-9 place-items-center border border-white/15 text-white/65 transition hover:border-gold hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
                 aria-label="Fermer l’étude"
               >
                 <X size={16} />
@@ -234,12 +234,12 @@ export default function InteractiveArtPage({
             <div className="mx-auto max-w-[1440px] px-5 pb-14 pt-10 md:px-10 md:pb-20 md:pt-16 lg:px-14">
               <section className="grid gap-10 sm:gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
                 <div>
-                  <div className="mb-6 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-[#d6b86f]">
+                  <div className="mb-6 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
                     <span>
                       ÉTUDE {displayIndex} / {totalWorks}
                     </span>
 
-                    <span className="h-px w-10 bg-[#d6b86f]/60" />
+                    <span className="h-px w-10 bg-gold/60" />
 
                     <span>{artwork.chapter}</span>
                   </div>
@@ -251,13 +251,13 @@ export default function InteractiveArtPage({
                     {artwork.title}
                   </h1>
 
-                  <p className="mt-5 font-serif text-2xl italic text-[#d6b86f] md:text-3xl">
+                  <p className="mt-5 font-serif text-2xl italic text-gold md:text-3xl">
                     {artwork.subtitle}
                   </p>
 
                   <div className="mt-12 border-t border-white/12">
                     <div className="grid gap-5 border-b border-white/12 py-6 md:grid-cols-[130px_1fr]">
-                      <span className="micro-meta text-[#d6b86f]">
+                      <span className="micro-meta text-gold">
                         Hypothèse
                       </span>
 
@@ -281,7 +281,7 @@ export default function InteractiveArtPage({
                         Conséquence
                       </span>
 
-                      <p className="font-serif text-xl italic leading-7 text-[#d6b86f]">
+                      <p className="font-serif text-xl italic leading-7 text-gold">
                         {artwork.consequence}
                       </p>
                     </div>

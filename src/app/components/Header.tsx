@@ -95,13 +95,13 @@ export default function Header() {
     <>
       <a
         href="#main-content"
-        className="fixed left-4 top-4 z-[100] -translate-y-24 bg-[#f4f0e8] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[#080808] transition-transform duration-200 focus:translate-y-0 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#d6b86f]"
+        className="fixed left-4 top-4 z-[100] -translate-y-24 bg-ink px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-bg transition-transform duration-200 focus:translate-y-0 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-gold"
       >
         Aller au contenu
       </a>
 
       <motion.header
-      className="fixed inset-x-0 top-0 z-50 border-b border-[#d6b86f]/35 bg-[#080808]/82 backdrop-blur-xl"
+      className="fixed inset-x-0 top-0 z-50 border-b border-gold/35 bg-bg/82 backdrop-blur-xl"
       initial={{
         y: -72,
       }}
@@ -118,7 +118,7 @@ export default function Header() {
         ],
       }}
     >
-      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-14">
+      <div className="mx-auto flex h-[var(--header-height)] max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-14">
         <a
           href={withBase(
             '#fragments',
@@ -129,11 +129,11 @@ export default function Header() {
             setOpen(false)
           }
         >
-          <span className="text-sm font-semibold tracking-[0.24em] text-[#f4f0e8] transition-colors duration-300 group-hover:text-[#d6b86f]">
+          <span className="text-sm font-semibold tracking-[0.24em] text-ink transition-colors duration-300 group-hover:text-gold">
             ANTHOLOGIE
           </span>
 
-          <span className="font-mono text-[10px] tracking-[0.18em] text-[#d6b86f]">
+          <span className="font-mono text-[10px] tracking-[0.18em] text-gold">
             NUMÉRIQUE / 01
           </span>
         </a>
@@ -159,7 +159,7 @@ export default function Header() {
                 }
                 className={`inline-flex min-h-11 items-center text-xs uppercase tracking-[0.16em] transition-colors duration-300 hover:text-[#e6d39a] ${
                   link.active
-                    ? 'text-[#d6b86f]'
+                    ? 'text-gold'
                     : 'text-white/55'
                 }`}
               >
@@ -171,7 +171,7 @@ export default function Header() {
 
         <button
           type="button"
-          className="grid h-11 w-11 place-items-center border border-white/15 text-white transition-colors duration-300 hover:border-[#d6b86f]/60 hover:text-[#d6b86f] md:hidden"
+          className="grid h-11 w-11 place-items-center border border-white/15 text-white transition-colors duration-300 hover:border-gold/60 hover:text-gold md:hidden"
           aria-expanded={
             open
           }
@@ -209,7 +209,7 @@ export default function Header() {
           <motion.nav
             id="mobile-navigation"
             aria-label="Navigation mobile"
-            className="border-t border-white/10 bg-[#0b0b0b] px-5 py-6 md:hidden"
+            className="border-t border-white/10 bg-panel px-5 py-6 md:hidden"
             initial={{
               opacity: 0,
               height: 0,
@@ -253,7 +253,7 @@ export default function Header() {
                     }
                     className={`flex min-h-12 items-center justify-between border-b border-white/10 py-4 text-sm uppercase tracking-[0.15em] transition-colors duration-300 ${
                       link.active
-                        ? 'text-[#d6b86f]'
+                        ? 'text-gold'
                         : 'text-white/75'
                     }`}
                   >
@@ -261,7 +261,7 @@ export default function Header() {
 
                     <span
                       aria-hidden="true"
-                      className="font-mono text-[10px] text-[#d6b86f]"
+                      className="font-mono text-[10px] text-gold"
                     >
                       0
                       {index + 1}

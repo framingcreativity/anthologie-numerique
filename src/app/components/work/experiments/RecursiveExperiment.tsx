@@ -138,7 +138,7 @@ export default function RecursiveExperiment({
         <div>
           <div
             id={`recursive-${artwork.id}`}
-            className="micro-meta text-[#d6b86f]"
+            className="micro-meta text-gold"
           >
             Interaction / récursion
           </div>
@@ -162,7 +162,7 @@ export default function RecursiveExperiment({
                   Passage
                 </div>
 
-                <div className="mt-2 font-mono text-[10px] text-[#d6b86f]/70">
+                <div className="mt-2 font-mono text-[10px] text-gold/70">
                   {passageNumber} / 06
                 </div>
               </div>
@@ -172,7 +172,7 @@ export default function RecursiveExperiment({
                   Boucle
                 </div>
 
-                <div className="mt-2 font-mono text-[10px] text-[#d6b86f]/70">
+                <div className="mt-2 font-mono text-[10px] text-gold/70">
                   {cycleNumber} / 03
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function RecursiveExperiment({
                         ? 0
                         : 0.4,
                     }}
-                    className="h-px origin-left bg-[#d6b86f]"
+                    className="h-px origin-left bg-gold"
                   />
                 ),
               )}
@@ -288,19 +288,19 @@ export default function RecursiveExperiment({
                     className="relative z-10"
                   >
                     <div className="flex items-center gap-4">
-                      <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-[#d6b86f]/55">
+                      <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-gold/55">
                         Lettre / passage {passageNumber}
                       </span>
 
                       <span
                         aria-hidden="true"
-                        className="h-px w-8 bg-[#d6b86f]/30"
+                        className="h-px w-8 bg-gold/30"
                       />
                     </div>
 
                     <p
                       aria-live="polite"
-                      className="mt-11 max-w-[22ch] break-words font-serif text-[clamp(2.05rem,4.4vw,5.1rem)] leading-[0.96] text-[#f4f0e8]"
+                      className="mt-11 max-w-[22ch] break-words font-serif text-[clamp(2.05rem,4.4vw,5.1rem)] leading-[0.96] text-ink"
                     >
                       {currentText}
                     </p>
@@ -338,7 +338,7 @@ export default function RecursiveExperiment({
                       : 1.1,
                   }}
                 >
-                  <div className="micro-meta text-[#d6b86f]/55">
+                  <div className="micro-meta text-gold/55">
                     Interruption / boucle 03
                   </div>
 
@@ -366,7 +366,7 @@ export default function RecursiveExperiment({
               <button
                 type="button"
                 onClick={advance}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 {finalPassage
                   ? finalCycle
@@ -378,7 +378,7 @@ export default function RecursiveExperiment({
               <button
                 type="button"
                 onClick={restart}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/34 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/34 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Relire depuis le commencement
               </button>

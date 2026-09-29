@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 export default function AboutPage() {
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-[#080808] text-[#f4f0e8] selection:bg-[#d6b86f] selection:text-black">
+    <div className="relative min-h-screen overflow-x-hidden bg-bg text-ink selection:bg-gold selection:text-black">
       <PageMeta
         title="À propos — Anthologie numérique"
         description="Pourquoi Anthologie numérique existe : une pratique où texte, image, interaction et mouvement deviennent une seule forme de lecture."
@@ -60,7 +60,7 @@ export default function AboutPage() {
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                <div className="micro-meta text-[#d6b86f]">
+                <div className="micro-meta text-gold">
                   À propos
                 </div>
 
@@ -111,8 +111,8 @@ export default function AboutPage() {
                   </p>
                 </div>
 
-                <div className="mt-14 border-t border-[#d6b86f]/45 pt-8">
-                  <div className="micro-meta font-semibold tracking-[0.2em] text-[#d6b86f]">
+                <div className="mt-14 border-t border-gold/45 pt-8">
+                  <div className="micro-meta font-semibold tracking-[0.2em] text-gold">
                     Pratique artistique
                   </div>
 
@@ -126,13 +126,13 @@ export default function AboutPage() {
                     href="https://framing-creativity.ch"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group mt-8 inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-[#d6b86f] transition-all duration-300 ease-out hover:translate-x-1.5 hover:tracking-[0.205em] hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                    className="group mt-8 inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition-all duration-300 ease-out hover:translate-x-1.5 hover:tracking-[0.205em] hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
                   >
                     <span>
                       Découvrir mon portfolio
                     </span>
 
-                    <span className="text-white/38 transition-colors duration-300 group-hover:text-[#d6b86f]">
+                    <span className="text-white/38 transition-colors duration-300 group-hover:text-gold">
                       Framing Creativity
                     </span>
 

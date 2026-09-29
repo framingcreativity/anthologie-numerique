@@ -43,7 +43,7 @@ export default function AboutSection() {
   return (
     <section
       id="algorithmiques"
-      className="editorial-grid discipline-dual relative border-y border-white/10 bg-[#0a0a0a]"
+      className="editorial-grid discipline-dual relative border-y border-white/10 bg-secondary"
     >
       <div className="relative z-[1] mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32 lg:px-14">
         <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
@@ -52,11 +52,11 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="mb-6 micro-meta text-[#d3b16e]">
+            <div className="mb-6 micro-meta text-gold">
               Principes / expérience
             </div>
 
-            <h2 className="max-w-[8ch] text-[clamp(3.2rem,6vw,6.4rem)] font-medium leading-[0.9] tracking-[-0.065em] text-[#f4f0e8]">
+            <h2 className="max-w-[8ch] text-[clamp(3.2rem,6vw,6.4rem)] font-medium leading-[0.9] tracking-[-0.065em] text-ink">
               <span className="discipline-code-text block">
                 Le numérique
               </span>
@@ -88,12 +88,12 @@ export default function AboutSection() {
                 </span>
               </p>
 
-              <div className="mt-8 max-w-[860px] border-l border-[#d3b16e]/45 pl-6 md:pl-8">
+              <div className="mt-8 max-w-[860px] border-l border-gold/45 pl-6 md:pl-8">
                 <p className="font-serif text-2xl leading-[1.35] text-white/66 md:text-3xl">
                   L’une est fixée.
                 </p>
 
-                <p className="discipline-writing-text mt-3 font-serif text-2xl italic leading-[1.35] text-[#d3b16e] md:text-3xl">
+                <p className="discipline-writing-text mt-3 font-serif text-2xl italic leading-[1.35] text-gold md:text-3xl">
                   L’autre peut attendre, réagir, disparaître, bifurquer.
                 </p>
               </div>
@@ -114,7 +114,7 @@ export default function AboutSection() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.08 }}
                 >
-                  <span className="font-mono text-[10px] text-[#d3b16e]">
+                  <span className="font-mono text-[10px] text-gold">
                     {principle.index}
                   </span>
 
@@ -147,11 +147,11 @@ export default function AboutSection() {
             <div className="mt-10 border-t border-white/12 pt-8">
               <a
                 href={`${import.meta.env.BASE_URL}a-propos/`}
-                className="group inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-[#d3b16e] transition hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d3b16e] focus-visible:outline-offset-4"
+                className="group inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 À propos de l’expérience
 
-                <span className="grid h-9 w-9 place-items-center border border-[#d3b16e]/40 transition group-hover:border-[#d3b16e]">
+                <span className="grid h-9 w-9 place-items-center border border-gold/40 transition group-hover:border-gold">
                   <ArrowUpRight
                     size={15}
                     className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"

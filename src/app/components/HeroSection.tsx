@@ -37,7 +37,7 @@ export default function HeroSection() {
   return (
     <section
       id="fragments"
-      className="editorial-grid scan-overlay discipline-dual relative min-h-screen overflow-hidden border-b border-white/10 bg-[#080808] pt-[72px]"
+      className="editorial-grid scan-overlay discipline-dual relative min-h-screen overflow-hidden border-b border-white/10 bg-bg pt-[var(--header-height)]"
     >
       <div className="absolute inset-0">
         <img
@@ -54,7 +54,7 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute inset-y-0 left-[6vw] w-px bg-white/[0.06]" />
       <div className="pointer-events-none absolute inset-y-0 right-[6vw] w-px bg-white/[0.06]" />
 
-      <div className="relative z-[1] mx-auto grid min-h-[calc(100vh-72px)] max-w-[1440px] grid-cols-1 items-end gap-10 px-5 pb-10 pt-16 md:px-10 lg:grid-cols-[1.35fr_.65fr] lg:px-14 lg:pb-14 lg:pt-20">
+      <div className="relative z-[1] mx-auto grid min-h-[calc(100vh-var(--header-height))] max-w-[1440px] grid-cols-1 items-end gap-10 px-5 pb-10 pt-16 md:px-10 lg:grid-cols-[1.35fr_.65fr] lg:px-14 lg:pb-14 lg:pt-20">
         <div className="max-w-[980px]">
           <motion.div
             className="mb-8 flex flex-wrap items-center gap-3"
@@ -66,13 +66,13 @@ export default function HeroSection() {
               Littérature × Interface × Système
             </span>
 
-            <span className="micro-meta border border-[#d3b16e]/35 px-2.5 py-1 text-[#d3b16e]">
+            <span className="micro-meta border border-gold/35 px-2.5 py-1 text-gold">
               Édition 01
             </span>
           </motion.div>
 
           <motion.h1
-            className="max-w-[1000px] text-[clamp(4.1rem,10vw,9.5rem)] font-medium leading-[0.82] tracking-[-0.075em] text-[#f4f0e8]"
+            className="max-w-[1000px] text-[clamp(4.1rem,10vw,9.5rem)] font-medium leading-[0.82] tracking-[-0.075em] text-ink"
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -85,7 +85,7 @@ export default function HeroSection() {
               Anthologie
             </span>
 
-            <span className="discipline-writing-text block font-serif italic font-normal tracking-[-0.04em] text-[#d3b16e]">
+            <span className="discipline-writing-text block font-serif italic font-normal tracking-[-0.04em] text-gold">
               numérique.
             </span>
           </motion.h1>
@@ -104,11 +104,11 @@ export default function HeroSection() {
 
             <a
               href="#pages"
-              className="group inline-flex items-center gap-3 self-start text-xs uppercase tracking-[0.18em] text-[#f4f0e8]"
+              className="group inline-flex items-center gap-3 self-start text-xs uppercase tracking-[0.18em] text-ink"
             >
               Explorer
 
-              <span className="grid h-9 w-9 place-items-center border border-[#d3b16e]/55 text-[#d3b16e] transition-transform group-hover:translate-x-1 group-hover:translate-y-1">
+              <span className="grid h-9 w-9 place-items-center border border-gold/55 text-gold transition-transform group-hover:translate-x-1 group-hover:translate-y-1">
                 <ArrowDownRight size={16} />
               </span>
             </a>
@@ -146,7 +146,7 @@ export default function HeroSection() {
               Index / principes
             </div>
 
-            <div className="micro-meta text-[#d3b16e]">
+            <div className="micro-meta text-gold">
               03
             </div>
           </div>
@@ -157,7 +157,7 @@ export default function HeroSection() {
                 key={principle.code}
                 className="grid grid-cols-[42px_1fr] border-b border-white/10 py-4 first:border-t"
               >
-                <span className="font-mono text-[10px] text-[#d3b16e]">
+                <span className="font-mono text-[10px] text-gold">
                   {principle.code}
                 </span>
 

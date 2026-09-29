@@ -55,7 +55,7 @@ export default function Gallery() {
             <motion.button
               key={work.id}
               type="button"
-              className="group digital-frame digital-noise relative min-h-[520px] overflow-hidden bg-[#0d0d0d] text-left text-white"
+              className="group digital-frame digital-noise relative min-h-[520px] overflow-hidden bg-panel text-left text-white"
               initial={{ opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
@@ -78,7 +78,7 @@ export default function Gallery() {
               <div className="relative flex h-full min-h-[520px] flex-col justify-between p-6 md:p-7">
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="font-mono text-[10px] tracking-[0.18em] text-[#e3ca87]">
+                    <span className="font-mono text-[10px] tracking-[0.18em] text-gold-highlight">
                       ÉTUDE {formatArtworkIndex(index)} / {total}
                     </span>
 
@@ -87,7 +87,7 @@ export default function Gallery() {
                     </div>
                   </div>
 
-                  <span className="grid h-9 w-9 place-items-center border border-white/18 text-white/62 transition group-hover:border-[#e3ca87] group-hover:text-[#e3ca87]">
+                  <span className="grid h-9 w-9 place-items-center border border-white/18 text-white/62 transition group-hover:border-gold-highlight group-hover:text-gold-highlight">
                     <ArrowUpRight size={16} />
                   </span>
                 </div>
@@ -109,7 +109,7 @@ export default function Gallery() {
                     {work.title}
                   </h3>
 
-                  <p className="mt-3 font-serif text-xl italic text-[#e3ca87]">
+                  <p className="mt-3 font-serif text-xl italic text-gold-highlight">
                     {work.subtitle}
                   </p>
 

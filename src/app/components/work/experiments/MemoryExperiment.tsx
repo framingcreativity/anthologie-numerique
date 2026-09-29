@@ -96,7 +96,7 @@ export default function MemoryExperiment({
         <div>
           <div
             id={`memory-${artwork.id}`}
-            className="micro-meta text-[#d6b86f]"
+            className="micro-meta text-gold"
           >
             Interaction / mémoire
           </div>
@@ -119,7 +119,7 @@ export default function MemoryExperiment({
                 Reconstruction
               </span>
 
-              <span className="text-[#d6b86f]/70">
+              <span className="text-gold/70">
                 {displayIndex} / {displayTotal}
               </span>
             </div>
@@ -148,7 +148,7 @@ export default function MemoryExperiment({
                       : 0.5,
                     ease: [0.2, 0.8, 0.2, 1],
                   }}
-                  className="h-px flex-1 origin-left bg-[#d6b86f]"
+                  className="h-px flex-1 origin-left bg-gold"
                 />
               ))}
             </div>
@@ -236,7 +236,7 @@ export default function MemoryExperiment({
                       }}
                       className="absolute inset-x-0 top-0"
                     >
-                      <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-[#d6b86f]/40">
+                      <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-gold/40">
                         trace{' '}
                         {String(
                           versionIndex + 1,
@@ -280,19 +280,19 @@ export default function MemoryExperiment({
                   className="relative z-20"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-[#d6b86f]/55">
+                    <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-gold/55">
                       Version {displayIndex}
                     </span>
 
                     <span
                       aria-hidden="true"
-                      className="h-px w-8 bg-[#d6b86f]/35"
+                      className="h-px w-8 bg-gold/35"
                     />
                   </div>
 
                   <p
                     aria-live="polite"
-                    className="mt-8 max-w-[23ch] font-serif text-[clamp(2.15rem,4.1vw,4.7rem)] leading-[0.98] text-[#f4f0e8]"
+                    className="mt-8 max-w-[23ch] font-serif text-[clamp(2.15rem,4.1vw,4.7rem)] leading-[0.98] text-ink"
                   >
                     {memoryVersions[currentIndex]}
                   </p>
@@ -335,7 +335,7 @@ export default function MemoryExperiment({
               <button
                 type="button"
                 onClick={reconstruct}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Reconstruire depuis la trace
               </button>
@@ -343,7 +343,7 @@ export default function MemoryExperiment({
               <button
                 type="button"
                 onClick={restart}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Revenir au souvenir initial
               </button>

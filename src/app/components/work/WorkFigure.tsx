@@ -6,7 +6,7 @@ type Props = {
 
 export default function WorkFigure({ artwork }: Props) {
   return (
-    <figure className="relative min-h-[300px] sm:min-h-[420px] overflow-hidden border border-white/10 bg-[#0b0b0b] lg:min-h-[650px]">
+    <figure className="relative min-h-[300px] sm:min-h-[420px] overflow-hidden border border-white/10 bg-panel lg:min-h-[650px]">
       <img
         src={artwork.image}
         alt=""

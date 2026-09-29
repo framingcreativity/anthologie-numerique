@@ -135,7 +135,7 @@ export default function MachineExperiment({
         <div>
           <div
             id={`machine-${artwork.id}`}
-            className="micro-meta text-[#d6b86f]"
+            className="micro-meta text-gold"
           >
             Interaction / interprétation
           </div>
@@ -173,13 +173,13 @@ export default function MachineExperiment({
                       aria-current={
                         active ? 'true' : undefined
                       }
-                      className={`grid grid-cols-[28px_1fr] gap-3 bg-[#090909] px-3 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1 ${
+                      className={`grid grid-cols-[28px_1fr] gap-3 bg-work px-3 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 ${
                         active
-                          ? 'text-[#f4f0e8]'
+                          ? 'text-ink'
                           : 'text-white/28 hover:text-white/55'
                       }`}
                     >
-                      <span className="font-mono text-[8px] text-[#d6b86f]/55">
+                      <span className="font-mono text-[8px] text-gold/55">
                         {String(
                           index + 1,
                         ).padStart(2, '0')}
@@ -213,7 +213,7 @@ export default function MachineExperiment({
           <div className="grid border-y border-white/10 lg:grid-cols-[1.05fr_.95fr]">
             <div className="min-h-[390px] border-b border-white/10 px-5 py-8 lg:border-b-0 lg:border-r lg:px-8 lg:py-10">
               <div className="flex items-center justify-between">
-                <span className="micro-meta text-[#d6b86f]">
+                <span className="micro-meta text-gold">
                   Phrase / lecteur
                 </span>
 
@@ -241,7 +241,7 @@ export default function MachineExperiment({
                     : 0.55,
                   ease: [0.2, 0.8, 0.2, 1],
                 }}
-                className="mt-12 max-w-[18ch] break-words font-serif text-[clamp(2.05rem,4vw,4.8rem)] leading-[0.98] text-[#f4f0e8]"
+                className="mt-12 max-w-[18ch] break-words font-serif text-[clamp(2.05rem,4vw,4.8rem)] leading-[0.98] text-ink"
               >
                 {phrase}
               </motion.p>
@@ -325,7 +325,7 @@ export default function MachineExperiment({
               }
               aria-expanded={showRemainder}
               aria-controls="machine-remainder"
-              className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-300 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+              className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-300 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
             >
               {showRemainder
                 ? 'Masquer l’écart'
@@ -352,8 +352,8 @@ export default function MachineExperiment({
             }}
             className="overflow-hidden"
           >
-            <div className="mt-8 border-l border-[#d6b86f]/35 pl-5">
-              <div className="micro-meta text-[#d6b86f]/55">
+            <div className="mt-8 border-l border-gold/35 pl-5">
+              <div className="micro-meta text-gold/55">
                 Reste non classé
               </div>
 

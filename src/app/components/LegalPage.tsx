@@ -107,7 +107,7 @@ export default function LegalPage({
   const page = pages[kind];
 
   return (
-    <div className="min-h-screen bg-[#080808] text-[#f4f0e8] selection:bg-[#d6b86f] selection:text-black">
+    <div className="min-h-screen bg-bg text-ink selection:bg-gold selection:text-black">
       <PageMeta
         title={`${page.title} — Anthologie numérique`}
         description={page.description}
@@ -126,7 +126,7 @@ export default function LegalPage({
           className="grid gap-14 lg:grid-cols-[.62fr_1.38fr] lg:gap-24"
         >
           <header>
-            <p className="micro-meta text-[#d6b86f]">
+            <p className="micro-meta text-gold">
               {page.eyebrow}
             </p>
 
@@ -153,7 +153,7 @@ export default function LegalPage({
                       : 'mt-12 border-t border-white/10 pt-10'
                   }
                 >
-                  <h2 className="font-serif text-[clamp(1.6rem,2.3vw,2.3rem)] font-normal leading-[1.15] tracking-[-0.025em] text-[#f4f0e8]">
+                  <h2 className="font-serif text-[clamp(1.6rem,2.3vw,2.3rem)] font-normal leading-[1.15] tracking-[-0.025em] text-ink">
                     {section.title}
                   </h2>
 
@@ -164,7 +164,7 @@ export default function LegalPage({
               ),
             )}
 
-            <p className="mt-14 border-t border-[#d6b86f]/30 pt-6 font-mono text-[9px] uppercase tracking-[0.15em] text-white/38">
+            <p className="mt-14 border-t border-gold/30 pt-6 font-mono text-[9px] uppercase tracking-[0.15em] text-white/38">
               Version éditoriale · 29 septembre 2026
             </p>
           </div>

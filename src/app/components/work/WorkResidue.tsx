@@ -35,7 +35,7 @@ export default function WorkResidue({
 
           <div
             aria-hidden="true"
-            className="absolute bottom-[18%] right-[8%] h-px w-[8%] bg-[#d6b86f]/28"
+            className="absolute bottom-[18%] right-[8%] h-px w-[8%] bg-gold/28"
           />
 
           <div

@@ -100,7 +100,7 @@ export default function ErrorExperiment({
         <div>
           <div
             id={`error-${artwork.id}`}
-            className="micro-meta text-[#d6b86f]"
+            className="micro-meta text-gold"
           >
             Interaction / erreur
           </div>
@@ -122,7 +122,7 @@ export default function ErrorExperiment({
                 Descendants
               </span>
 
-              <span className="font-mono text-[9px] text-[#d6b86f]/70">
+              <span className="font-mono text-[9px] text-gold/70">
                 {String(stage).padStart(2, '0')}
                 {' / '}
                 {String(
@@ -154,7 +154,7 @@ export default function ErrorExperiment({
                       ? 0
                       : 0.18,
                   }}
-                  className="h-px origin-left bg-[#d6b86f]"
+                  className="h-px origin-left bg-gold"
                 />
               ))}
             </div>
@@ -232,7 +232,7 @@ export default function ErrorExperiment({
                   className="relative z-10"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="micro-meta text-[#d6b86f]/55">
+                    <span className="micro-meta text-gold/55">
                       {isInitial
                         ? 'Source / intacte'
                         : `Erreur / ${current.type}`}
@@ -240,13 +240,13 @@ export default function ErrorExperiment({
 
                     <span
                       aria-hidden="true"
-                      className="h-px w-8 bg-[#d6b86f]/30"
+                      className="h-px w-8 bg-gold/30"
                     />
                   </div>
 
                   <p
                     aria-live="polite"
-                    className="mt-10 max-w-[19ch] break-words font-serif text-[clamp(2.05rem,4.2vw,4.9rem)] leading-[0.96] text-[#f4f0e8]"
+                    className="mt-10 max-w-[19ch] break-words font-serif text-[clamp(2.05rem,4.2vw,4.9rem)] leading-[0.96] text-ink"
                   >
                     {current.text}
                   </p>
@@ -307,10 +307,10 @@ export default function ErrorExperiment({
                           >
                             <span
                               aria-hidden="true"
-                              className="absolute -left-6 top-2 h-px w-4 bg-[#d6b86f]/30"
+                              className="absolute -left-6 top-2 h-px w-4 bg-gold/30"
                             />
 
-                            <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-[#d6b86f]/45">
+                            <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-gold/45">
                               {String(
                                 index + 1,
                               ).padStart(
@@ -349,7 +349,7 @@ export default function ErrorExperiment({
               <button
                 type="button"
                 onClick={introduceError}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-[#d6b86f] transition-colors duration-150 hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-gold transition-colors duration-150 hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Introduire l’écart suivant
               </button>
@@ -357,7 +357,7 @@ export default function ErrorExperiment({
               <button
                 type="button"
                 onClick={reset}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-150 hover:text-[#d6b86f] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-150 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Restaurer la règle
               </button>

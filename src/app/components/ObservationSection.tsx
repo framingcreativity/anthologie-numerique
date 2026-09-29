@@ -2,7 +2,7 @@ import { motion } from 'motion/react';
 
 export default function ObservationSection() {
   return (
-    <section className="border-t border-black/15 bg-[#e9e4d9] text-[#111]">
+    <section className="border-t border-black/15 bg-editorial text-editorial-ink">
       <div className="mx-auto max-w-[1440px] px-5 pb-24 pt-6 md:px-10 md:pb-32 lg:px-14">
         <motion.div
           className="grid gap-12 border-t border-black/20 pt-12 lg:grid-cols-[.55fr_1.45fr]"

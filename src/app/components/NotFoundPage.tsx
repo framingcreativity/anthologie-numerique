@@ -12,7 +12,7 @@ import {
 
 export default function NotFoundPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#080808] text-[#f4f0e8]">
+    <div className="flex min-h-screen flex-col bg-bg text-ink">
       <PageMeta
         title="Page introuvable — Anthologie numérique"
         description="La page demandée n’existe pas ou n’est plus disponible."
@@ -26,7 +26,7 @@ export default function NotFoundPage() {
         className="mx-auto flex w-full max-w-[1440px] flex-1 items-center px-5 pb-24 pt-32 md:px-10 lg:px-14"
       >
         <div>
-          <p className="micro-meta text-[#d6b86f]">
+          <p className="micro-meta text-gold">
             Erreur 404
           </p>
 
@@ -40,7 +40,7 @@ export default function NotFoundPage() {
 
           <a
             href={withBase()}
-            className="group mt-10 inline-flex min-h-11 items-center gap-3 py-2 font-mono text-[10px] uppercase tracking-[0.17em] text-[#d6b86f] transition hover:text-[#f4f0e8]"
+            className="group mt-10 inline-flex min-h-11 items-center gap-3 py-2 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition hover:text-ink"
           >
             Retour à l’anthologie
 

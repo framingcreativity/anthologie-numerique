@@ -43,11 +43,11 @@ export default function WorkNavigation({
           <button
             type="button"
             onClick={() => onSelect(previous)}
-            className="group flex min-h-[112px] sm:min-h-[138px] w-full items-center gap-5 p-5 text-left sm:p-6 transition hover:bg-white/[0.018] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1 md:p-8"
+            className="group flex min-h-[112px] sm:min-h-[138px] w-full items-center gap-5 p-5 text-left sm:p-6 transition hover:bg-white/[0.018] focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 md:p-8"
           >
             <ArrowLeft
               size={17}
-              className="text-[#d6b86f] transition-transform group-hover:-translate-x-1"
+              className="text-gold transition-transform group-hover:-translate-x-1"
             />
 
             <div>
@@ -74,7 +74,7 @@ export default function WorkNavigation({
           <button
             type="button"
             onClick={() => onSelect(next)}
-            className="group flex min-h-[112px] sm:min-h-[138px] w-full items-center justify-end gap-5 p-5 text-right sm:p-6 transition hover:bg-white/[0.018] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d6b86f] focus-visible:-outline-offset-1 md:p-8"
+            className="group flex min-h-[112px] sm:min-h-[138px] w-full items-center justify-end gap-5 p-5 text-right sm:p-6 transition hover:bg-white/[0.018] focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 md:p-8"
           >
             <div>
               <div className="micro-meta text-white/28">
@@ -88,7 +88,7 @@ export default function WorkNavigation({
 
             <ArrowRight
               size={17}
-              className="text-[#d6b86f] transition-transform group-hover:translate-x-1"
+              className="text-gold transition-transform group-hover:translate-x-1"
             />
           </button>
         ) : (
