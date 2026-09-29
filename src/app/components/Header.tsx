@@ -1,33 +1,135 @@
-import { AnimatePresence, motion } from 'motion/react';
-import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import {
+  AnimatePresence,
+  motion,
+} from 'motion/react';
 
-const links = [
-  { label: 'Œuvres', href: '#pages' },
-  { label: 'Manifeste', href: '#algorithmiques' },
-  { label: 'À propos', href: '#contact' },
-];
+import {
+  Menu,
+  X,
+} from 'lucide-react';
+
+import {
+  useEffect,
+  useState,
+} from 'react';
+
+import {
+  getRoutePath,
+  withBase,
+} from '../lib/site';
 
 export default function Header() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] =
+    useState(false);
+
+  const [hash, setHash] =
+    useState(
+      () =>
+        typeof window !== 'undefined'
+          ? window.location.hash
+          : '',
+    );
+
+  useEffect(
+    () => {
+      const syncHash = () => {
+        setHash(
+          window.location.hash,
+        );
+      };
+
+      window.addEventListener(
+        'hashchange',
+        syncHash,
+      );
+
+      return () => {
+        window.removeEventListener(
+          'hashchange',
+          syncHash,
+        );
+      };
+    },
+    [],
+  );
+
+  const pathname =
+    getRoutePath();
+
+  const isHome =
+    pathname === '/';
+
+  const isAbout =
+    pathname === '/a-propos/';
+
+  const links = [
+    {
+      label: 'Œuvres',
+      href: withBase('#pages'),
+      active:
+        isHome &&
+        (
+          hash === '#pages' ||
+          hash === '#fragments'
+        ),
+    },
+    {
+      label: 'Manifeste',
+      href: withBase(
+        '#algorithmiques',
+      ),
+      active:
+        isHome &&
+        hash === '#algorithmiques',
+    },
+    {
+      label: 'À propos',
+      href: withBase(
+        'a-propos/',
+      ),
+      active: isAbout,
+    },
+  ];
 
   return (
-    <motion.header
-      className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#080808]/82 backdrop-blur-xl"
-      initial={{ y: -72 }}
-      animate={{ y: 0 }}
+    <>
+      <a
+        href="#main-content"
+        className="fixed left-4 top-4 z-[100] -translate-y-24 bg-[#f4f0e8] px-4 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-[#080808] transition-transform duration-200 focus:translate-y-0 focus:outline focus:outline-2 focus:outline-offset-2 focus:outline-[#d6b86f]"
+      >
+        Aller au contenu
+      </a>
+
+      <motion.header
+      className="fixed inset-x-0 top-0 z-50 border-b border-[#d6b86f]/35 bg-[#080808]/82 backdrop-blur-xl"
+      initial={{
+        y: -72,
+      }}
+      animate={{
+        y: 0,
+      }}
       transition={{
         duration: 0.65,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [
+          0.22,
+          1,
+          0.36,
+          1,
+        ],
       }}
     >
       <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-14">
         <a
-          href="#fragments"
-          className="group flex items-baseline gap-2"
-          onClick={() => setOpen(false)}
+          href={withBase(
+            '#fragments',
+          )}
+          aria-label="Anthologie numérique — revenir à l’accueil"
+          className="group flex min-h-11 items-center gap-2"
+          onClick={() =>
+            setOpen(false)
+          }
         >
-          <span className="text-sm font-semibold tracking-[0.24em] text-[#f4f0e8]">
+          <span className="text-sm font-semibold tracking-[0.24em] text-[#f4f0e8] transition-colors duration-300 group-hover:text-[#d6b86f]">
             ANTHOLOGIE
           </span>
 
@@ -40,55 +142,138 @@ export default function Header() {
           className="hidden items-center gap-8 md:flex"
           aria-label="Navigation principale"
         >
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-xs uppercase tracking-[0.16em] text-white/55 transition-colors hover:text-[#e6d39a]"
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map(
+            link => (
+              <a
+                key={link.href}
+                href={link.href}
+                aria-current={
+                  link.active
+                    ? (
+                        link.label ===
+                        'À propos'
+                          ? 'page'
+                          : 'location'
+                      )
+                    : undefined
+                }
+                className={`inline-flex min-h-11 items-center text-xs uppercase tracking-[0.16em] transition-colors duration-300 hover:text-[#e6d39a] ${
+                  link.active
+                    ? 'text-[#d6b86f]'
+                    : 'text-white/55'
+                }`}
+              >
+                {link.label}
+              </a>
+            ),
+          )}
         </nav>
 
         <button
           type="button"
-          className="grid h-10 w-10 place-items-center border border-white/15 text-white md:hidden"
-          aria-expanded={open}
-          aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-          onClick={() => setOpen((value) => !value)}
+          className="grid h-11 w-11 place-items-center border border-white/15 text-white transition-colors duration-300 hover:border-[#d6b86f]/60 hover:text-[#d6b86f] md:hidden"
+          aria-expanded={
+            open
+          }
+          aria-controls="mobile-navigation"
+          aria-label={
+            open
+              ? 'Fermer le menu'
+              : 'Ouvrir le menu'
+          }
+          onClick={() =>
+            setOpen(
+              value =>
+                !value,
+            )
+          }
         >
-          {open ? <X size={18} /> : <Menu size={18} />}
+          {open
+            ? (
+                <X
+                  size={18}
+                  aria-hidden="true"
+                />
+              )
+            : (
+                <Menu
+                  size={18}
+                  aria-hidden="true"
+                />
+              )}
         </button>
       </div>
 
       <AnimatePresence>
         {open && (
           <motion.nav
+            id="mobile-navigation"
+            aria-label="Navigation mobile"
             className="border-t border-white/10 bg-[#0b0b0b] px-5 py-6 md:hidden"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{
+              opacity: 0,
+              height: 0,
+            }}
+            animate={{
+              opacity: 1,
+              height: 'auto',
+            }}
+            exit={{
+              opacity: 0,
+              height: 0,
+            }}
           >
             <div className="mx-auto flex max-w-[1440px] flex-col">
-              {links.map((link, index) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center justify-between border-b border-white/10 py-4 text-sm uppercase tracking-[0.15em] text-white/75"
-                >
-                  {link.label}
+              {links.map(
+                (
+                  link,
+                  index,
+                ) => (
+                  <a
+                    key={
+                      link.href
+                    }
+                    href={
+                      link.href
+                    }
+                    aria-current={
+                      link.active
+                        ? (
+                            link.label ===
+                            'À propos'
+                              ? 'page'
+                              : 'location'
+                          )
+                        : undefined
+                    }
+                    onClick={() =>
+                      setOpen(
+                        false,
+                      )
+                    }
+                    className={`flex min-h-12 items-center justify-between border-b border-white/10 py-4 text-sm uppercase tracking-[0.15em] transition-colors duration-300 ${
+                      link.active
+                        ? 'text-[#d6b86f]'
+                        : 'text-white/75'
+                    }`}
+                  >
+                    {link.label}
 
-                  <span className="font-mono text-[10px] text-[#d6b86f]">
-                    0{index + 1}
-                  </span>
-                </a>
-              ))}
+                    <span
+                      aria-hidden="true"
+                      className="font-mono text-[10px] text-[#d6b86f]"
+                    >
+                      0
+                      {index + 1}
+                    </span>
+                  </a>
+                ),
+              )}
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
-    </motion.header>
+      </motion.header>
+    </>
   );
 }

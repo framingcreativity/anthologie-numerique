@@ -6,21 +6,21 @@ const principles = [
     index: '01',
     title: 'Écrire avec l’espace',
     text:
-      'La mise en page n’illustre pas le texte. Elle règle sa vitesse, ses interruptions et ses silences.',
+      'La mise en page ne décore pas le texte. Elle règle son rythme, ses coupures et ses silences.',
   },
 
   {
     index: '02',
     title: 'Rendre le système visible',
     text:
-      'Le code, la répétition et la règle ne restent pas toujours derrière l’œuvre. Ils apparaissent parfois à sa surface et deviennent lisibles à leur tour.',
+      'Le code et la règle ne restent pas toujours en coulisses. Par moments, l’œuvre laisse voir ce qui la fait agir.',
   },
 
   {
     index: '03',
     title: 'Laisser une résistance',
     text:
-      'Une interface n’a pas toujours à faciliter. Certaines interactions peuvent ralentir, interrompre ou déplacer la lecture.',
+      'Une interface n’a pas toujours à simplifier. Elle peut ralentir, interrompre ou déplacer la lecture lorsqu’une résistance produit du sens.',
   },
 ];
 
@@ -99,8 +99,8 @@ export default function AboutSection() {
               </div>
 
               <p className="mt-9 max-w-[760px] text-base leading-7 text-white/54">
-                L’interface ne contient donc pas seulement le texte.
-                Elle participe à son sens.
+                Quand l’interface agit, elle ne contient plus seulement
+                le texte. Elle prend part à ce qu’il devient.
               </p>
             </motion.div>
 
@@ -146,7 +146,7 @@ export default function AboutSection() {
 
             <div className="mt-10 border-t border-white/12 pt-8">
               <a
-                href="#a-propos"
+                href={`${import.meta.env.BASE_URL}a-propos/`}
                 className="group inline-flex min-h-11 items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-[#d3b16e] transition hover:text-[#f4f0e8] focus-visible:outline focus-visible:outline-1 focus-visible:outline-[#d3b16e] focus-visible:outline-offset-4"
               >
                 À propos de l’expérience

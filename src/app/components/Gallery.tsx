@@ -35,7 +35,7 @@ export default function Gallery() {
 
           <div className="max-w-[720px] lg:justify-self-end">
             <p className="text-base leading-7 text-black/58 lg:text-lg">
-              Une collection ouverte. Une même question.
+              Une collection ouverte. Une question commune.
             </p>
 
             <p className="mt-4 font-serif text-[clamp(1.65rem,2.5vw,2.5rem)] italic leading-[1.2] text-[#a9853e]">
@@ -44,7 +44,7 @@ export default function Gallery() {
               </span>
 
               <span className="block">
-                quand l’interface participe réellement à la lecture ?
+                lorsque la page cesse d’être immobile ?
               </span>
             </p>
           </div>

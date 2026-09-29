@@ -36,16 +36,16 @@ export default function ContactSection() {
 
           <div className="border-t border-black/25 pt-7 lg:border-l lg:border-t-0 lg:pl-9 lg:pt-0">
             <p className="text-base leading-7 text-black/62">
-              Ces six études ne cherchent pas une nouvelle manière
-              d’habiller le texte.
+              Ces études ne cherchent pas à habiller le texte
+              autrement.
             </p>
 
             <p className="mt-5 text-base leading-7 text-black/62">
-              Elles explorent quelque chose de plus simple :
+              Elles posent une question plus simple :
             </p>
 
             <p className="discipline-writing-text mt-5 font-serif text-2xl italic leading-[1.3] text-black/88">
-              ce qui arrive lorsque la page commence à répondre.
+              que se passe-t-il lorsque la page commence à répondre ?
             </p>
 
             <a

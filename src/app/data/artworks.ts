@@ -38,17 +38,17 @@ export const artworks: Artwork[] = [
     title: 'Syntaxe de l’absence',
     subtitle: 'Le vide comme instruction',
     preview:
-      'Une lecture où ce qui manque agit autant que ce qui demeure.',
+      'Le blanc n’encadre plus la phrase : il en devient une partie active.',
     hypothesis:
-      'Une absence peut-elle produire autant de sens qu’une phrase ?',
+      'Que peut dire ce qui n’est pas écrit ?',
     mainText:
-      'La page devient une architecture de silences. Certains fragments apparaissent, d’autres restent hors champ. L’espace ne sépare plus le texte : il participe à sa syntaxe.',
+      'Ici, le blanc n’entoure pas la phrase : il agit avec elle. Il coupe, retarde, retient. Une partie du texte n’existe pour le lecteur qu’au moment où il vient la chercher.',
     consequence:
-      'Lire revient aussi à interpréter ce qui manque.',
+      'Le manque devient une forme de présence.',
     residue:
       'La lecture garde la forme du manque.',
     interactionNote:
-      'Approcher, choisir, révéler. Chaque fragment reste partiellement absent tant que le lecteur ne vient pas à sa rencontre.',
+      'Approchez les absences. Certaines se révèlent ; d’autres peuvent rester.',
     fragments: [
       'Le blanc conserve la trace.',
       'Une ligne manque. Le sens reste.',
@@ -69,17 +69,17 @@ export const artworks: Artwork[] = [
     title: 'Matrice de mémoire',
     subtitle: 'Archives instables',
     preview:
-      'Des fragments reviennent, mais jamais exactement dans le même état.',
+      'Un souvenir revient, déplacé par ce qui l’a précédé.',
     hypothesis:
-      'Une archive peut-elle se souvenir de ses propres transformations ?',
+      'Un souvenir reste-t-il le même chaque fois qu’il revient ?',
     mainText:
-      'La mémoire n’est pas présentée comme un document stable mais comme une grille mouvante. Certaines zones s’éclairent, d’autres s’effacent. Chaque reprise déplace légèrement ce qui semblait acquis.',
+      'Rien ne revient intact. À chaque reprise, un détail glisse, un autre persiste. La version suivante hérite de la précédente sans pouvoir la restituer exactement.',
     consequence:
-      'Se souvenir, ici, signifie reconstruire.',
+      'Se souvenir, c’est déjà réécrire.',
     residue:
       'La dernière version ne sait plus laquelle était la première.',
     interactionNote:
-      'Le système conserve la trace du fragment précédent. La lecture suivante hérite donc toujours de quelque chose.',
+      'Faites revenir la phrase. Observez ce qui change — et ce qui insiste.',
     fragments: [
       'Chaque reprise modifie la source.',
       'Une archive peut hésiter.',
@@ -100,17 +100,17 @@ export const artworks: Artwork[] = [
     title: 'Lecture machine',
     subtitle: 'Quand le système interprète',
     preview:
-      'Une pièce sur l’écart entre reconnaître des signes et comprendre une phrase.',
+      'Les mêmes signes passent du regard humain au classement machine — sans produire le même sens.',
     hypothesis:
-      'Reconnaître une structure revient-il à comprendre ce qu’elle signifie ?',
+      'Reconnaître une structure, est-ce déjà comprendre ?',
     mainText:
-      'La machine classe, segmente et rapproche. Le lecteur, lui, hésite. Entre les deux demeure un espace difficile à mesurer : celui où une phrase cesse d’être une suite de signes et devient une expérience.',
+      'La machine peut segmenter, rapprocher, attribuer une probabilité. Le lecteur peut hésiter, associer, se contredire. Entre les deux, les signes restent les mêmes ; ce qu’ils deviennent change.',
     consequence:
-      'Reconnaître n’est pas comprendre.',
+      'Le classement laisse toujours quelque chose dehors.',
     residue:
       'Ce qui est correctement classé peut encore rester incompris.',
     interactionNote:
-      'Chaque fragment peut être lu comme donnée ou comme phrase. Le contenu reste identique ; le régime de lecture change.',
+      'Passez d’une lecture à l’autre sans changer les signes.',
     fragments: [
       'Reconnaître n’est pas comprendre.',
       'La probabilité laisse une ombre.',
@@ -131,17 +131,17 @@ export const artworks: Artwork[] = [
     title: 'Lettre récursive',
     subtitle: 'Un texte qui revient sur lui-même',
     preview:
-      'Chaque lecture replie la précédente et déplace légèrement le point de départ.',
+      'Une lettre revient à son point de départ, mais le détour l’a déjà modifiée.',
     hypothesis:
       'Peut-on revenir au même texte sans revenir au même endroit ?',
     mainText:
-      'La récursion devient un procédé littéraire. Chaque fragment appelle un autre fragment, puis revient au précédent avec une nuance nouvelle. Le parcours produit moins une boucle qu’une spirale.',
+      'La lettre revient. Une formule se répète, puis se déplace. Ce qui semblait être une boucle accumule ses détours jusqu’à devenir une spirale.',
     consequence:
-      'Revenir n’est jamais répéter.',
+      'Chaque retour déplace son origine.',
     residue:
       'Le retour contient désormais le détour.',
     interactionNote:
-      'Le dernier fragment renvoie au premier. Mais entre les deux, le contexte a changé.',
+      'Relancez le texte. Chaque retour conserve une part du détour.',
     fragments: [
       'Revenir n’est jamais répéter.',
       'Le texte se souvient du détour.',
@@ -162,17 +162,17 @@ export const artworks: Artwork[] = [
     title: 'Saison compressée',
     subtitle: 'Poésie sous contrainte',
     preview:
-      'Une expérience sur ce qui subsiste lorsque le texte est progressivement réduit.',
+      'Une saison se contracte jusqu’à ne laisser que sa température.',
     hypothesis:
-      'Jusqu’où peut-on retirer sans perdre la sensation ?',
+      'Combien peut-on retirer avant de perdre la sensation ?',
     mainText:
-      'La compression n’est pas une économie technique mais une question poétique. Chaque réduction retire de l’information tout en augmentant la pression exercée sur ce qui reste.',
+      'La phrase perd d’abord ses détails, puis ses appuis. Ce qui demeure doit porter davantage. À la fin, quelques mots suffisent peut-être encore à garder une saison.',
     consequence:
-      'Moins de signes ne signifie pas nécessairement moins de présence.',
+      'Retirer change le poids de ce qui reste.',
     residue:
       'Ce qui reste porte le poids de ce qui a été retiré.',
     interactionNote:
-      'À mesure que la lecture avance, la phrase se contracte. Le sens ne disparaît pas d’un coup : il change de densité.',
+      'Compressez la phrase jusqu’à sa limite.',
     fragments: [
       'Le vent tient dans trois lignes.',
       'Le pixel garde la saison.',
@@ -193,17 +193,17 @@ export const artworks: Artwork[] = [
     title: 'Jardin d’erreurs',
     subtitle: 'L’accident comme méthode',
     preview:
-      'Une anomalie n’est plus supprimée automatiquement : elle est observée.',
+      'Une anomalie persiste assez longtemps pour révéler la règle qu’elle dérange.',
     hypothesis:
-      'Que révèle un système au moment précis où il cesse de fonctionner comme prévu ?',
+      'Que devient une règle lorsqu’une erreur la rend visible ?',
     mainText:
-      'Décalage, répétition, interruption : l’erreur devient matériau lorsqu’elle produit une lecture qui n’existait pas dans le plan initial. Le défaut n’est pas célébré pour lui-même ; il révèle la règle qu’il vient de rompre.',
+      'Un décalage, une omission, une répétition. L’erreur n’est pas réparée tout de suite. Elle reste assez longtemps pour montrer la structure qu’elle vient de rompre.',
     consequence:
-      'Parfois, corriger efface précisément ce qu’il fallait regarder.',
+      'Le défaut rend la règle perceptible.',
     residue:
       'La règle devient visible dans la forme de sa rupture.',
     interactionNote:
-      'Chaque sélection provoque un léger déplacement avant stabilisation. L’erreur reste perceptible, mais ne devient jamais spectacle.',
+      'Laissez chaque erreur agir avant de poursuivre.',
     fragments: [
       'Le défaut ouvre une bifurcation.',
       'L’erreur montre le système.',

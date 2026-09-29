@@ -26,7 +26,12 @@ function figmaAssetResolver() {
   };
 }
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
+  base:
+    command === 'serve'
+      ? '/'
+      : process.env.VITE_BASE_PATH ||
+        '/anthologie-numerique/',
   plugins: [
     figmaAssetResolver(),
     react(),
@@ -41,4 +46,4 @@ export default defineConfig({
       ),
     },
   },
-});
+}));

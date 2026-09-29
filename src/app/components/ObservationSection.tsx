@@ -16,16 +16,16 @@ export default function ObservationSection() {
 
           <div>
             <p className="text-base leading-7 text-black/48">
-              Six expériences. Une même observation :
+              À travers ces expériences, un même constat :
             </p>
 
             <p className="mt-5 max-w-[1000px] text-[clamp(2.5rem,5.4vw,6rem)] font-medium leading-[0.95] tracking-[-0.055em]">
-              La forme numérique intervient dans ce que nous comprenons.
+              Ce que nous lisons change avec la manière dont la page agit.
             </p>
 
             <p className="mt-8 max-w-[760px] font-serif text-xl italic leading-8 text-[#9b7836] md:text-2xl">
-              Dès que la page peut attendre, répondre ou se souvenir,
-              elle cesse d’être un simple contenant.
+              Dès qu’elle peut attendre, répondre ou se souvenir,
+              la page cesse d’être un simple contenant.
             </p>
           </div>
         </motion.div>

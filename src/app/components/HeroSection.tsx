@@ -97,9 +97,9 @@ export default function HeroSection() {
             transition={{ duration: 0.7, delay: 0.58 }}
           >
             <p className="max-w-[720px] text-base leading-7 text-white/62 md:text-lg md:leading-8">
-              Une collection d’expériences éditoriales où le texte ne se
-              contente plus d’être lu. Il attend, se déplace, disparaît,
-              répond — et parfois résiste.
+              Une collection d’expériences éditoriales où lire signifie
+              aussi attendre, choisir, perdre, recommencer. Ici, l’interface
+              ne présente pas seulement le texte : elle agit avec lui.
             </p>
 
             <a
