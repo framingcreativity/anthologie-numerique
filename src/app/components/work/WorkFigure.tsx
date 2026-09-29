@@ -9,6 +9,7 @@ export default function WorkFigure({ artwork }: Props) {
     <figure className="relative min-h-[300px] sm:min-h-[420px] overflow-hidden border border-white/10 bg-panel lg:min-h-[650px]">
       <img
         src={artwork.image}
+        decoding="async"
         alt=""
         className="absolute inset-0 h-full w-full object-cover opacity-88"
       />

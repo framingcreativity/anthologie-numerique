@@ -1,5 +1,5 @@
+import { createPortal } from 'react-dom';
 import {
-  AnimatePresence,
   motion,
   useReducedMotion,
 } from 'motion/react';
@@ -8,7 +8,7 @@ import {
   X,
 } from 'lucide-react';
 import {
-  useEffect,
+  useLayoutEffect,
   useRef,
 } from 'react';
 
@@ -30,57 +30,36 @@ type Props = {
   onSelect: (artwork: Artwork) => void;
 };
 
-export default function InteractiveArtPage({
-  artwork,
-  onClose,
-  onSelect,
-}: Props) {
+export default function InteractiveArtPage(props: Props) {
+  return props.artwork ? createPortal(
+    <WorkDialog {...props} artwork={props.artwork} />,
+    document.body,
+  ) : null;
+}
+
+function WorkDialog({ artwork, onClose, onSelect }: Props & { artwork: Artwork }) {
   const reduceMotion = useReducedMotion();
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const previousFocus = useRef<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
-  useEffect(() => {
-    if (!artwork) return;
-
-    previousFocus.current =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
-
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current!;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-
-    window.requestAnimationFrame(() => {
-      closeButtonRef.current?.focus();
-    });
-
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    window.addEventListener('keydown', onKey);
-
+    // The native modal makes the background inert and contains keyboard focus.
+    dialog.showModal();
     return () => {
+      dialog.close();
       document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', onKey);
-
-      window.requestAnimationFrame(() => {
-        previousFocus.current?.focus();
-      });
+      if (opener?.isConnected) opener.focus({ preventScroll: true });
     };
-  }, [artwork, onClose]);
+  }, []);
 
-  useEffect(() => {
-    if (!artwork) return;
-
-    scrollRef.current?.scrollTo({
-      top: 0,
-      behavior: 'auto',
-    });
-  }, [artwork?.id]);
+  useLayoutEffect(() => {
+    titleRef.current?.focus({ preventScroll: true });
+    dialogRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+  }, [artwork.id]);
 
   const artworkPosition = artwork
     ? artworks.findIndex((item) => item.id === artwork.id)
@@ -94,135 +73,32 @@ export default function InteractiveArtPage({
   const totalWorks = formatArtworkTotal();
 
 
-  // ANTHOLOGIE_FOCUS_TRAP
-  useEffect(() => {
-    if (!artwork) return;
-
-    const root = scrollRef.current;
-
-    if (!root) return;
-
-    const selector = [
-      'a[href]',
-      'button:not([disabled])',
-      'input:not([disabled])',
-      'select:not([disabled])',
-      'textarea:not([disabled])',
-      '[tabindex]:not([tabindex="-1"])',
-    ].join(',');
-
-    const getFocusable = () =>
-      Array.from(
-        root.querySelectorAll<HTMLElement>(
-          selector,
-        ),
-      ).filter((element) => {
-        const style =
-          window.getComputedStyle(element);
-
-        return (
-          style.display !== 'none' &&
-          style.visibility !== 'hidden' &&
-          element.getClientRects().length > 0 &&
-          element.getAttribute('aria-hidden') !==
-            'true'
-        );
-      });
-
-    const trapFocus = (
-      event: KeyboardEvent,
-    ) => {
-      if (event.key !== 'Tab') return;
-
-      const focusable = getFocusable();
-
-      if (focusable.length === 0) {
-        event.preventDefault();
-        root.focus();
-        return;
-      }
-
-      const first = focusable[0];
-      const last =
-        focusable[focusable.length - 1];
-
-      const active =
-        document.activeElement;
-
-      if (
-        event.shiftKey &&
-        (
-          active === first ||
-          !root.contains(active)
-        )
-      ) {
-        event.preventDefault();
-        last.focus();
-        return;
-      }
-
-      if (
-        !event.shiftKey &&
-        active === last
-      ) {
-        event.preventDefault();
-        first.focus();
-      }
-    };
-
-    root.addEventListener(
-      'keydown',
-      trapFocus,
-    );
-
-    return () => {
-      root.removeEventListener(
-        'keydown',
-        trapFocus,
-      );
-    };
-  }, [artwork]);
-
   return (
-    <AnimatePresence mode="wait">
-      {artwork && (
-        <motion.div
-          ref={scrollRef}
-        tabIndex={-1}
-          key={artwork.id}
-          className="fixed inset-0 z-[80] overflow-x-hidden overflow-y-auto overscroll-contain bg-work text-ink"
-          initial={{
-            opacity: reduceMotion ? 1 : 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          exit={{
-            opacity: reduceMotion ? 1 : 0,
-          }}
-          transition={{
-            duration: reduceMotion ? 0 : 0.28,
-          }}
-          role="dialog"
+        <motion.dialog
+          ref={dialogRef}
+          className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto overscroll-contain border-0 bg-work p-0 text-ink"
+          initial={{ opacity: reduceMotion ? 1 : 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: reduceMotion ? 0 : 0.28 }}
           aria-modal="true"
           aria-labelledby={`work-title-${artwork.id}`}
+          onCancel={(event) => { event.preventDefault(); onClose(); }}
         >
           <header className="sticky top-0 z-20 border-b border-white/10 bg-work/88 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-14">
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-white/60 transition hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center gap-2 text-xs uppercase tracking-[0.16em] text-white/60 transition hover:text-white focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 <ArrowLeft aria-hidden="true" size={15} />
                 Retour à la collection
               </button>
 
               <button
-                ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                className="grid h-9 w-9 place-items-center border border-white/15 text-white/65 transition hover:border-gold hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                className="grid h-11 w-11 shrink-0 place-items-center border border-white/15 text-white/65 transition hover:border-gold hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
                 aria-label="Fermer l’étude"
               >
                 <X aria-hidden="true" size={16} />
@@ -230,11 +106,11 @@ export default function InteractiveArtPage({
             </div>
           </header>
 
-          <main>
+          <div>
             <div className="mx-auto max-w-[1440px] px-5 pb-14 pt-10 md:px-10 md:pb-20 md:pt-16 lg:px-14">
               <section className="grid gap-10 sm:gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
                 <div>
-                  <div className="mb-6 flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+                  <div className="mb-6 flex flex-wrap items-center gap-4 font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
                     <span>
                       ÉTUDE {displayIndex} / {totalWorks}
                     </span>
@@ -245,6 +121,8 @@ export default function InteractiveArtPage({
                   </div>
 
                   <h1
+                    ref={titleRef}
+                    tabIndex={-1}
                     id={`work-title-${artwork.id}`}
                     className="max-w-[10ch] text-[clamp(3rem,15vw,8rem)] font-medium leading-[0.85] tracking-[-0.065em]"
                   >
@@ -292,7 +170,7 @@ export default function InteractiveArtPage({
               </section>
 
               <div className="mt-20">
-                <ExperimentRenderer artwork={artwork} />
+                <ExperimentRenderer key={artwork.id} artwork={artwork} />
               </div>
 
               <WorkResidue artwork={artwork} />
@@ -302,9 +180,7 @@ export default function InteractiveArtPage({
               artwork={artwork}
               onSelect={onSelect}
             />
-          </main>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          </div>
+        </motion.dialog>
   );
 }

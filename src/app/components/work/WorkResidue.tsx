@@ -14,12 +14,12 @@ export default function WorkResidue({
     >
       <div className="grid gap-10 lg:grid-cols-[.48fr_1.52fr]">
         <div>
-          <div
+          <h2
             id={`residue-${artwork.id}`}
             className="micro-meta text-white/28"
           >
             Résidu
-          </div>
+          </h2>
 
           <p className="mt-4 max-w-[260px] text-sm leading-6 text-white/34">
             Ce qui demeure après
