@@ -23,7 +23,7 @@ export default function Gallery() {
       <div className="mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32 lg:px-14">
         <div className="grid gap-10 border-b border-black/20 pb-12 lg:grid-cols-[.65fr_1.35fr] lg:items-end">
           <div>
-            <div className="mb-5 micro-meta text-black/42">
+            <div className="mb-5 micro-meta text-editorial-muted">
               Collection / {total} études
             </div>
 
@@ -35,11 +35,11 @@ export default function Gallery() {
           </div>
 
           <div className="max-w-[720px] lg:justify-self-end">
-            <p className="text-base leading-7 text-black/58 lg:text-lg">
+            <p className="text-base leading-7 text-editorial-muted lg:text-lg">
               Une collection ouverte. Une question commune.
             </p>
 
-            <p className="mt-4 font-serif text-[clamp(1.65rem,2.5vw,2.5rem)] italic leading-[1.2] text-[#a9853e]">
+            <p className="mt-4 font-serif text-[clamp(1.65rem,2.5vw,2.5rem)] italic leading-[1.2] text-editorial-gold">
               <span className="block">
                 Que devient l’écriture
               </span>
@@ -83,7 +83,7 @@ export default function Gallery() {
                       ÉTUDE {formatArtworkIndex(index)} / {total}
                     </span>
 
-                    <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.15em] text-white/32">
+                    <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.15em] text-muted-2">
                       {work.chapter}
                     </div>
                   </div>

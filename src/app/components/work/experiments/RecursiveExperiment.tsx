@@ -128,11 +128,11 @@ export default function RecursiveExperiment({
             Interaction / récursion
           </h2>
 
-          <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
+          <p className="mt-4 max-w-[330px] text-sm leading-6 text-muted">
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/30">
+          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-muted-2">
             Continuer fait avancer.
             <br />
             Arriver au bout fait revenir.
@@ -143,7 +143,7 @@ export default function RecursiveExperiment({
           <div className="mt-10 max-w-[285px] border-t border-white/10 pt-5">
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                   Passage
                 </div>
 
@@ -153,7 +153,7 @@ export default function RecursiveExperiment({
               </div>
 
               <div>
-                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                   Boucle
                 </div>
 
@@ -273,7 +273,7 @@ export default function RecursiveExperiment({
                     className="relative z-10"
                   >
                     <div className="flex items-center gap-4">
-                      <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-gold/55">
+                      <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-gold">
                         Lettre / passage {passageNumber}
                       </span>
 
@@ -302,7 +302,7 @@ export default function RecursiveExperiment({
                           ? 0
                           : 1,
                       }}
-                      className="mt-12 max-w-[34ch] font-serif text-base italic leading-6 text-white/22"
+                      className="mt-12 max-w-[34ch] font-serif text-base italic leading-6 text-muted-2"
                     >
                       {cycleNotes[cycleIndex]}
                     </motion.p>
@@ -322,7 +322,7 @@ export default function RecursiveExperiment({
                       : 1.1,
                   }}
                 >
-                  <div className="micro-meta text-gold/55">
+                  <div className="micro-meta text-gold">
                     Interruption / boucle {cycleNumber}
                   </div>
 
@@ -338,7 +338,7 @@ export default function RecursiveExperiment({
           </div>
 
           <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
               {ended
                 ? 'état / interrompu'
                 : cycleIndex === 0
@@ -362,7 +362,7 @@ export default function RecursiveExperiment({
               <button
                 type="button"
                 onClick={restart}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/34 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Relire depuis le commencement
               </button>

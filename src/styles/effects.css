@@ -120,6 +120,7 @@
 
 .discipline-dual {
   position: relative;
+  overflow: clip;
   isolation: isolate;
 }
 

@@ -135,11 +135,11 @@ export default function MachineExperiment({
             Interaction / interprétation
           </h2>
 
-          <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
+          <p className="mt-4 max-w-[330px] text-sm leading-6 text-muted">
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[285px] font-serif text-lg italic leading-7 text-white/30">
+          <p className="mt-8 max-w-[285px] font-serif text-lg italic leading-7 text-muted-2">
             La structure peut être correcte.
             <br />
             L’interprétation peut pourtant
@@ -147,7 +147,7 @@ export default function MachineExperiment({
           </p>
 
           <div className="mt-10 border-t border-white/10 pt-5">
-            <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/22">
+            <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
               Corpus
             </div>
 
@@ -165,13 +165,13 @@ export default function MachineExperiment({
                         choose(index)
                       }
                       aria-pressed={active}
-                      className={`grid grid-cols-[28px_1fr] gap-3 bg-work px-3 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 ${
+                      className={`grid min-h-11 grid-cols-[28px_minmax(0,1fr)] gap-3 bg-work px-3 py-3 text-left transition-colors focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 ${
                         active
                           ? 'text-ink'
-                          : 'text-white/28 hover:text-white/55'
+                          : 'text-muted-2 hover:text-white/55'
                       }`}
                     >
-                      <span className="font-mono text-[8px] text-gold/55">
+                      <span className="font-mono text-[8px] text-gold">
                         {String(
                           index + 1,
                         ).padStart(2, '0')}
@@ -209,7 +209,7 @@ export default function MachineExperiment({
                   Phrase / lecteur
                 </span>
 
-                <span className="font-mono text-[8px] tracking-[0.16em] text-white/18">
+                <span className="font-mono text-[8px] tracking-[0.16em] text-muted-2">
                   {String(selected + 1).padStart(
                     2,
                     '0',
@@ -238,7 +238,7 @@ export default function MachineExperiment({
                 {phrase}
               </motion.p>
 
-              <p className="mt-10 max-w-[34ch] text-sm leading-6 text-white/28">
+              <p className="mt-10 max-w-[34ch] text-sm leading-6 text-muted-2">
                 Même chaîne de signes.
                 Aucun changement de contenu.
                 Seul le régime de lecture
@@ -261,7 +261,7 @@ export default function MachineExperiment({
               }}
               className="min-h-[390px] px-5 py-8 lg:px-8 lg:py-10"
             >
-              <div className="micro-meta text-white/30">
+              <div className="micro-meta text-muted-2">
                 Analyse / système
               </div>
 
@@ -280,7 +280,7 @@ export default function MachineExperiment({
                     key={label}
                     className="grid grid-cols-[72px_minmax(0,1fr)] gap-4 py-3"
                   >
-                    <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/20">
+                    <span className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-2">
                       {label}
                     </span>
 
@@ -292,11 +292,11 @@ export default function MachineExperiment({
               </div>
 
               <div className="mt-8">
-                <div className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/20">
+                <div className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-2">
                   sortie
                 </div>
 
-                <p className="mt-3 max-w-[38ch] break-words font-mono text-[10px] leading-5 text-white/46">
+                <p className="mt-3 max-w-[38ch] break-words font-mono text-[10px] leading-5 text-muted">
                   {analysis.output}
                 </p>
               </div>
@@ -304,7 +304,7 @@ export default function MachineExperiment({
           </div>
 
           <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
               système / lecture littérale
             </span>
 
@@ -346,11 +346,11 @@ export default function MachineExperiment({
             className="overflow-hidden"
           >
             <div className="mt-8 border-l border-gold/35 pl-5">
-              <div className="micro-meta text-gold/55">
+              <div className="micro-meta text-gold">
                 Reste non classé
               </div>
 
-              <p className="mt-4 max-w-[38ch] font-serif text-xl italic leading-7 text-white/32">
+              <p className="mt-4 max-w-[38ch] font-serif text-xl italic leading-7 text-muted-2">
                 {analysis.remainder}
               </p>
             </div>

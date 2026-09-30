@@ -16,7 +16,7 @@ export default function ContactSection() {
           viewport={{ once: true }}
         >
           <div>
-            <div className="mb-6 micro-meta text-black/52">
+            <div className="mb-6 micro-meta text-editorial-muted">
               Épilogue
             </div>
 

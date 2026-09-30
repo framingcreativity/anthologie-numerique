@@ -51,7 +51,7 @@ export default function WorkNavigation({
             />
 
             <div>
-              <div className="micro-meta text-white/28">
+              <div className="micro-meta text-muted-2">
                 Étude précédente
               </div>
 
@@ -62,7 +62,7 @@ export default function WorkNavigation({
           </button>
         ) : (
           <div className="flex min-h-[112px] sm:min-h-[138px] items-center p-6 md:p-8">
-            <span className="micro-meta text-white/18">
+            <span className="micro-meta text-muted-2">
               Début du corpus
             </span>
           </div>
@@ -77,7 +77,7 @@ export default function WorkNavigation({
             className="group flex min-h-[112px] sm:min-h-[138px] w-full items-center justify-end gap-5 p-5 text-right sm:p-6 transition hover:bg-white/[0.018] focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:-outline-offset-1 md:p-8"
           >
             <div>
-              <div className="micro-meta text-white/28">
+              <div className="micro-meta text-muted-2">
                 Étude suivante
               </div>
 
@@ -93,7 +93,7 @@ export default function WorkNavigation({
           </button>
         ) : (
           <div className="flex min-h-[112px] sm:min-h-[138px] items-center justify-end p-5 text-right sm:p-6 md:p-8">
-            <span className="micro-meta text-white/18">
+            <span className="micro-meta text-muted-2">
               Fin du corpus actuel
             </span>
           </div>

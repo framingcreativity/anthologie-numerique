@@ -126,7 +126,7 @@ export default function AbsenceExperiment({
             Interaction / absence
           </h2>
 
-          <p className="mt-4 max-w-[340px] text-sm leading-6 text-white/45">
+          <p className="mt-4 max-w-[340px] text-sm leading-6 text-muted">
             {artwork.interactionNote}
           </p>
 
@@ -138,7 +138,7 @@ export default function AbsenceExperiment({
             transition={{
               duration: reduceMotion ? 0 : 0.8,
             }}
-            className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/32"
+            className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-muted-2"
           >
             Approcher révèle.
             <br />
@@ -149,7 +149,7 @@ export default function AbsenceExperiment({
 
           <div className="mt-10 max-w-[280px] border-t border-white/10 pt-5">
             <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em]">
-              <span className="text-white/25">
+              <span className="text-muted-2">
                 {completed
                   ? 'Résidu'
                   : 'Traces rencontrées'}
@@ -349,7 +349,7 @@ export default function AbsenceExperiment({
                       )}
                     </motion.span>
 
-                    <motion.p
+                    <motion.span
                       aria-hidden="true"
                       initial={false}
                       animate={{
@@ -371,14 +371,14 @@ export default function AbsenceExperiment({
                               : 0.65,
                         ease: experimentEase,
                       }}
-                      className="mt-8 max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white"
+                      className="mt-8 block max-w-[15ch] font-serif text-[clamp(1.4rem,2vw,2rem)] leading-[1.12] text-white"
                     >
                       {completed
                         ? masks[index]
                         : revealed
                           ? fragment
                           : masks[index]}
-                    </motion.p>
+                    </motion.span>
 
                     <motion.span
                       aria-hidden="true"
@@ -403,14 +403,14 @@ export default function AbsenceExperiment({
             </div>
 
             <div className="mt-5 flex min-h-8 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                 {completed
                   ? 'mémoire / résiduelle'
                   : `mémoire locale / ${visited.size}`}
               </span>
 
               {!completed && pinned !== null && (
-                <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                   fragment{' '}
                   {String(pinned + 1).padStart(
                     2,
@@ -423,7 +423,7 @@ export default function AbsenceExperiment({
               {!completed &&
                 pinned === null &&
                 !allVisited && (
-                  <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                     état / instable
                   </span>
                 )}
@@ -447,7 +447,7 @@ export default function AbsenceExperiment({
               initial={{ opacity: reduceMotion ? 1 : 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: reduceMotion ? 0 : 1.1 }}
-              className="mt-10 max-w-[28ch] border-t border-white/8 pt-8 font-serif text-xl italic leading-7 text-white/24"
+              className="mt-10 max-w-[28ch] border-t border-white/8 pt-8 font-serif text-xl italic leading-7 text-muted-2"
             >
               La phrase n’est plus là.
               <br />

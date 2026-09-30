@@ -3,8 +3,8 @@
   --panel: #0d0d0d;
   --panel-2: #101010;
   --ink: #f4f0e8;
-  --muted: rgba(244, 240, 232, 0.56);
-  --muted-2: rgba(244, 240, 232, 0.56);
+  --muted: #b0aaa0;
+  --muted-2: #918b82;
   --gold: #d3b16e;
   --gold-soft: rgba(211, 177, 110, 0.2);
   --line: rgba(255, 255, 255, 0.1);
@@ -15,6 +15,8 @@
   --accent-green-strong: rgba(92, 170, 136, 0.28);
   --editorial: #e9e4d9;
   --editorial-ink: #111;
+  --editorial-muted: #5e594f;
+  --editorial-gold: #79581c;
   --section-gold: #d2b873;
   --work: #090909;
   --secondary: #0a0a0a;
@@ -37,6 +39,8 @@
   --color-gold-highlight: var(--gold-highlight);
   --color-editorial: var(--editorial);
   --color-editorial-ink: var(--editorial-ink);
+  --color-editorial-muted: var(--editorial-muted);
+  --color-editorial-gold: var(--editorial-gold);
   --color-section-gold: var(--section-gold);
   --color-work: var(--work);
   --color-secondary: var(--secondary);

@@ -121,11 +121,11 @@ export default function CompressionExperiment({
             Interaction / compression
           </h2>
 
-          <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
+          <p className="mt-4 max-w-[330px] text-sm leading-6 text-muted">
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/30">
+          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-muted-2">
             Chaque passage retire.
             <br />
             Le cadre se contracte.
@@ -135,7 +135,7 @@ export default function CompressionExperiment({
 
           <div className="mt-10 max-w-[285px] border-t border-white/10 pt-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                 Matière restante
               </span>
 
@@ -161,7 +161,7 @@ export default function CompressionExperiment({
             </div>
 
             <div className="mt-7">
-              <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+              <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                 Annotation
               </div>
 
@@ -182,7 +182,7 @@ export default function CompressionExperiment({
                       ? 0
                       : 0.4,
                   }}
-                  className="mt-3 max-w-[24ch] font-serif text-base italic leading-6 text-white/28"
+                  className="mt-3 max-w-[24ch] font-serif text-base italic leading-6 text-muted-2"
                 >
                   {
                     artwork.fragments[
@@ -238,11 +238,11 @@ export default function CompressionExperiment({
                 className="relative min-w-[min(100%,16rem)] border-x border-white/8 px-5 py-12 text-center md:px-8"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="font-mono text-[8px] uppercase tracking-[0.17em] text-gold/55">
+                  <span className="font-mono text-[8px] uppercase tracking-[0.17em] text-gold">
                     Compression {stageNumber}
                   </span>
 
-                  <span className="font-mono text-[8px] tracking-[0.16em] text-white/16">
+                  <span className="font-mono text-[8px] tracking-[0.16em] text-muted-2">
                     / {total}
                   </span>
                 </div>
@@ -286,7 +286,7 @@ export default function CompressionExperiment({
           </div>
 
           <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
               {isFinal
                 ? 'densité / maximale'
                 : `retrait / ${stageNumber}`}
@@ -304,7 +304,7 @@ export default function CompressionExperiment({
               <button
                 type="button"
                 onClick={restore}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Restaurer la source
               </button>
@@ -313,7 +313,7 @@ export default function CompressionExperiment({
 
           {removedHistory.length > 0 && (
             <div className="mt-9 border-t border-white/8 pt-6">
-              <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+              <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                 Hors texte
               </div>
 
@@ -366,7 +366,7 @@ export default function CompressionExperiment({
                   ? 0
                   : 0.15,
               }}
-              className="mt-10 max-w-[29ch] font-serif text-xl italic leading-7 text-white/25"
+              className="mt-10 max-w-[29ch] font-serif text-xl italic leading-7 text-muted-2"
             >
               Presque tout a disparu.
               <br />

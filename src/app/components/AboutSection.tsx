@@ -100,7 +100,7 @@ export default function AboutSection() {
                 </p>
               </div>
 
-              <p className="mt-9 max-w-[760px] text-base leading-7 text-white/54">
+              <p className="mt-9 max-w-[760px] text-base leading-7 text-muted">
                 Quand l’interface agit, elle ne contient plus seulement
                 le texte. Elle prend part à ce qu’il devient.
               </p>
@@ -135,7 +135,7 @@ export default function AboutSection() {
               {layers.map((item) => (
                 <div
                   key={item.label}
-                  className={`micro-meta px-4 py-3 text-white/48 ${
+                  className={`micro-meta px-4 py-3 text-muted ${
                     item.tone === 'writing'
                       ? 'discipline-writing-panel'
                       : 'discipline-code-panel'

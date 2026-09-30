@@ -83,6 +83,20 @@ function WorkDialog({ artwork, onClose, onSelect }: Props & { artwork: Artwork }
           aria-modal="true"
           aria-labelledby={`work-title-${artwork.id}`}
           onCancel={(event) => { event.preventDefault(); onClose(); }}
+          onKeyDown={(event) => {
+            if (event.key !== 'Tab') return;
+            // Keep Tab inside the reading controls rather than moving to browser chrome.
+            const controls = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('button:not(:disabled)'));
+            const first = controls[0];
+            const last = controls[controls.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+              event.preventDefault();
+              last?.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+              event.preventDefault();
+              first?.focus();
+            }
+          }}
         >
           <header className="sticky top-0 z-20 border-b border-white/10 bg-work/88 backdrop-blur-xl">
             <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-5 md:px-10 lg:px-14">
@@ -145,7 +159,7 @@ function WorkDialog({ artwork, onClose, onSelect }: Props & { artwork: Artwork }
                     </div>
 
                     <div className="grid gap-5 border-b border-white/12 py-6 md:grid-cols-[130px_1fr]">
-                      <span className="micro-meta text-white/36">
+                      <span className="micro-meta text-muted">
                         Expérience
                       </span>
 
@@ -155,7 +169,7 @@ function WorkDialog({ artwork, onClose, onSelect }: Props & { artwork: Artwork }
                     </div>
 
                     <div className="grid gap-5 border-b border-white/12 py-6 md:grid-cols-[130px_1fr]">
-                      <span className="micro-meta text-white/36">
+                      <span className="micro-meta text-muted">
                         Conséquence
                       </span>
 

@@ -89,11 +89,11 @@ export default function MemoryExperiment({
             Interaction / mémoire
           </h2>
 
-          <p className="mt-4 max-w-[340px] text-sm leading-6 text-white/45">
+          <p className="mt-4 max-w-[340px] text-sm leading-6 text-muted">
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[290px] font-serif text-lg italic leading-7 text-white/30">
+          <p className="mt-8 max-w-[290px] font-serif text-lg italic leading-7 text-muted-2">
             Rejouer ne restitue pas.
             <br />
             La phrase revient,
@@ -103,7 +103,7 @@ export default function MemoryExperiment({
 
           <div className="mt-10 max-w-[290px] border-t border-white/10 pt-5">
             <div className="flex items-center justify-between font-mono text-[8px] uppercase tracking-[0.16em]">
-              <span className="text-white/24">
+              <span className="text-muted-2">
                 Reconstruction
               </span>
 
@@ -150,7 +150,7 @@ export default function MemoryExperiment({
               transition={{
                 duration: reduceMotion ? 0 : 0.5,
               }}
-              className="mt-5 font-mono text-[8px] uppercase tracking-[0.15em] text-white/20"
+              className="mt-5 font-mono text-[8px] uppercase tracking-[0.15em] text-muted-2"
             >
               {mutationNotes[currentIndex]}
             </motion.div>
@@ -224,7 +224,7 @@ export default function MemoryExperiment({
                       }}
                       className="absolute inset-x-0 top-0"
                     >
-                      <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-gold/40">
+                      <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-gold">
                         trace{' '}
                         {String(
                           versionIndex + 1,
@@ -268,7 +268,7 @@ export default function MemoryExperiment({
                   className="relative z-20"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-gold/55">
+                    <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-gold">
                       Version {displayIndex}
                     </span>
 
@@ -285,11 +285,11 @@ export default function MemoryExperiment({
                   </p>
 
                   <div className="mt-9 max-w-[34ch] border-l border-white/10 pl-4">
-                    <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-white/18">
+                    <p className="font-mono text-[8px] uppercase tracking-[0.14em] text-muted-2">
                       annotation d’archive
                     </p>
 
-                    <p className="mt-3 font-serif text-sm italic leading-6 text-white/24">
+                    <p className="mt-3 font-serif text-sm italic leading-6 text-muted-2">
                       {
                         artwork.fragments[
                           Math.min(
@@ -306,7 +306,7 @@ export default function MemoryExperiment({
           </div>
 
           <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
               {history.length === 0
                 ? 'archive / aucune trace'
                 : `archive / ${String(
@@ -330,7 +330,7 @@ export default function MemoryExperiment({
               <button
                 type="button"
                 onClick={restart}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-muted transition-colors duration-300 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Revenir au souvenir initial
               </button>
@@ -349,7 +349,7 @@ export default function MemoryExperiment({
                 duration: reduceMotion ? 0 : 1,
                 delay: reduceMotion ? 0 : 0.25,
               }}
-              className="mt-10 max-w-[30ch] font-serif text-xl italic leading-7 text-white/24"
+              className="mt-10 max-w-[30ch] font-serif text-xl italic leading-7 text-muted-2"
             >
               À force d’être rappelée,
               la phrase ne se souvient plus

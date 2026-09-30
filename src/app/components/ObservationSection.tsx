@@ -11,12 +11,12 @@ export default function ObservationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="micro-meta text-black/40">
+          <div className="micro-meta text-editorial-muted">
             Observation / 01
           </div>
 
           <div>
-            <p className="text-base leading-7 text-black/48">
+            <p className="text-base leading-7 text-editorial-muted">
               À travers ces expériences, un même constat :
             </p>
 
@@ -24,7 +24,7 @@ export default function ObservationSection() {
               Ce que nous lisons change avec la manière dont la page agit.
             </p>
 
-            <p className="mt-8 max-w-[760px] font-serif text-xl italic leading-8 text-[#9b7836] md:text-2xl">
+            <p className="mt-8 max-w-[760px] font-serif text-xl italic leading-8 text-editorial-gold md:text-2xl">
               Dès qu’elle peut attendre, répondre ou se souvenir,
               la page cesse d’être un simple contenant.
             </p>

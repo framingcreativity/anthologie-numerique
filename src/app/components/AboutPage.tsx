@@ -112,7 +112,7 @@ export default function AboutPage() {
                     Pratique artistique
                   </div>
 
-                  <p className="mt-4 max-w-[600px] text-sm leading-6 text-white/52">
+                  <p className="mt-4 max-w-[600px] text-sm leading-6 text-muted">
                     Pour découvrir l’ensemble de mon
                     travail, mes autres projets et ma
                     démarche.
@@ -128,7 +128,7 @@ export default function AboutPage() {
                       Découvrir mon portfolio
                     </span>
 
-                    <span className="text-white/38 transition-colors duration-300 group-hover:text-gold">
+                    <span className="text-muted transition-colors duration-300 group-hover:text-gold">
                       Framing Creativity
                     </span>
 

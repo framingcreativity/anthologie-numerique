@@ -127,7 +127,7 @@ export default function HeroSection() {
             {layers.map((item) => (
               <div
                 key={item.label}
-                className={`micro-meta px-4 py-3 text-white/46 ${
+                className={`micro-meta px-4 py-3 text-muted ${
                   item.tone === 'writing'
                     ? 'discipline-writing-panel'
                     : 'discipline-code-panel'
@@ -146,7 +146,7 @@ export default function HeroSection() {
           transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.8 }}
         >
           <div className="mb-6 flex items-center justify-between">
-            <div className="micro-meta text-white/38">
+            <div className="micro-meta text-muted">
               Index / principes
             </div>
 

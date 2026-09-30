@@ -10,7 +10,7 @@ export default function Footer() {
               ANTHOLOGIE NUMÉRIQUE
             </div>
 
-            <p className="mt-3 max-w-[600px] text-xs leading-5 text-white/38">
+            <p className="mt-3 max-w-[600px] text-xs leading-5 text-muted">
               Concept, direction artistique & expérience numérique — J-ART
             </p>
           </div>
@@ -20,7 +20,7 @@ export default function Footer() {
               ÉDITION 01 · 2026
             </div>
 
-            <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.15em] text-white/25">
+            <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.15em] text-muted-2">
               Littérature × Interface × Système
             </div>
           </div>
@@ -29,7 +29,7 @@ export default function Footer() {
         <div className="mt-8 flex flex-col gap-5 border-t border-gold/20 pt-6 md:flex-row md:items-center md:justify-between">
           <nav
             aria-label="Pages légales"
-            className="flex flex-wrap gap-x-6 gap-y-3 font-mono text-[8px] uppercase tracking-[0.16em] text-white/38"
+            className="flex flex-wrap gap-x-6 gap-y-3 font-mono text-[8px] uppercase tracking-[0.16em] text-muted"
           >
             <a
               href={withBase('mentions-legales/')}
@@ -53,7 +53,7 @@ export default function Footer() {
             </a>
           </nav>
 
-          <div className="font-mono text-[8px] uppercase tracking-[0.15em] text-white/28">
+          <div className="font-mono text-[8px] uppercase tracking-[0.15em] text-muted-2">
             © 2026 J-ART. Tous droits réservés.
           </div>
         </div>

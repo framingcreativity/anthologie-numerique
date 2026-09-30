@@ -101,11 +101,11 @@ export default function ErrorExperiment({
             Interaction / erreur
           </h2>
 
-          <p className="mt-4 max-w-[330px] text-sm leading-6 text-white/45">
+          <p className="mt-4 max-w-[330px] text-sm leading-6 text-muted">
             {artwork.interactionNote}
           </p>
 
-          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-white/30">
+          <p className="mt-8 max-w-[280px] font-serif text-lg italic leading-7 text-muted-2">
             Ne pas corriger.
             <br />
             Observer ce que l’écart
@@ -114,7 +114,7 @@ export default function ErrorExperiment({
 
           <div className="mt-10 max-w-[285px] border-t border-white/10 pt-5">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/20">
+              <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                 Descendants
               </span>
 
@@ -156,11 +156,11 @@ export default function ErrorExperiment({
             </div>
 
             <div className="mt-7">
-              <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+              <div className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
                 État
               </div>
 
-              <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.14em] text-white/34">
+              <div className="mt-2 font-mono text-[9px] uppercase tracking-[0.14em] text-muted">
                 {isInitial
                   ? 'stable'
                   : isFinal
@@ -228,7 +228,7 @@ export default function ErrorExperiment({
                   className="relative z-10"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="micro-meta text-gold/55">
+                    <span className="micro-meta text-gold">
                       {isInitial
                         ? 'Source / intacte'
                         : `Erreur / ${current.type}`}
@@ -246,19 +246,19 @@ export default function ErrorExperiment({
                     {current.text}
                   </p>
 
-                  <p className="mt-9 max-w-[36ch] text-sm leading-6 text-white/26">
+                  <p className="mt-9 max-w-[36ch] text-sm leading-6 text-muted-2">
                     {current.detail}
                   </p>
                 </motion.div>
               </div>
 
               <div className="min-h-[310px] px-5 py-8 lg:px-8 lg:py-10">
-                <div className="micro-meta text-white/25">
+                <div className="micro-meta text-muted-2">
                   Descendance / trace
                 </div>
 
                 {descendants.length === 0 ? (
-                  <p className="mt-8 max-w-[24ch] font-serif text-lg italic leading-7 text-white/18">
+                  <p className="mt-8 max-w-[24ch] font-serif text-lg italic leading-7 text-muted-2">
                     Aucun écart.
                     Le système ne révèle encore
                     rien de sa structure.
@@ -305,7 +305,7 @@ export default function ErrorExperiment({
                               className="absolute -left-6 top-2 h-px w-4 bg-gold/30"
                             />
 
-                            <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-gold/45">
+                            <div className="font-mono text-[7px] uppercase tracking-[0.16em] text-gold">
                               {String(
                                 index + 1,
                               ).padStart(
@@ -316,7 +316,7 @@ export default function ErrorExperiment({
                               {mutation.type}
                             </div>
 
-                            <p className="mt-2 max-w-[28ch] font-serif text-base leading-6 text-white/34">
+                            <p className="mt-2 max-w-[28ch] font-serif text-base leading-6 text-muted">
                               {fragment}
                             </p>
                           </motion.div>
@@ -330,7 +330,7 @@ export default function ErrorExperiment({
           </div>
 
           <div className="mt-7 flex min-h-10 flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-white/18">
+            <span className="font-mono text-[8px] uppercase tracking-[0.16em] text-muted-2">
               {isInitial
                 ? 'règle / visible'
                 : isFinal
@@ -352,7 +352,7 @@ export default function ErrorExperiment({
               <button
                 type="button"
                 onClick={reset}
-                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-white/36 transition-colors duration-150 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                className="inline-flex min-h-11 items-center py-2 text-left font-mono text-[9px] uppercase tracking-[0.18em] text-muted transition-colors duration-150 hover:text-gold focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
               >
                 Restaurer la règle
               </button>
@@ -372,7 +372,7 @@ export default function ErrorExperiment({
                   ? 0
                   : 0.6,
               }}
-              className="mt-10 max-w-[31ch] font-serif text-xl italic leading-7 text-white/26"
+              className="mt-10 max-w-[31ch] font-serif text-xl italic leading-7 text-muted-2"
             >
               La règle était presque invisible.
               <br />

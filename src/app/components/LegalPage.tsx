@@ -150,7 +150,7 @@ export default function LegalPage({
               ),
             )}
 
-            <p className="mt-14 border-t border-gold/30 pt-6 font-mono text-[9px] uppercase tracking-[0.15em] text-white/38">
+            <p className="mt-14 border-t border-gold/30 pt-6 font-mono text-[9px] uppercase tracking-[0.15em] text-muted">
               Version éditoriale · 29 septembre 2026
             </p>
           </div>
