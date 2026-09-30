@@ -39,7 +39,7 @@ export default function HeroSection() {
   return (
     <section
       id="fragments"
-      className="editorial-grid scan-overlay discipline-dual relative min-h-screen overflow-hidden border-b border-white/10 bg-bg pt-[var(--header-height)]"
+      className="editorial-grid relative min-h-screen overflow-hidden border-b border-white/10 bg-bg pt-[var(--header-height)]"
     >
       <div className="absolute inset-0">
         <img

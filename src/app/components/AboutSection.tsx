@@ -46,7 +46,7 @@ export default function AboutSection() {
   return (
     <section
       id="algorithmiques"
-      className="editorial-grid discipline-dual relative border-y border-white/10 bg-secondary"
+      className="editorial-grid relative border-y border-white/10 bg-secondary"
     >
       <div className="relative z-[1] mx-auto max-w-[1440px] px-5 py-24 md:px-10 md:py-32 lg:px-14">
         <div className="grid gap-12 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">

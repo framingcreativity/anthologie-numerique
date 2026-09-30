@@ -63,7 +63,7 @@ export default function Gallery() {
           {artworks.map((work, index) => (
             <motion.article
               key={work.id}
-              className="group digital-frame digital-noise relative min-h-[520px] overflow-hidden bg-panel text-left text-white"
+              className="group digital-frame relative min-h-[520px] overflow-hidden bg-panel text-left text-white"
               initial={reduceMotion ? false : { opacity: 0, y: 22 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
