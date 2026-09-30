@@ -64,7 +64,11 @@ export default function HeroSection() {
             className="mb-8 flex flex-wrap items-center gap-3"
             initial={reduceMotion ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduceMotion ? 0 : motionTiming.standard, delay: reduceMotion ? 0 : 0.12 }}
+            transition={{
+              duration: reduceMotion ? 0 : motionTiming.standard,
+              delay: reduceMotion ? 0 : 0.12,
+              ease: editorialEase,
+            }}
           >
             <span className="data-label">
               Littérature × Interface × Système
@@ -98,7 +102,11 @@ export default function HeroSection() {
             className="mt-10 grid max-w-[900px] gap-8 border-t border-white/15 pt-7 md:grid-cols-[1fr_auto]"
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.58 }}
+            transition={{
+              duration: reduceMotion ? 0 : motionTiming.deliberate,
+              delay: reduceMotion ? 0 : 0.58,
+              ease: editorialEase,
+            }}
           >
             <p className="max-w-[720px] text-base leading-7 text-white/62 md:text-lg md:leading-8">
               Une collection d’expériences éditoriales où lire signifie
@@ -122,7 +130,11 @@ export default function HeroSection() {
             className="mt-10 grid gap-3 md:grid-cols-3"
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.7, delay: reduceMotion ? 0 : 0.78 }}
+            transition={{
+              duration: reduceMotion ? 0 : motionTiming.deliberate,
+              delay: reduceMotion ? 0 : 0.78,
+              ease: editorialEase,
+            }}
           >
             {layers.map((item) => (
               <div
@@ -143,7 +155,11 @@ export default function HeroSection() {
           className="panel-soft self-end p-5 lg:p-6"
           initial={reduceMotion ? false : { opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.72, delay: reduceMotion ? 0 : 0.8 }}
+          transition={{
+            duration: reduceMotion ? 0 : motionTiming.deliberate,
+            delay: reduceMotion ? 0 : 0.8,
+            ease: editorialEase,
+          }}
         >
           <div className="mb-6 flex items-center justify-between">
             <div className="micro-meta text-muted">

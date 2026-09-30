@@ -122,7 +122,7 @@ export default function AboutPage() {
                     href="https://framing-creativity.ch"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group mt-8 inline-flex min-h-11 flex-wrap items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition-all duration-300 ease-out hover:translate-x-1.5 hover:tracking-[0.205em] hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
+                    className="group mt-8 inline-flex min-h-11 flex-wrap items-center gap-4 font-mono text-[10px] uppercase tracking-[0.17em] text-gold transition-[transform,color,letter-spacing] duration-300 ease-out hover:translate-x-1.5 hover:tracking-[0.205em] hover:text-ink focus-visible:outline focus-visible:outline-1 focus-visible:outline-gold focus-visible:outline-offset-4"
                   >
                     <span>
                       Découvrir mon portfolio

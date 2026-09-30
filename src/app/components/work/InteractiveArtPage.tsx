@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom';
 import {
+  AnimatePresence,
   motion,
   useReducedMotion,
 } from 'motion/react';
@@ -23,6 +24,7 @@ import ExperimentRenderer from './ExperimentRenderer';
 import WorkFigure from './WorkFigure';
 import WorkNavigation from './WorkNavigation';
 import WorkResidue from './WorkResidue';
+import { motionTiming } from '../../lib/motion';
 
 type Props = {
   artwork: Artwork | null;
@@ -31,10 +33,21 @@ type Props = {
 };
 
 export default function InteractiveArtPage(props: Props) {
-  return props.artwork ? createPortal(
-    <WorkDialog {...props} artwork={props.artwork} />,
+  if (typeof document === 'undefined') {
+    return null;
+  }
+
+  return createPortal(
+    <AnimatePresence initial={false}>
+      {props.artwork ? (
+        <WorkDialog
+          {...props}
+          artwork={props.artwork}
+        />
+      ) : null}
+    </AnimatePresence>,
     document.body,
-  ) : null;
+  );
 }
 
 function WorkDialog({ artwork, onClose, onSelect }: Props & { artwork: Artwork }) {
@@ -79,7 +92,10 @@ function WorkDialog({ artwork, onClose, onSelect }: Props & { artwork: Artwork }
           className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto overscroll-contain border-0 bg-work p-0 text-ink"
           initial={{ opacity: reduceMotion ? 1 : 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: reduceMotion ? 0 : 0.28 }}
+          exit={{ opacity: reduceMotion ? 1 : 0 }}
+          transition={{
+            duration: reduceMotion ? 0 : motionTiming.fast,
+          }}
           aria-modal="true"
           aria-labelledby={`work-title-${artwork.id}`}
           onCancel={(event) => { event.preventDefault(); onClose(); }}

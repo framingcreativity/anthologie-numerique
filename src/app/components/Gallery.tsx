@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
+import { editorialEase, motionTiming } from '../lib/motion';
 import { ArrowUpRight } from 'lucide-react';
 
 import InteractiveArtPage from './work/InteractiveArtPage';
@@ -67,8 +68,9 @@ export default function Gallery() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-80px' }}
               transition={{
-                duration: reduceMotion ? 0 : 0.55,
+                duration: reduceMotion ? 0 : motionTiming.reveal,
                 delay: reduceMotion ? 0 : Math.min(index * 0.05, 0.24),
+                ease: editorialEase,
               }}
             >
               <img

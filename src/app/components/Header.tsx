@@ -1,5 +1,6 @@
-import { editorialEase } from '../lib/motion';
+import { editorialEase, motionTiming } from '../lib/motion';
 import {
+  AnimatePresence,
   motion,
   useReducedMotion,
 } from 'motion/react';
@@ -135,7 +136,7 @@ export default function Header() {
         y: 0,
       }}
       transition={{
-        duration: reduceMotion ? 0 : 0.65,
+        duration: reduceMotion ? 0 : motionTiming.standard,
         ease: editorialEase,
       }}
     >
@@ -227,63 +228,73 @@ export default function Header() {
       </div>
 
 
-          <motion.nav
-            id="mobile-navigation"
-            aria-label="Navigation mobile"
-            className="border-t border-white/10 bg-panel px-5 py-6 md:hidden"
-            hidden={!open}
-            initial={false}
-            animate={{ opacity: open ? 1 : 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.18 }}
-          >
-            <div className="mx-auto flex max-w-[1440px] flex-col">
-              {links.map(
-                (
-                  link,
-                  index,
-                ) => (
-                  <a
-                    key={
-                      link.href
-                    }
-                    href={
-                      link.href
-                    }
-                    aria-current={
-                      link.active
-                        ? (
-                            link.label ===
-                            'À propos'
-                              ? 'page'
-                              : 'location'
+          <AnimatePresence initial={false}>
+            {open && (
+              <motion.nav
+                id="mobile-navigation"
+                aria-label="Navigation mobile"
+                className="border-t border-white/10 bg-panel px-5 py-6 md:hidden"
+                initial={reduceMotion ? false : { opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{
+                  opacity: reduceMotion ? 1 : 0,
+                  y: reduceMotion ? 0 : -6,
+                }}
+                transition={{
+                  duration: reduceMotion ? 0 : motionTiming.micro,
+                  ease: editorialEase,
+                }}
+              >
+                <div className="mx-auto flex max-w-[1440px] flex-col">
+                  {links.map(
+                    (
+                      link,
+                      index,
+                    ) => (
+                      <a
+                        key={
+                          link.href
+                        }
+                        href={
+                          link.href
+                        }
+                        aria-current={
+                          link.active
+                            ? (
+                                link.label ===
+                                'À propos'
+                                  ? 'page'
+                                  : 'location'
+                              )
+                            : undefined
+                        }
+                        onClick={() =>
+                          setOpen(
+                            false,
                           )
-                        : undefined
-                    }
-                    onClick={() =>
-                      setOpen(
-                        false,
-                      )
-                    }
-                    className={`flex min-h-12 items-center justify-between border-b border-white/10 py-4 text-sm uppercase tracking-[0.15em] transition-colors duration-300 ${
-                      link.active
-                        ? 'text-gold'
-                        : 'text-white/75'
-                    }`}
-                  >
-                    {link.label}
+                        }
+                        className={`flex min-h-12 items-center justify-between border-b border-white/10 py-4 text-sm uppercase tracking-[0.15em] transition-colors duration-300 ${
+                          link.active
+                            ? 'text-gold'
+                            : 'text-white/75'
+                        }`}
+                      >
+                        {link.label}
 
-                    <span
-                      aria-hidden="true"
-                      className="font-mono text-[10px] text-gold"
-                    >
-                      0
-                      {index + 1}
-                    </span>
-                  </a>
-                ),
-              )}
-            </div>
-          </motion.nav>
+                        <span
+                          aria-hidden="true"
+                          className="font-mono text-[10px] text-gold"
+                        >
+                          0
+                          {index + 1}
+                        </span>
+                      </a>
+                    ),
+                  )}
+                </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
 
       </motion.header>
     </>

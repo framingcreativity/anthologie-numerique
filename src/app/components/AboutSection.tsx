@@ -1,4 +1,5 @@
 import { withBase } from '../lib/site';
+import { editorialEase, motionTiming } from '../lib/motion';
 import { motion, useReducedMotion } from 'motion/react';
 import { ArrowUpRight } from 'lucide-react';
 
@@ -53,6 +54,10 @@ export default function AboutSection() {
             initial={reduceMotion ? false : { opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{
+              duration: reduceMotion ? 0 : motionTiming.standard,
+              ease: editorialEase,
+            }}
           >
             <div className="mb-6 micro-meta text-gold">
               Principes / expérience
@@ -85,7 +90,11 @@ export default function AboutSection() {
               initial={reduceMotion ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: reduceMotion ? 0 : 0.08 }}
+              transition={{
+                duration: reduceMotion ? 0 : motionTiming.standard,
+                delay: reduceMotion ? 0 : 0.08,
+                ease: editorialEase,
+              }}
             >
               <p className="max-w-[860px] font-serif text-2xl leading-[1.35] text-white/84 md:text-3xl">
                 <span className="block">
@@ -121,7 +130,11 @@ export default function AboutSection() {
                   initial={reduceMotion ? false : { opacity: 0, x: 18 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: reduceMotion ? 0 : index * 0.08 }}
+                  transition={{
+                    duration: reduceMotion ? 0 : motionTiming.reveal,
+                    delay: reduceMotion ? 0 : index * 0.08,
+                    ease: editorialEase,
+                  }}
                 >
                   <span className="font-mono text-[10px] text-gold">
                     {principle.index}

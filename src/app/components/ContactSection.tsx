@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
+import { editorialEase, motionTiming } from '../lib/motion';
 import { ArrowUpRight } from 'lucide-react';
 
 export default function ContactSection() {
@@ -14,6 +15,10 @@ export default function ContactSection() {
           initial={reduceMotion ? false : { opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{
+            duration: reduceMotion ? 0 : motionTiming.standard,
+            ease: editorialEase,
+          }}
         >
           <div>
             <div className="mb-6 micro-meta text-editorial-muted">

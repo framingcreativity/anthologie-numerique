@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
+import { editorialEase, motionTiming } from '../lib/motion';
 
 export default function ObservationSection() {
   const reduceMotion = useReducedMotion();
@@ -11,6 +12,10 @@ export default function ObservationSection() {
           initial={reduceMotion ? false : { opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{
+            duration: reduceMotion ? 0 : motionTiming.standard,
+            ease: editorialEase,
+          }}
         >
           <div>
             <div className="micro-meta text-editorial-muted">
