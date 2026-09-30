@@ -15,7 +15,7 @@ const pages = {
       {
         title: 'Édition',
         text:
-          'Anthologie numérique est un projet artistique, éditorial et numérique publié sous le nom de J-ART. Le responsable de publication est J-ART. Contact : j-art@framing-creativity.ch. Toute autre information d’identification légalement requise sera complétée avant la publication définitive lorsque cela sera applicable.',
+          'Anthologie numérique est un projet artistique, éditorial et numérique publié sous le nom de J-ART. Le responsable de publication est J-ART. Contact : j-art@framing-creativity.ch.',
       },
       {
         title: 'Hébergement',
