@@ -15,7 +15,7 @@ export default function AboutPage() {
 
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 opacity-[0.42]"
+        className="pointer-events-none fixed inset-0 z-0 opacity-[0.68]"
         style={{
           backgroundImage: `url(${aboutExperience})`,
           backgroundSize: 'cover',
@@ -29,7 +29,7 @@ export default function AboutPage() {
         className="pointer-events-none fixed inset-0 z-0"
         style={{
           background:
-            'linear-gradient(90deg, rgba(5,5,5,0.74) 0%, rgba(5,5,5,0.82) 46%, rgba(5,5,5,0.89) 100%)',
+            'linear-gradient(90deg, rgba(5,5,5,0.46) 0%, rgba(5,5,5,0.54) 46%, rgba(5,5,5,0.66) 100%)',
         }}
       />
 
@@ -38,7 +38,7 @@ export default function AboutPage() {
         className="pointer-events-none fixed inset-0 z-0"
         style={{
           background:
-            'linear-gradient(180deg, rgba(5,5,5,0.18) 0%, rgba(5,5,5,0.12) 42%, rgba(5,5,5,0.48) 100%)',
+            'linear-gradient(180deg, rgba(5,5,5,0.08) 0%, rgba(5,5,5,0.05) 42%, rgba(5,5,5,0.26) 100%)',
         }}
       />
 

@@ -33,6 +33,13 @@ export default function ContactSection() {
                 à lire.
               </span>
             </h2>
+
+            <p className="mt-7 max-w-[42ch] text-sm leading-6 text-black/62">
+              Chaque étude peut être abordée séparément, sans ordre
+              imposé. Parcourir l’anthologie revient à passer d’un
+              comportement à un autre, puis à observer ce que ces
+              variations produisent sur la lecture.
+            </p>
           </div>
 
           <div className="border-t border-black/25 pt-7 lg:border-l lg:border-t-0 lg:pl-9 lg:pt-0">

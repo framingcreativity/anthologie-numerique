@@ -32,6 +32,13 @@ export default function Gallery() {
               <br />
               œuvres
             </h2>
+
+            <p className="mt-7 max-w-[34ch] text-sm leading-6 text-editorial-muted">
+              Chaque œuvre met à l’épreuve une manière différente
+              de lire. Certaines demandent d’attendre, d’autres de
+              choisir, de recommencer ou simplement d’observer ce
+              qui change.
+            </p>
           </div>
 
           <div className="max-w-[720px] lg:justify-self-end">

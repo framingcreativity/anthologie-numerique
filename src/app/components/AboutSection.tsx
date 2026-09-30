@@ -71,6 +71,13 @@ export default function AboutSection() {
                 support neutre.
               </span>
             </h2>
+
+            <p className="mt-7 max-w-[34ch] text-sm leading-6 text-muted">
+              Une interface impose toujours une temporalité, une
+              distance et une façon de regarder. Même les gestes les
+              plus discrets — attendre, faire défiler, cliquer ou
+              revenir — participent à la construction du sens.
+            </p>
           </motion.div>
 
           <div className="lg:pt-20">
