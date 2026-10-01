@@ -27,10 +27,7 @@
   body {
     margin: 0;
     min-width: 320px;
-    background:
-      radial-gradient(circle at 20% 10%, rgba(214, 184, 111, 0.05), transparent 24%),
-      radial-gradient(circle at 80% 30%, rgba(214, 184, 111, 0.035), transparent 28%),
-      var(--bg);
+    background: var(--bg);
     color: var(--ink);
   }
 

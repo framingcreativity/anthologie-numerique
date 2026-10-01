@@ -47,12 +47,11 @@ export default function HeroSection() {
           fetchPriority="high"
           decoding="async"
           alt=""
-          className="h-full w-full object-cover opacity-[0.12] grayscale"
+          className="h-full w-full object-cover opacity-[0.24]"
         />
 
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,.98)_0%,rgba(8,8,8,.93)_38%,rgba(8,8,8,.65)_68%,rgba(8,8,8,.92)_100%)]" />
+        <div className="absolute inset-0 bg-bg/60" />
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_24%,rgba(214,184,111,.14),transparent_28%)]" />
       </div>
 
       <div className="pointer-events-none absolute inset-y-0 left-[6vw] w-px bg-white/[0.06]" />

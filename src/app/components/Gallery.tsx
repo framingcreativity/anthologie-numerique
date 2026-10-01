@@ -78,12 +78,11 @@ export default function Gallery() {
                 loading="lazy"
                 decoding="async"
                 alt=""
-                className="absolute inset-0 h-full w-full object-cover opacity-55 transition duration-700 group-hover:scale-[1.025] group-hover:opacity-72"
+                className="absolute inset-0 h-full w-full object-cover opacity-62 transition duration-700 group-hover:scale-[1.02] group-hover:opacity-76"
               />
 
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,.12)_0%,rgba(5,5,5,.38)_38%,rgba(5,5,5,.90)_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,.06)_0%,rgba(5,5,5,.26)_42%,rgba(5,5,5,.86)_100%)]" />
 
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(214,184,111,.11),transparent_28%)]" />
 
               <div className="relative flex h-full min-h-[520px] flex-col justify-between p-6 md:p-7">
                 <div className="flex items-start justify-between">

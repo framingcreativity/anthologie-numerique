@@ -29,7 +29,7 @@ export default function AboutPage() {
         className="pointer-events-none fixed inset-0 z-0"
         style={{
           background:
-            'linear-gradient(90deg, rgba(5,5,5,0.46) 0%, rgba(5,5,5,0.54) 46%, rgba(5,5,5,0.66) 100%)',
+            'rgba(5,5,5,0.50)',
         }}
       />
 
@@ -38,7 +38,7 @@ export default function AboutPage() {
         className="pointer-events-none fixed inset-0 z-0"
         style={{
           background:
-            'linear-gradient(180deg, rgba(5,5,5,0.08) 0%, rgba(5,5,5,0.05) 42%, rgba(5,5,5,0.26) 100%)',
+            'rgba(5,5,5,0.10)',
         }}
       />
 
